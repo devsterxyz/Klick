@@ -1,22 +1,24 @@
 import { useState } from 'react'
-import ClickSpark from './components/ClickSpark'
-import ClickRipple from './components/ClickRipple'
-import ClickShatter from './components/ClickShatter'
-import ClickBinary from './components/ClickBinary'
-import ClickGeo from './components/ClickGeo'
-import ClickFirework from './components/ClickFirework'
-import ClickFocus from './components/ClickFocus'
-import ClickSparkle from './components/ClickSparkle'
+import ClickSpark from './components/animations/ClickSpark'
+import ClickRipple from './components/animations/ClickRipple'
+import ClickShatter from './components/animations/ClickShatter'
+import ClickBinary from './components/animations/ClickBinary'
+import ClickGeo from './components/animations/ClickGeo'
+import ClickFirework from './components/animations/ClickFirework'
+import ClickFocus from './components/animations/ClickFocus'
+import ClickSparkle from './components/animations/ClickSparkle'
+import ClickPing from './components/animations/ClickPing'
+import { useTheme } from './components/ThemeContext'
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { contrastColor } = useTheme();
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col bg-white dark:bg-black'>
       <ClickSpark
-        sparkColor='black'
+        sparkColor={contrastColor}
         sparkSize={10}
         sparkRadius={15}
         sparkCount={8}
@@ -26,15 +28,13 @@ function App() {
 
         </div>
       </ClickSpark>
-      <ClickRipple
-      color='black'
+    <ClickRipple
+      color={contrastColor}
     >
-      <div className='flex'>
-        <div className='h-20 w-20 border'></div>
-      </div>
+      <div className='h-20 w-20 border'></div>
     </ClickRipple>
     <ClickShatter
-      shardColor="black"
+      shardColor={contrastColor}
       shardCount={7}
       shardSize={3}
       spreadRadius={40}
@@ -47,7 +47,7 @@ function App() {
       </div>
     </ClickShatter>
     <ClickBinary
-      textColor="black"
+      textColor={contrastColor}
       fontSize={12}
       particleCount={10}
       spreadRadius={60}
@@ -60,7 +60,7 @@ function App() {
       </div>
     </ClickBinary>
     <ClickGeo
-      color="black"
+      color={contrastColor}
       lineWidth={1}
       maxRadius={50}
       duration={900}
@@ -72,7 +72,7 @@ function App() {
       </div>
     </ClickGeo>
     <ClickFirework
-      color='black'
+      color={contrastColor}
       speed={1}       
       gravity={0.08}  
       friction={0.96}
@@ -83,7 +83,7 @@ function App() {
       </div>
     </ClickFirework>
     <ClickFocus
-      color="black"
+      color={contrastColor}
       lineWidth={1}
       startDist={40}
       convergeSpeed={-1.5}
@@ -95,7 +95,7 @@ function App() {
       </div>
     </ClickFocus>
     <ClickSparkle
-      color="black"
+      color={contrastColor}
       lineWidth={0.5}
       count={8}
       scatter={50}
@@ -107,6 +107,19 @@ function App() {
 
       </div>
     </ClickSparkle>
+    <ClickPing
+      color={contrastColor}
+      ringSpeed={0.6}
+      ringLineWidth={1.5}
+      dotSize={2}
+      ringDecay={0.025}
+      dotDecay={0.05}
+      maxRadius={20}
+    >
+      <div className='h-20 w-20 border'>
+
+      </div>
+    </ClickPing>
     </div>
   )
 }
