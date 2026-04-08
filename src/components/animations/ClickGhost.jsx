@@ -1,17 +1,28 @@
 import { useRef, useEffect } from 'react';
 
-const ClickSpark = ({
-  color = '#fff',
-  count = 20,
-  speedMin = 4,
-  speedMax = 12,
-  lenMin = 5,
-  lenMax = 20,
-  decay = 0.03,
+// Preset color filters mapped to human-readable names
+
+
+const ClickGhost = ({
+  // Number of ghosts per click
+  count = 6,
+  // Scatter width around click point (px)
+  scatter = 40,
+  // Min and max float speed upward
+  minSpeed = 1,
+  maxSpeed = 3,
+  // Emoji size (px)
+  size = 24,
+  // Sideways wobble amount (px)
+  wobble = 1.5,
+  // Fade speed
+  decay = 0.015,
+  // Color — 'white' | 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'pink' | 'cyan' | 'random'
+  color = 'white',
   children,
 }) => {
   const canvasRef = useRef(null);
-  const sparksRef = useRef([]);
+  const ghostsRef = useRef([]);
   const isRunningRef = useRef(false);
   const animationIdRef = useRef(null);
 
@@ -44,6 +55,8 @@ const ClickSpark = ({
     };
   }, []);
 
+
+
   const startLoop = () => {
     if (isRunningRef.current) return;
     isRunningRef.current = true;
@@ -52,7 +65,7 @@ const ClickSpark = ({
     const ctx = canvas.getContext('2d');
 
     const draw = () => {
-      if (sparksRef.current.length === 0) {
+      if (ghostsRef.current.length === 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         isRunningRef.current = false;
         return;
@@ -60,24 +73,21 @@ const ClickSpark = ({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      sparksRef.current = sparksRef.current.filter(p => {
+      ghostsRef.current = ghostsRef.current.filter(p => {
         p.life -= p.decay;
         if (p.life <= 0) return false;
 
-        p.x += p.vx;
-        p.y += p.vy;
+        // Exact original render logic
+        p.y -= p.vy;
+        p.x += Math.sin(p.phase + p.life * 10) * wobble;
 
-        // Tail trails behind the spark head
-        const tailX = p.x - p.vx * p.len * 0.1;
-        const tailY = p.y - p.vy * p.len * 0.1;
 
-        ctx.globalAlpha = Math.max(0, p.life);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
+        ctx.filter = "none";
+        ctx.font = `${p.size}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('👻', p.x, p.y);
+        ctx.filter = 'none';
 
         return true;
       });
@@ -96,6 +106,7 @@ const ClickSpark = ({
     };
   }, []);
 
+  // Click handler — exact original generateParticles emoji_ghost case
   const handleClick = e => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -104,22 +115,19 @@ const ClickSpark = ({
     const y = e.clientY - rect.top;
     const PI2 = Math.PI * 2;
 
-    const newSparks = Array.from({ length: count }, () => {
-      const angle = Math.random() * PI2;
-      const speed = speedMin + Math.random() * (speedMax - speedMin);
-      const len = lenMin + Math.random() * (lenMax - lenMin);
-      return {
-        x,
-        y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        len,
+    for (let i = 0; i < count; i++) {
+      ghostsRef.current.push({
+        x: x + (Math.random() - 0.5) * scatter,
+        y: y,
+        vy: minSpeed + Math.random() * (maxSpeed - minSpeed),
+        phase: Math.random() * PI2,
+        size,
         life: 1.0,
         decay,
-      };
-    });
+        // Each ghost gets its own color filter — 'random' gives each one different color
+      });
+    }
 
-    sparksRef.current.push(...newSparks);
     startLoop();
   };
 
@@ -134,4 +142,4 @@ const ClickSpark = ({
   );
 };
 
-export default ClickSpark;
+export default ClickGhost;

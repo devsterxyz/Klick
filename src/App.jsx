@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import ClickSpark from './components/animations/ClickSpark'
 import ClickRipple from './components/animations/ClickRipple'
 import ClickShatter from './components/animations/ClickShatter'
 import ClickBinary from './components/animations/ClickBinary'
@@ -9,6 +8,8 @@ import ClickFocus from './components/animations/ClickFocus'
 import ClickSparkle from './components/animations/ClickSparkle'
 import ClickPing from './components/animations/ClickPing'
 import { useTheme } from './components/ThemeContext'
+import ClickGhost from './components/animations/ClickGhost'
+import ClickSpark from './components/animations/ClickSpark'
 
 
 
@@ -17,17 +18,6 @@ function App() {
 
   return (
     <div className='flex flex-col bg-white dark:bg-black'>
-      <ClickSpark
-        sparkColor={contrastColor}
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
-        <div className='h-20 w-20 border'>
-
-        </div>
-      </ClickSpark>
     <ClickRipple
       color={contrastColor}
     >
@@ -120,6 +110,18 @@ function App() {
 
       </div>
     </ClickPing>
+    <ClickGhost color="random">
+      <div className='h-20 w-20 border'>
+
+      </div>
+    </ClickGhost>
+    <ClickSpark
+    color='black'
+    >
+      <div className='h-20 w-20 border'>
+
+      </div>
+    </ClickSpark>
     </div>
   )
 }

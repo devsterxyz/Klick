@@ -142,7 +142,7 @@ const ClickPing = ({
   };
 
   return (
-    <div className="relative w-full h-full" onClick={handleClick}>
+    <div className="relative w-fit h-fit" onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-fit h-fit block absolute top-0 left-0 select-none pointer-events-none"
