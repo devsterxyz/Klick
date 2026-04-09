@@ -10,6 +10,10 @@ import ClickPing from './components/animations/ClickPing'
 import { useTheme } from './components/ThemeContext'
 import ClickGhost from './components/animations/ClickGhost'
 import ClickSpark from './components/animations/ClickSpark'
+import ClickHeart from './components/animations/ClickHeart'
+import ClickSkull from './components/animations/ClickSkull'
+import ClickFire from './components/animations/ClickFire'
+import ClickBulletTime from './components/animations/ClickBulletTime'
 
 
 
@@ -21,7 +25,7 @@ function App() {
     <ClickRipple
       color={contrastColor}
     >
-      <div className='h-20 w-20 border'></div>
+      <div className='h-30 w-30 border'></div>
     </ClickRipple>
     <ClickShatter
       shardColor={contrastColor}
@@ -32,7 +36,7 @@ function App() {
       easing="ease-out"
       gravity={0.6}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickShatter>
@@ -45,7 +49,7 @@ function App() {
       easing="ease-out"
       chars={['0', '1']}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickBinary>
@@ -57,7 +61,7 @@ function App() {
       easing="ease-out"
       shapes={['square', 'triangle']}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickGeo>
@@ -68,7 +72,7 @@ function App() {
       friction={0.96}
       count={35}
       >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickFirework>
@@ -80,7 +84,7 @@ function App() {
       bracketSize={10}
       decay={0.02}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickFocus>
@@ -93,7 +97,7 @@ function App() {
       maxSize={6}
       decay={0.02}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickSparkle>
@@ -106,22 +110,48 @@ function App() {
       dotDecay={0.05}
       maxRadius={20}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickPing>
-    <ClickGhost color="random">
-      <div className='h-20 w-20 border'>
+    <ClickGhost>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickGhost>
     <ClickSpark
-    color='black'
+    color={contrastColor}
+    count = {20}
+    speedMin = {2}
+    speedMax = {4}
+    lenMin = {5}
+    lenMax = {20}
+    decay = {0.03}
+    maxRadius = {30}
     >
-      <div className='h-20 w-20 border'>
+      <div className='h-30 w-30 border'>
 
       </div>
     </ClickSpark>
+    <ClickHeart>
+      <div className='h-30 w-30 border'></div>
+    </ClickHeart>
+    <ClickSkull>
+      <div className='h-30 w-30 border'></div>
+    </ClickSkull>
+    <ClickFire>
+      <div className='h-30 w-30 border'></div>
+    </ClickFire>
+    <ClickBulletTime
+    count = {10}
+    speedMin = {4}
+    speedMax = {6}
+    friction = {0.92}
+    decay = {0.015}
+    maxRadius = {50}
+    >
+      <div className='h-30 w-30 border'></div>
+    </ClickBulletTime>
     </div>
   )
 }

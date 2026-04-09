@@ -8,6 +8,7 @@ const ClickSpark = ({
   lenMin = 5,
   lenMax = 20,
   decay = 0.03,
+  maxRadius = 80,
   children,
 }) => {
   const canvasRef = useRef(null);
@@ -67,6 +68,14 @@ const ClickSpark = ({
         p.x += p.vx;
         p.y += p.vy;
 
+        // ✅ Distance from origin
+        const dx = p.x - p.originX;
+        const dy = p.y - p.originY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // ❗ Kill if too far OR life ended
+        if (p.life <= 0 || dist >= maxRadius) return false;
+
         // Tail trails behind the spark head
         const tailX = p.x - p.vx * p.len * 0.1;
         const tailY = p.y - p.vy * p.len * 0.1;
@@ -111,6 +120,8 @@ const ClickSpark = ({
       return {
         x,
         y,
+        originX: x,   // ✅ add
+        originY: y,   // ✅ add
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         len,
