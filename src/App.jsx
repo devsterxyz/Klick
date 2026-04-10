@@ -14,6 +14,28 @@ import ClickHeart from './components/animations/ClickHeart'
 import ClickSkull from './components/animations/ClickSkull'
 import ClickFire from './components/animations/ClickFire'
 import ClickBulletTime from './components/animations/ClickBulletTime'
+import ClickMatrixRain from './components/animations/ClickMatrixRain'
+import ClickWarp from './components/animations/ClickWarp'
+import ClickTesseract from './components/animations/ClickTesseract'
+import ClickSynapse from './components/animations/ClickSynapse'
+import ClickHoloSphere from './components/animations/ClickHoloSphere'
+import ClickQuantum from './components/animations/ClickQuantum'
+import ClickFission from './components/animations/ClickFission'
+import ClickFusion from './components/animations/ClickFusion'
+import ClickRadiate from './components/animations/ClickRadiate'
+import ClickFlowField from './components/animations/ClickFlowField'
+import ClickRippleMatrix from './components/animations/ClickRippleMatrix'
+import ClickDroplet from './components/animations/ClickDroplet'
+import ClickSplash from './components/animations/ClickSplash'
+import ClickRain from './components/animations/ClickRain'
+import ClickFlame from './components/animations/ClickFlame'
+import ClickEmbers from './components/animations/ClickEmbers'
+import ClickSpark2 from './components/animations/ClickSpark2'
+import ClickSmoke from './components/animations/ClickSmoke'
+import ClickBlast from './components/animations/ClickBlast'
+import ClickFireTrail from './components/animations/ClickFireTrail'
+import ClickAgitate from './components/animations/ClickAgitate'
+import ClickFloat from './components/animations/ClickFloat'
 
 
 
@@ -152,6 +174,74 @@ function App() {
     >
       <div className='h-30 w-30 border'></div>
     </ClickBulletTime>
+    <ClickMatrixRain
+    textColor ={contrastColor}
+    >
+      <div className='h-30 w-30 border'></div>
+    </ClickMatrixRain>
+    <ClickWarp>
+      <div className='h-30 w-30 border'></div>
+    </ClickWarp>
+    <ClickTesseract>
+      <div className='h-30 w-30 border'></div>
+    </ClickTesseract>
+    <ClickSynapse>
+      <div className='h-30 w-30 border'></div>
+    </ClickSynapse>
+    <ClickHoloSphere>
+      <div className='h-30 w-30 border'></div>
+    </ClickHoloSphere>
+    <ClickQuantum>
+       <div className='h-30 w-30 border'></div>
+    </ClickQuantum>
+    <ClickFission>
+      <div className='h-30 w-30 border'></div>
+    </ClickFission>
+    <ClickFusion>
+      <div className='h-30 w-30 border'></div>
+    </ClickFusion>
+    <ClickRadiate>
+      <div className='h-30 w-30 border'></div>
+    </ClickRadiate>
+    <ClickFlowField>
+      <div className='h-30 w-30 border'></div>
+    </ClickFlowField>
+    <ClickRippleMatrix>
+      <div className='h-30 w-30 border'></div>
+    </ClickRippleMatrix>
+    <ClickDroplet>
+      <div className='h-30 w-30 border'></div>
+    </ClickDroplet>
+    <ClickSplash>
+      <div className='h-30 w-30 border'></div>
+    </ClickSplash>
+    <ClickRain>
+      <div className='h-30 w-30 border'></div>
+    </ClickRain>
+    <ClickFlame>
+      <div className='h-30 w-30 border'></div>
+    </ClickFlame>
+    <ClickEmbers>
+      <div className='h-30 w-30 border'></div>
+    </ClickEmbers>
+    <ClickSpark2>
+      <div className='h-30 w-30 border'></div>
+    </ClickSpark2>
+    <ClickSmoke>
+      <div className='h-30 w-30 border'></div>
+    </ClickSmoke>
+    <ClickBlast>
+      <div className='h-30 w-30 border'></div>
+    </ClickBlast>
+    <ClickFireTrail>
+      <div className='h-30 w-30 border'></div>
+    </ClickFireTrail>
+    <ClickAgitate>
+      <div className='h-30 w-30 border'></div>
+    </ClickAgitate>
+    <ClickFloat>
+      <div className='h-30 w-30 border'></div>
+    </ClickFloat>
     </div>
   )
 }

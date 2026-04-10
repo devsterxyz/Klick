@@ -129,7 +129,7 @@ const ClickFire = ({
   };
 
   return (
-    <div className="relative w-full h-full" onClick={handleClick}>
+    <div className="relative w-fit h-fit" onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none"
