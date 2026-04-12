@@ -120,7 +120,7 @@ const ClickAgitate = ({
     <div className="relative w-fit h-fit" onClick={handleClick}>
       <canvas
         ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none"
+        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
       />
       {children}
     </div>
