@@ -1,0 +1,100 @@
+import React, { ReactNode, ComponentType, JSX } from "react";
+import ClickBinary from "../animations/ClickBinary";
+import ClickAgitate from "../animations/ClickAgitate";
+import ClickBlast from "../animations/ClickBlast";
+import ClickBulletTime from "../animations/ClickBulletTime";
+import ClickDroplet from "../animations/ClickDroplet";
+import ClickEmbers from "../animations/ClickEmbers";
+import ClickFire from "../animations/ClickFire";
+import ClickFireTrail from "../animations/ClickFireTrail";
+import ClickFirework from "../animations/ClickFirework";
+import ClickFission from "../animations/ClickFission";
+import ClickFlame from "../animations/ClickFlame";
+import ClickFloat from "../animations/ClickFloat";
+import ClickFlowField from "../animations/ClickFlowField";
+import ClickFocus from "../animations/ClickFocus";
+import ClickFusion from "../animations/ClickFusion";
+import ClickGeo from "../animations/ClickGeo";
+import ClickGhost from "../animations/ClickGhost";
+import ClickHeart from "../animations/ClickHeart";
+import ClickHoloSphere from "../animations/ClickHoloSphere";
+import ClickMatrixRain from "../animations/ClickMatrixRain";
+import ClickPing from "../animations/ClickPing";
+import ClickQuantum from "../animations/ClickQuantum";
+import ClickRadiate from "../animations/ClickRadiate";
+import ClickRain from "../animations/ClickRain";
+import ClickRipple from "../animations/ClickRipple";
+import ClickRippleMatrix from "../animations/ClickRippleMatrix";
+import ClickShatter from "../animations/ClickShatter";
+import ClickSkull from "../animations/ClickSkull";
+import ClickSmoke from "../animations/ClickSmoke";
+import ClickSpark from "../animations/ClickSpark";
+import ClickSpark2 from "../animations/ClickSpark2";
+import ClickSparkle from "../animations/ClickSparkle";
+import ClickSplash from "../animations/ClickSplash";
+import ClickSynapse from "../animations/ClickSynapse";
+import ClickTesseract from "../animations/ClickTesseract";
+import ClickWarp from "../animations/ClickWarp";
+
+const Grid = (): JSX.Element => {
+  return (
+    <div className="grid grid-cols-4 gap-4 px-50">
+      <EffectCard title="1" Wrapper={ClickWarp} />
+      <EffectCard title="2" />
+      <EffectCard title="3" />
+      <EffectCard title="4" />
+      <EffectCard title="5" />
+      <EffectCard title="6" />
+      <EffectCard title="7" />
+      <EffectCard title="8" />
+      <EffectCard title="9" />
+      <EffectCard title="10" />
+      <EffectCard title="10" />
+      <EffectCard title="10" />
+    </div>
+  );
+};
+
+export default Grid;
+
+
+type EffectCardProps = {
+  title: string;
+  Wrapper?: ComponentType<{ children: ReactNode }>;
+};
+
+
+const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
+  const content = (
+    <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center group-hover:border-[#333] group-hover:bg-[#0a0a0a]">
+      <div className="absolute top-0 left-0 w-[6px] h-[6px] border-t border-l border-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      <div className="absolute bottom-0 right-0 w-[6px] h-[6px] border-b border-r border-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+        CLICK
+      </span>
+    </div>
+  );
+
+  return (
+    <div className="group flex flex-col space-y-3 cursor-default">
+      <div className="flex items-center h-4">
+        <span className="text-[10px] font-mono tracking-[0.15em] font-bold text-[#555] group-hover:text-white transition-colors duration-200">
+          {title}
+        </span>
+      </div>
+      {Wrapper ? <Wrapper>{content}</Wrapper> : content}
+    </div>
+  );
+};
+const CardBox = (): JSX.Element=> {
+  return (
+    <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center hover:border-[#333] hover:bg-[#0a0a0a]">
+      <div className="absolute top-0 left-0 w-[6px] h-[6px] border-t border-l border-white opacity-0 hover:opacity-100 transition-opacity duration-200" />
+      <div className="absolute bottom-0 right-0 w-[6px] h-[6px] border-b border-r border-white opacity-0 hover:opacity-100 transition-opacity duration-200" />
+
+      <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 hover:opacity-0 transition-opacity duration-300">
+        CLICK
+      </span>
+    </div>
+  );
+};
