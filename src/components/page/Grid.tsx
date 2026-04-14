@@ -39,8 +39,8 @@ import ClickWarp from "../animations/ClickWarp";
 const Grid = (): JSX.Element => {
   return (
     <div className="grid grid-cols-4 gap-4 px-50">
-      <EffectCard title="1" Wrapper={ClickWarp} />
-      <EffectCard title="2" />
+      <EffectCard title="Warp" Wrapper={ClickWarp} />
+      <EffectCard title="2" Wrapper={ClickBlast}/>
       <EffectCard title="3" />
       <EffectCard title="4" />
       <EffectCard title="5" />
