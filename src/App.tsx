@@ -1,13 +1,11 @@
 import React from 'react'
-import TestingAni from './components/TestingAni'
 import Home from './components/page/Home'
-import Grid from './components/page/Grid'
 import Navbar from './components/Navbar'
 
 
 const App = () => {
   return (
-    <div className=''>
+    <div className='h-screen overflow-hidden bg-neutral-950'>
         <Navbar />
         <Home />
     </div>

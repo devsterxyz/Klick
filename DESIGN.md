@@ -1,313 +1,338 @@
-# Design System Inspired by Apple
+# Akira — Design System Documentation
 
-## 1. Visual Theme & Atmosphere
+A complete reference for the visual language, typography, color system, spacing, and interaction patterns used in the Akira Next.js starter kit.
 
-Apple's website is a masterclass in controlled drama — vast expanses of pure black and near-white serve as cinematic backdrops for products that are photographed as if they were sculptures in a gallery. The design philosophy is reductive to its core: every pixel exists in service of the product, and the interface itself retreats until it becomes invisible. This is not minimalism as aesthetic preference; it is minimalism as reverence for the object.
+---
 
-The typography anchors everything. San Francisco (SF Pro Display for large sizes, SF Pro Text for body) is Apple's proprietary typeface, engineered with optical sizing that automatically adjusts letterforms depending on point size. At display sizes (56px), weight 600 with a tight line-height of 1.07 and subtle negative letter-spacing (-0.28px) creates headlines that feel machined rather than typeset — precise, confident, and unapologetically direct. At body sizes (17px), the tracking loosens slightly (-0.374px) and line-height opens to 1.47, creating a reading rhythm that is comfortable without ever feeling slack.
+## 1. Design Philosophy
 
-The color story is starkly binary. Product sections alternate between pure black (`#000000`) backgrounds with white text and light gray (`#f5f5f7`) backgrounds with near-black text (`#1d1d1f`). This creates a cinematic pacing — dark sections feel immersive and premium, light sections feel open and informational. The only chromatic accent is Apple Blue (`#0071e3`), reserved exclusively for interactive elements: links, buttons, and focus states. This singular accent color in a sea of neutrals gives every clickable element unmistakable visibility.
+Akira follows a **brutalist-minimal** aesthetic — a raw, engineering-forward style with sharp edges, monospaced type, dashed borders, and precise grid lines. It deliberately avoids softness: no border-radius on interactive elements, no gradients on backgrounds. The visual tone is precise, technical, and slightly retro-futuristic — evoking a developer tool rather than a polished consumer product.
 
-**Key Characteristics:**
-- SF Pro Display/Text with optical sizing — letterforms adapt automatically to size context
-- Binary light/dark section rhythm: black (`#000000`) alternating with light gray (`#f5f5f7`)
-- Single accent color: Apple Blue (`#0071e3`) reserved exclusively for interactive elements
-- Product-as-hero photography on solid color fields — no gradients, no textures, no distractions
-- Extremely tight headline line-heights (1.07-1.14) creating compressed, billboard-like impact
-- Full-width section layout with centered content — the viewport IS the canvas
-- Pill-shaped CTAs (980px radius) creating soft, approachable action buttons
-- Generous whitespace between sections allowing each product moment to breathe
+Key design principles:
+- **No rounded corners on interactive UI** — buttons and cards use `rounded-none`
+- **Grid-based structure** — the layout is scaffolded with explicit vertical and horizontal border lines
+- **Dashed borders** as a primary decorative motif on interactive elements
+- **Corner bracket** accents (4 small L-shaped marks at corners) replace traditional card borders
+- **Reveal-on-hover** — most detail is hidden by default and fades in on interaction
+- **Dark/light parity** — both themes are fully supported via CSS custom properties
 
-## 2. Color Palette & Roles
+---
 
-### Primary
-- **Pure Black** (`#000000`): Hero section backgrounds, immersive product showcases. The darkest canvas for the brightest products.
-- **Light Gray** (`#f5f5f7`): Alternate section backgrounds, informational areas. Not white — the slight blue-gray tint prevents sterility.
-- **Near Black** (`#1d1d1f`): Primary text on light backgrounds, dark button fills. Slightly warmer than pure black for comfortable reading.
+## 2. Color System
 
-### Interactive
-- **Apple Blue** (`#0071e3`): `--sk-focus-color`, primary CTA backgrounds, focus rings. The ONLY chromatic color in the interface.
-- **Link Blue** (`#0066cc`): `--sk-body-link-color`, inline text links. Slightly darker than Apple Blue for text-level readability.
-- **Bright Blue** (`#2997ff`): Links on dark backgrounds. Higher luminance for contrast on black sections.
+Colors are defined in `src/app/globals.css` using OKLCH color space and CSS custom properties. The palette is deliberately **achromatic** (zero chroma) — pure blacks, whites, and grays — with a single accent color for destructive states.
 
-### Text
-- **White** (`#ffffff`): Text on dark backgrounds, button text on blue/dark CTAs.
-- **Near Black** (`#1d1d1f`): Primary body text on light backgrounds.
-- **Black 80%** (`rgba(0, 0, 0, 0.8)`): Secondary text, nav items on light backgrounds. Slightly softened.
-- **Black 48%** (`rgba(0, 0, 0, 0.48)`): Tertiary text, disabled states, carousel controls.
+### Light Theme (`:root`)
 
-### Surface & Dark Variants
-- **Dark Surface 1** (`#272729`): Card backgrounds in dark sections.
-- **Dark Surface 2** (`#262628`): Subtle surface variation in dark contexts.
-- **Dark Surface 3** (`#28282a`): Elevated cards on dark backgrounds.
-- **Dark Surface 4** (`#2a2a2d`): Highest dark surface elevation.
-- **Dark Surface 5** (`#242426`): Deepest dark surface tone.
+| Token | OKLCH Value | Approximate Hex | Usage |
+|---|---|---|---|
+| `--background` | `oklch(1 0 0)` | `#ffffff` | Page background |
+| `--foreground` | `oklch(0.145 0 0)` | `#1a1a1a` | Primary text |
+| `--card` | `oklch(1 0 0)` | `#ffffff` | Card background |
+| `--card-foreground` | `oklch(0.145 0 0)` | `#1a1a1a` | Card text |
+| `--primary` | `oklch(0.205 0 0)` | `#252525` | Primary buttons, key UI |
+| `--primary-foreground` | `oklch(0.985 0 0)` | `#fbfbfb` | Text on primary |
+| `--secondary` | `oklch(0.97 0 0)` | `#f7f7f7` | Secondary buttons/surfaces |
+| `--secondary-foreground` | `oklch(0.205 0 0)` | `#252525` | Text on secondary |
+| `--muted` | `oklch(0.97 0 0)` | `#f7f7f7` | Muted backgrounds |
+| `--muted-foreground` | `oklch(0.556 0 0)` | `#737373` | Subdued text, labels |
+| `--accent` | `oklch(0.97 0 0)` | `#f7f7f7` | Accent hover surfaces |
+| `--border` | `oklch(0.922 0 0)` | `#ebebeb` | Borders, dividers |
+| `--input` | `oklch(0.922 0 0)` | `#ebebeb` | Input borders |
+| `--ring` | `oklch(0.708 0 0)` | `#b3b3b3` | Focus rings |
+| `--destructive` | `oklch(0.577 0.245 27.325)` | `~#e5483a` | Error states, destructive actions |
 
-### Button States
-- **Button Active** (`#ededf2`): Active/pressed state for light buttons.
-- **Button Default Light** (`#fafafc`): Search/filter button backgrounds.
-- **Overlay** (`rgba(210, 210, 215, 0.64)`): Media control scrims, overlays.
-- **White 32%** (`rgba(255, 255, 255, 0.32)`): Hover state on dark modal close buttons.
+### Dark Theme (`.dark`)
 
-### Shadows
-- **Card Shadow** (`rgba(0, 0, 0, 0.22) 3px 5px 30px 0px`): Soft, diffused elevation for product cards. Offset and wide blur create a natural, photographic shadow.
+| Token | OKLCH Value | Approximate Hex | Usage |
+|---|---|---|---|
+| `--background` | `oklch(0.145 0 0)` | `#1a1a1a` | Page background |
+| `--foreground` | `oklch(0.985 0 0)` | `#fbfbfb` | Primary text |
+| `--card` | `oklch(0.205 0 0)` | `#252525` | Card background |
+| `--primary` | `oklch(0.922 0 0)` | `#ebebeb` | Primary UI (inverted) |
+| `--primary-foreground` | `oklch(0.205 0 0)` | `#252525` | Text on primary |
+| `--muted` | `oklch(0.269 0 0)` | `#363636` | Muted surfaces |
+| `--muted-foreground` | `oklch(0.708 0 0)` | `#b3b3b3` | Subdued text |
+| `--border` | `oklch(1 0 0 / 10%)` | `rgba(255,255,255,0.10)` | Borders in dark mode |
+| `--input` | `oklch(1 0 0 / 15%)` | `rgba(255,255,255,0.15)` | Input borders |
+| `--destructive` | `oklch(0.704 0.191 22.216)` | `~#f26a58` | Error (brighter in dark) |
 
-## 3. Typography Rules
+### Chart Colors (used in data visualization)
 
-### Font Family
-- **Display**: `SF Pro Display`, with fallbacks: `SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif`
-- **Body**: `SF Pro Text`, with fallbacks: `SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif`
-- SF Pro Display is used at 20px and above; SF Pro Text is optimized for 19px and below.
+Light: warm amber (`chart-1`), teal (`chart-2`), muted navy (`chart-3`), golden yellow (`chart-4`, `chart-5`).  
+Dark: vivid violet, green, amber, purple, red-orange.
 
-### Hierarchy
+---
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|------|--------|-------------|----------------|-------|
-| Display Hero | SF Pro Display | 56px (3.50rem) | 600 | 1.07 (tight) | -0.28px | Product launch headlines, maximum impact |
-| Section Heading | SF Pro Display | 40px (2.50rem) | 600 | 1.10 (tight) | normal | Feature section titles |
-| Tile Heading | SF Pro Display | 28px (1.75rem) | 400 | 1.14 (tight) | 0.196px | Product tile headlines |
-| Card Title | SF Pro Display | 21px (1.31rem) | 700 | 1.19 (tight) | 0.231px | Bold card headings |
-| Sub-heading | SF Pro Display | 21px (1.31rem) | 400 | 1.19 (tight) | 0.231px | Regular card headings |
-| Nav Heading | SF Pro Text | 34px (2.13rem) | 600 | 1.47 | -0.374px | Large navigation headings |
-| Sub-nav | SF Pro Text | 24px (1.50rem) | 300 | 1.50 | normal | Light sub-navigation text |
-| Body | SF Pro Text | 17px (1.06rem) | 400 | 1.47 | -0.374px | Standard reading text |
-| Body Emphasis | SF Pro Text | 17px (1.06rem) | 600 | 1.24 (tight) | -0.374px | Emphasized body text, labels |
-| Button Large | SF Pro Text | 18px (1.13rem) | 300 | 1.00 (tight) | normal | Large button text, light weight |
-| Button | SF Pro Text | 17px (1.06rem) | 400 | 2.41 (relaxed) | normal | Standard button text |
-| Link | SF Pro Text | 14px (0.88rem) | 400 | 1.43 | -0.224px | Body links, "Learn more" |
-| Caption | SF Pro Text | 14px (0.88rem) | 400 | 1.29 (tight) | -0.224px | Secondary text, descriptions |
-| Caption Bold | SF Pro Text | 14px (0.88rem) | 600 | 1.29 (tight) | -0.224px | Emphasized captions |
-| Micro | SF Pro Text | 12px (0.75rem) | 400 | 1.33 | -0.12px | Fine print, footnotes |
-| Micro Bold | SF Pro Text | 12px (0.75rem) | 600 | 1.33 | -0.12px | Bold fine print |
-| Nano | SF Pro Text | 10px (0.63rem) | 400 | 1.47 | -0.08px | Legal text, smallest size |
+## 3. Typography
 
-### Principles
-- **Optical sizing as philosophy**: SF Pro automatically switches between Display and Text optical sizes. Display versions have wider letter spacing and thinner strokes optimized for large sizes; Text versions are tighter and sturdier for small sizes. This means the font literally changes its DNA based on context.
-- **Weight restraint**: The scale spans 300 (light) to 700 (bold) but most text lives at 400 (regular) and 600 (semibold). Weight 300 appears only on large decorative text. Weight 700 is rare, used only for bold card titles.
-- **Negative tracking at all sizes**: Unlike most systems that only track headlines, Apple applies subtle negative letter-spacing even at body sizes (-0.374px at 17px, -0.224px at 14px, -0.12px at 12px). This creates universally tight, efficient text.
-- **Extreme line-height range**: Headlines compress to 1.07 while body text opens to 1.47, and some button contexts stretch to 2.41. This dramatic range creates clear visual hierarchy through rhythm alone.
+### Font Stack
 
-## 4. Component Stylings
+Three typefaces are loaded via `next/font/google` (Geist package) and exposed as CSS variables:
+
+| Variable | Font | Usage |
+|---|---|---|
+| `--font-geist-sans` / `font-sans` | **Geist Sans** | Body text, UI labels, prose, cards |
+| `--font-geist-mono` / `font-mono` | **Geist Mono** | Code snippets, technical data (schema fields, provider names, prices) |
+| `--font-geist-pixel-square` / `font-pixel-square` | **Geist Pixel Square** | Branding, hero headings, nav logo, footer — the distinctive "retro" voice |
+
+All three fonts are applied to `<body>` as CSS variables via:
+```
+className={`${geistSans.variable} ${geistMono.variable} ${GeistPixelSquare.variable} antialiased`}
+```
+
+### Type Scale & Usage
+
+| Element | Size | Weight | Font | Notes |
+|---|---|---|---|---|
+| Hero `<h1>` ("Akira") | `text-4xl` → `text-6xl` | — | `font-pixel-square` | Responsive: 36px → 60px |
+| Section title (cards) | `20px` | `font-bold` | `font-sans` | `tracking-tight`, `leading-tight` |
+| Nav logo | Default | — | `font-pixel-square` | Brand identity |
+| Footer text | `text-sm` | — | `font-pixel-square` | All footer copy |
+| Tech grid labels | `10px` | — | `font-pixel-square` | `tracking-widest uppercase` |
+| Card category label | `8px` | — | `font-sans` | `uppercase tracking-[0.2em]` |
+| Card body copy | `9px` | — | `font-sans` | `leading-relaxed` |
+| Schema/data rows | `8px` | — | `font-mono` | Provider names, prices, DB fields |
+| CTA links in cards | `9px` | `font-medium` | `font-sans` | |
+| Badge text | Default | `font-light` | `font-sans` | `<HeroBadge>` |
+| Sign-in heading | `text-3xl` | `font-bold` | `font-sans` | |
+| Sign-in sub-text | `text-sm` | — | `font-sans` | `text-muted-foreground` |
+| Button text (hero) | Default (`text-sm`) | — | `font-sans` | `h-8 px-3 py-1` |
+
+### Tracking & Leading Conventions
+
+- Section labels use extreme letter-spacing: `tracking-[0.2em]` (20% of font size)
+- Tech grid names use `tracking-widest` (Tailwind's widest preset)
+- Card headings use `tracking-tight` to counteract the bold weight
+- Body copy uses `leading-relaxed` for readability at small sizes
+
+---
+
+## 4. Spacing & Layout
+
+### Layout Architecture
+
+The page is structured as a **3-column grid** at `xl` breakpoints:
+
+```
+[Ladder aside] [Main content — max-w-7xl] [Ladder aside]
+```
+
+- Center column: `max-w-7xl`, bordered with `border-x`
+- Ladder asides: decorative hatched backgrounds, hidden below `xl`
+- Nav height: `--nav-height: 4rem` (64px)
+- Footer height: `--footer-height: 3.75rem` (60px)
+
+### Border Radius Scale
+
+Defined via CSS variables from a `--radius` base of `0.625rem` (10px):
+
+| Token | Value | Tailwind class |
+|---|---|---|
+| `--radius-sm` | `0.375rem` (6px) | `rounded-sm` |
+| `--radius-md` | `0.5rem` (8px) | `rounded-md` |
+| `--radius-lg` | `0.625rem` (10px) | `rounded-lg` |
+| `--radius-xl` | `0.875rem` (14px) | `rounded-xl` |
+| `--radius-2xl` | `1.125rem` (18px) | `rounded-2xl` |
+| `--radius-3xl` | `1.375rem` (22px) | `rounded-3xl` |
+| `--radius-4xl` | `1.625rem` (26px) | `rounded-4xl` |
+
+> **Important:** Despite these tokens existing, interactive components (buttons, cards, inputs) deliberately use `rounded-none`. The radius scale is available for utility but goes intentionally unused in the core UI.
+
+---
+
+## 5. Component Patterns
 
 ### Buttons
 
-**Primary Blue (CTA)**
-- Background: `#0071e3` (Apple Blue)
-- Text: `#ffffff`
-- Padding: 8px 15px
-- Radius: 8px
-- Border: 1px solid transparent
-- Font: SF Pro Text, 17px, weight 400
-- Hover: background brightens slightly
-- Active: `#ededf2` background shift
-- Focus: `2px solid var(--sk-focus-color, #0071E3)` outline
-- Use: Primary call-to-action ("Buy", "Shop iPhone")
+All buttons follow the same signature pattern:
 
-**Primary Dark**
-- Background: `#1d1d1f`
-- Text: `#ffffff`
-- Padding: 8px 15px
-- Radius: 8px
-- Font: SF Pro Text, 17px, weight 400
-- Use: Secondary CTA, dark variant
+```
+rounded-none  overflow-hidden  border-dashed  relative
+h-8 px-3 py-1  (compact) or  h-10 (full-width)
+```
 
-**Pill Link (Learn More / Shop)**
-- Background: transparent
-- Text: `#0066cc` (light bg) or `#2997ff` (dark bg)
-- Radius: 980px (full pill)
-- Border: 1px solid `#0066cc`
-- Font: SF Pro Text, 14px-17px
-- Hover: underline decoration
-- Use: "Learn more" and "Shop" links — the signature Apple inline CTA
+**Corner bracket decoration** — four `<span>` elements placed at absolute corners create L-shaped bracket marks instead of a full border:
 
-**Filter / Search Button**
-- Background: `#fafafc`
-- Text: `rgba(0, 0, 0, 0.8)`
-- Padding: 0px 14px
-- Radius: 11px
-- Border: 3px solid `rgba(0, 0, 0, 0.04)`
-- Focus: `2px solid var(--sk-focus-color, #0071E3)` outline
-- Use: Search bars, filter controls
+```html
+<span class="absolute h-2 w-2 border-foreground border-b border-r bottom-0 right-0" />
+<span class="absolute h-2 w-2 border-foreground border-b border-l bottom-0 left-0" />
+<span class="absolute h-2 w-2 border-foreground border-t border-r top-0 right-0" />
+<span class="absolute h-2 w-2 border-foreground border-t border-l top-0 left-0" />
+```
 
-**Media Control**
-- Background: `rgba(210, 210, 215, 0.64)`
-- Text: `rgba(0, 0, 0, 0.48)`
-- Radius: 50% (circular)
-- Active: scale(0.9), background shifts
-- Focus: `2px solid var(--sk-focus-color, #0071e3)` outline, white bg, black text
-- Use: Play/pause, carousel arrows
+**Shine sweep effect** — a skewed translucent overlay that plays an animation on group hover:
 
-### Cards & Containers
-- Background: `#f5f5f7` (light) or `#272729`-`#2a2a2d` (dark)
-- Border: none (borders are rare in Apple's system)
-- Radius: 5px-8px
-- Shadow: `rgba(0, 0, 0, 0.22) 3px 5px 30px 0px` for elevated product cards
-- Content: centered, generous padding
-- Hover: no standard hover state — cards are static, links within them are interactive
+```html
+<span class="shine absolute -top-1/2 -left-full h-[200%] w-3/4 skew-x-[-20deg]
+             bg-linear-to-r from-transparent via-white/50 to-transparent" />
+```
 
-### Navigation
-- Background: `rgba(0, 0, 0, 0.8)` (translucent dark) with `backdrop-filter: saturate(180%) blur(20px)`
-- Height: 48px (compact)
-- Text: `#ffffff` at 12px, weight 400
-- Active: underline on hover
-- Logo: Apple logomark (SVG) centered or left-aligned, 17x48px viewport
-- Mobile: collapses to hamburger with full-screen overlay menu
-- The nav floats above content, maintaining its dark translucent glass regardless of section background
+**Arrow reveal on hover** — right arrow icons start at `w-0 opacity-0` and transition to `w-4 opacity-100` on hover, creating an expanding chevron effect.
 
-### Image Treatment
-- Products on solid-color fields (black or white) — no backgrounds, no context, just the object
-- Full-bleed section images that span the entire viewport width
-- Product photography at extremely high resolution with subtle shadows
-- Lifestyle images confined to rounded-corner containers (12px+ radius)
+### Cards (Micro-Hero Cards)
 
-### Distinctive Components
+All three feature cards share:
 
-**Product Hero Module**
-- Full-viewport-width section with solid background (black or `#f5f5f7`)
-- Product name as the primary headline (SF Pro Display, 56px, weight 600)
-- One-line descriptor below in lighter weight
-- Two pill CTAs side by side: "Learn more" (outline) and "Buy" / "Shop" (filled)
+- Fixed height `h-[214px]`, max-width `max-w-[380px]`
+- `border border-border` with `overflow-hidden`
+- Corner bracket decorators (10px size, start at `border-foreground/30`, transition to full `border-foreground` on hover)
+- Shine sweep overlay at `z-20`
+- Motion entrance animation: `opacity: 0 → 1`, `y: 20 → 0`, staggered by `0.1s` per card
+- Interior content is revealed on `group-hover` with staggered `transitionDelay` per element
 
-**Product Grid Tile**
-- Square or near-square card on contrasting background
-- Product image dominating 60-70% of the tile
-- Product name + one-line description below
-- "Learn more" and "Shop" link pair at bottom
+### Badge
 
-**Feature Comparison Strip**
-- Horizontal scroll of product variants
-- Each variant as a vertical card with image, name, and key specs
-- Minimal chrome — the products speak for themselves
+```
+variant="outline"  border  rounded (default shadcn)
+```
 
-## 5. Layout Principles
+Contains an animated live-dot with two synchronized keyframe animations:
+- `ping-sequence`: two-pulse ping at intervals
+- `rotate-sequence`: diamond/square rotation from 0° → 45° → 90°
 
-### Spacing System
-- Base unit: 8px
-- Scale: 2px, 4px, 5px, 6px, 7px, 8px, 9px, 10px, 11px, 14px, 15px, 17px, 20px, 24px
-- Notable characteristic: the scale is dense at small sizes (2-11px) with granular 1px increments, then jumps in larger steps. This allows precise micro-adjustments for typography and icon alignment.
+### Grid Dividers
 
-### Grid & Container
-- Max content width: approximately 980px (the recurring "980px radius" in pill buttons echoes this width)
-- Hero: full-viewport-width sections with centered content block
-- Product grids: 2-3 column layouts within centered container
-- Single-column for hero moments — one product, one message, full attention
-- No visible grid lines or gutters — spacing creates implied structure
+The tech grid and layout use explicit SVG/CSS grid lines:
+- Vertical rules: `border-l border-border` positioned at percentage widths
+- Horizontal rules: `border-t border-border` at midpoints
+- Intersection dots: `<Square>` icons with `fill-background stroke-border` and small circles (`rounded-full border border-border bg-background`) at key junctions
 
-### Whitespace Philosophy
-- **Cinematic breathing room**: Each product section occupies a full viewport height (or close to it). The whitespace between products is not empty — it is the pause between scenes in a film.
-- **Vertical rhythm through color blocks**: Rather than using spacing alone to separate sections, Apple uses alternating background colors (black, `#f5f5f7`, white). Each color change signals a new "scene."
-- **Compression within, expansion between**: Text blocks are tightly set (negative letter-spacing, tight line-heights) while the space surrounding them is vast. This creates a tension between density and openness.
+---
 
-### Border Radius Scale
-- Micro (5px): Small containers, link tags
-- Standard (8px): Buttons, product cards, image containers
-- Comfortable (11px): Search inputs, filter buttons
-- Large (12px): Feature panels, lifestyle image containers
-- Full Pill (980px): CTA links ("Learn more", "Shop"), navigation pills
-- Circle (50%): Media controls (play/pause, arrows)
+## 6. Animation System
 
-## 6. Depth & Elevation
+The project uses **Motion** (Framer Motion v12) for entrance animations, with the following conventions:
 
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| Flat (Level 0) | No shadow, solid background | Standard content sections, text blocks |
-| Navigation Glass | `backdrop-filter: saturate(180%) blur(20px)` on `rgba(0,0,0,0.8)` | Sticky navigation bar — the glass effect |
-| Subtle Lift (Level 1) | `rgba(0, 0, 0, 0.22) 3px 5px 30px 0px` | Product cards, floating elements |
-| Media Control | `rgba(210, 210, 215, 0.64)` background with scale transforms | Play/pause buttons, carousel controls |
-| Focus (Accessibility) | `2px solid #0071e3` outline | Keyboard focus on all interactive elements |
+### Standard Entrance (cards, sections)
 
-**Shadow Philosophy**: Apple uses shadow extremely sparingly. The primary shadow (`3px 5px 30px` with 0.22 opacity) is soft, wide, and offset — mimicking a diffused studio light casting a natural shadow beneath a physical object. This reinforces the "product as physical sculpture" metaphor. Most elements have NO shadow at all; elevation comes from background color contrast (dark card on darker background, or light card on slightly different gray).
+```js
+initial={{ opacity: 0, y: 20 }}
+animate={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.5, ease: "easeOut" }}
+```
 
-### Decorative Depth
-- Navigation glass: the translucent, blurred navigation bar is the most recognizable depth element, creating a sense of floating UI above scrolling content
-- Section color transitions: depth is implied by the alternation between black and light gray sections rather than by shadows
-- Product photography shadows: the products themselves cast shadows in their photography, so the UI doesn't need to add synthetic ones
+Cards are staggered: delay `0`, `0.1`, `0.2`.
 
-## 7. Do's and Don'ts
+### Tech Grid Fade-in (`tech-fade-in` keyframe)
 
-### Do
-- Use SF Pro Display at 20px+ and SF Pro Text below 20px — respect the optical sizing boundary
-- Apply negative letter-spacing at all text sizes (not just headlines) — Apple tracks tight universally
-- Use Apple Blue (`#0071e3`) ONLY for interactive elements — it must be the singular accent
-- Alternate between black and light gray (`#f5f5f7`) section backgrounds for cinematic rhythm
-- Use 980px pill radius for CTA links — the signature Apple link shape
-- Keep product imagery on solid-color fields with no competing visual elements
-- Use the translucent dark glass (`rgba(0,0,0,0.8)` + blur) for sticky navigation
-- Compress headline line-heights to 1.07-1.14 — Apple headlines are famously tight
+```css
+@keyframes tech-fade-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0) scale(1);      filter: blur(0px); }
+}
+```
 
-### Don't
-- Don't introduce additional accent colors — the entire chromatic budget is spent on blue
-- Don't use heavy shadows or multiple shadow layers — Apple's shadow system is one soft diffused shadow or nothing
-- Don't use borders on cards or containers — Apple almost never uses visible borders (except on specific buttons)
-- Don't apply wide letter-spacing to SF Pro — it is designed to run tight at every size
-- Don't use weight 800 or 900 — the maximum is 700 (bold), and even that is rare
-- Don't add textures, patterns, or gradients to backgrounds — solid colors only
-- Don't make the navigation opaque — the glass blur effect is essential to the Apple UI identity
-- Don't center-align body text — Apple body copy is left-aligned; only headlines center
-- Don't use rounded corners larger than 12px on rectangular elements (980px is for pills only)
+Applied to each tech item with `i * 70ms` stagger.
 
-## 8. Responsive Behavior
+### Shine Sweep (`shine` keyframe)
 
-### Breakpoints
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Small Mobile | <360px | Minimum supported, single column |
-| Mobile | 360-480px | Standard mobile layout |
-| Mobile Large | 480-640px | Wider single column, larger images |
-| Tablet Small | 640-834px | 2-column product grids begin |
-| Tablet | 834-1024px | Full tablet layout, expanded nav |
-| Desktop Small | 1024-1070px | Standard desktop layout begins |
-| Desktop | 1070-1440px | Full layout, max content width |
-| Large Desktop | >1440px | Centered with generous margins |
+```css
+@keyframes shine {
+  0%   { left: -50%; top: -20%; }
+  100% { left: 150%; top: 20%;  }
+}
+```
 
-### Touch Targets
-- Primary CTAs: 8px 15px padding creating ~44px touch height
-- Navigation links: 48px height with adequate spacing
-- Media controls: 50% radius circular buttons, minimum 44x44px
-- "Learn more" pills: generous padding for comfortable tapping
+Triggers on `group:hover .shine` with `0.9s ease-out` and `0.3s delay`.
 
-### Collapsing Strategy
-- Hero headlines: 56px Display → 40px → 28px on mobile, maintaining tight line-height proportionally
-- Product grids: 3-column → 2-column → single column stacked
-- Navigation: full horizontal nav → compact mobile menu (hamburger)
-- Product hero modules: full-bleed maintained at all sizes, text scales down
-- Section backgrounds: maintain full-width color blocks at all breakpoints — the cinematic rhythm never breaks
-- Image sizing: products scale proportionally, never crop — the product silhouette is sacred
+### Hover Micro-interactions
 
-### Image Behavior
-- Product photography maintains aspect ratio at all breakpoints
-- Hero product images scale down but stay centered
-- Full-bleed section backgrounds persist at every size
-- Lifestyle images may crop on mobile but maintain their rounded corners
-- Lazy loading for below-fold product images
+- Arrow icons: `transition-all duration-200` — width/opacity expand
+- Card corner brackets: `transition-colors duration-300` — opacity ramp
+- Card inner items: `opacity-0 → opacity-100` with per-item `transitionDelay` (150ms base + 70ms per item)
+- Tech icons: `group-hover:scale-110` on hover
 
-## 9. Agent Prompt Guide
+---
 
-### Quick Color Reference
-- Primary CTA: Apple Blue (`#0071e3`)
-- Page background (light): `#f5f5f7`
-- Page background (dark): `#000000`
-- Heading text (light): `#1d1d1f`
-- Heading text (dark): `#ffffff`
-- Body text: `rgba(0, 0, 0, 0.8)` on light, `#ffffff` on dark
-- Link (light bg): `#0066cc`
-- Link (dark bg): `#2997ff`
-- Focus ring: `#0071e3`
-- Card shadow: `rgba(0, 0, 0, 0.22) 3px 5px 30px 0px`
+## 7. Decorative Motifs
 
-### Example Component Prompts
-- "Create a hero section on black background. Headline at 56px SF Pro Display weight 600, line-height 1.07, letter-spacing -0.28px, color white. One-line subtitle at 21px SF Pro Display weight 400, line-height 1.19, color white. Two pill CTAs: 'Learn more' (transparent bg, white text, 1px solid white border, 980px radius) and 'Buy' (Apple Blue #0071e3 bg, white text, 8px radius, 8px 15px padding)."
-- "Design a product card: #f5f5f7 background, 8px border-radius, no border, no shadow. Product image top 60% of card on solid background. Title at 28px SF Pro Display weight 400, letter-spacing 0.196px, line-height 1.14. Description at 14px SF Pro Text weight 400, color rgba(0,0,0,0.8). 'Learn more' and 'Shop' links in #0066cc at 14px."
-- "Build the Apple navigation: sticky, 48px height, background rgba(0,0,0,0.8) with backdrop-filter: saturate(180%) blur(20px). Links at 12px SF Pro Text weight 400, white text. Apple logo left, links centered, search and bag icons right."
-- "Create an alternating section layout: first section black bg with white text and centered product image, second section #f5f5f7 bg with #1d1d1f text. Each section near full-viewport height with 56px headline and two pill CTAs below."
-- "Design a 'Learn more' link: text #0066cc on light bg or #2997ff on dark bg, 14px SF Pro Text, underline on hover. After the text, include a right-arrow chevron character (>). Wrap in a container with 980px border-radius for pill shape when used as a standalone CTA."
+### Hatched Background (Ladder)
 
-### Iteration Guide
-1. Every interactive element gets Apple Blue (`#0071e3`) — no other accent colors
-2. Section backgrounds alternate: black for immersive moments, `#f5f5f7` for informational moments
-3. Typography optical sizing: SF Pro Display at 20px+, SF Pro Text below — never mix
-4. Negative letter-spacing at all sizes: -0.28px at 56px, -0.374px at 17px, -0.224px at 14px, -0.12px at 12px
-5. The navigation glass effect (translucent dark + blur) is non-negotiable — it defines the Apple web experience
-6. Products always appear on solid color fields — never on gradients, textures, or lifestyle backgrounds in hero modules
-7. Shadow is rare and always soft: `3px 5px 30px 0.22 opacity` or nothing at all
-8. Pill CTAs use 980px radius — this creates the signature Apple rounded-rectangle-that-looks-like-a-capsule shape
+The `<Ladder>` component fills the side columns with a diagonal hatch pattern using `repeating-linear-gradient`:
+
+```js
+backgroundImage: "repeating-linear-gradient(315deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%)",
+backgroundSize: "7px 7px",
+color: "oklch(from var(--foreground) l c h / 0.08)",
+```
+
+This creates a very subtle 8% opacity crosshatch at 45°, referencing technical/engineering drawing aesthetics.
+
+### Corner Brackets
+
+Used on every interactive card and button. The brackets are 2–2.5px (h-2/h-2.5) per side, made with two-sided borders rather than full corners.
+
+### Dashed Border Dividers
+
+Cards and form elements use `border-dashed` on the main border, with `border-border/40` or `border-border/30` on internal dividers for a layered hierarchy.
+
+### Node Dots
+
+Small `size-2.5 rounded-full border border-border bg-background` circles are placed at grid intersections (nav bottom corners, footer top corners, card divider midpoints) to create a circuit board / connector aesthetic.
+
+---
+
+## 8. Icon Library
+
+**Lucide React** (`lucide-react`) is used exclusively. Icons are rendered at:
+- `size-4` (16px) — inline with button text
+- `size-3` (12px) — small contextual icons (arrow-up-right, overlay icons)
+- `size-[18px]` — tech grid icons, with `strokeWidth={1.5}` for a lighter stroke weight
+- `size-3` for `<Square>` grid intersection markers
+
+---
+
+## 9. Theme Switching
+
+Handled by `next-themes` (`ThemeProvider`) with:
+- `attribute="class"` — dark mode via `.dark` class on `<html>`
+- `defaultTheme="system"` — follows OS preference by default
+- `enableSystem` — auto-detection enabled
+- `disableTransitionOnChange` — prevents flash/transition on theme toggle
+
+Favicon also switches theme: a black SVG in light mode, white SVG in dark mode, via separate `<link media="(prefers-color-scheme: ...)" />` entries.
+
+---
+
+## 10. Design Tokens Quick Reference
+
+```css
+/* Core spacing */
+--nav-height:    4rem;    /* 64px */
+--footer-height: 3.75rem; /* 60px */
+--radius:        0.625rem; /* 10px base */
+
+/* Fonts */
+font-sans:         Geist Sans
+font-mono:         Geist Mono
+font-pixel-square: Geist Pixel Square
+
+/* Achromatic palette (light) */
+background:        #ffffff
+foreground:        #1a1a1a
+muted-foreground:  #737373
+border:            #ebebeb
+primary:           #252525
+
+/* Achromatic palette (dark) */
+background:        #1a1a1a
+foreground:        #fbfbfb
+muted-foreground:  #b3b3b3
+border:            rgba(255,255,255,0.10)
+primary:           #ebebeb
+```
+
+---
+
+## 11. shadcn/ui Configuration
+
+```json
+{
+  "style": "new-york",
+  "tailwind": { "baseColor": "neutral", "cssVariables": true },
+  "iconLibrary": "lucide"
+}
+```
+
+The **new-york** style is selected — this is shadcn's sharper, more compact variant compared to the default. `baseColor: "neutral"` aligns with the achromatic palette.

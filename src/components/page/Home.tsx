@@ -1,35 +1,151 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { ArrowRight, Check, Copy } from 'lucide-react'
+import GithubIcon from '../icons/GithubIcon'
+
+const railSegments = Array.from({ length: 8 })
+const installCommand = 'npx shadcn@latest add button card tabs'
+
+const railSegmentClass =
+  '[background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]'
+
+const CornerBrackets = ({ muted = false }: { muted?: boolean }) => {
+  const color = muted ? 'border-white/20' : 'border-white/45'
+
+  return (
+    <>
+      <span className={`pointer-events-none absolute left-0 top-0 h-2 w-2 border-l border-t ${color}`} />
+      <span className={`pointer-events-none absolute right-0 top-0 h-2 w-2 border-r border-t ${color}`} />
+      <span className={`pointer-events-none absolute bottom-0 left-0 h-2 w-2 border-b border-l ${color}`} />
+      <span className={`pointer-events-none absolute bottom-0 right-0 h-2 w-2 border-b border-r ${color}`} />
+    </>
+  )
+}
+
+const PatternRail = ({ side }: { side: 'left' | 'right' }) => {
+  const sideBorder = side === 'left' ? 'border-r' : 'border-l'
+
+  return (
+    <div
+      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} flex w-14 flex-col text-white/8 sm:w-20 xl:w-28`}
+    >
+      {railSegments.map((_, index) => (
+        <div
+          key={`${side}-${index}`}
+          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? 'border-b' : ''} border-white/10 ${railSegmentClass}`}
+        />
+      ))}
+    </div>
+  )
+}
+
+const GhostButton = ({
+  href,
+  children,
+  invert = false,
+}: {
+  href: string
+  children: React.ReactNode
+  invert?: boolean
+}) => {
+  return (
+    <a
+      href={href}
+      className={`group relative inline-flex h-8 items-center justify-center gap-2 overflow-hidden border border-dashed px-3 text-[12px] transition ${
+        invert
+          ? 'border-white bg-white text-black hover:bg-neutral-200'
+          : 'border-white/20 text-white hover:border-white/40 hover:bg-white/[0.03]'
+      }`}
+    >
+      <CornerBrackets muted={!invert} />
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+    </a>
+  )
+}
 
 const Home = () => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(installCommand)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1600)
+    } catch (error) {
+      console.error('Copy failed', error)
+    }
+  }
+
   return (
-    
-    <div className="relative min-h-screen bg-neutral-950">
-      <div className="fixed left-0 top-0 h-full w-28 flex flex-col text-white/10 pointer-events-none">
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-r border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-      </div>
+    <div className="relative h-[calc(100vh-64px)] overflow-hidden bg-transparent text-white">
+      <PatternRail side="left" />
+      <PatternRail side="right" />
 
+      <div className="relative z-10 mx-14 flex h-full border-x border-white/10 sm:mx-20 xl:mx-28">
+        <div className="flex min-w-0 flex-1 flex-col">  
+          <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
+            <section className="flex min-h-0 flex-col border-b border-white/10 lg:border-b-0 lg:border-r">
+              <div className="flex flex-1 flex-col px-5 py-5 md:px-8 md:py-6">
+                <div className="inline-flex items-center gap-2 border border-dashed border-white/20 px-3 py-1 font-sans text-[10px] font-light text-white/75 mt-10">
+                  <span className="h-1.5 w-1.5 bg-white" />
+                  v1 &middot; Early Preview
+                </div>
 
-      <div className="fixed right-0 top-0 h-full w-28 flex flex-col text-white/10 pointer-events-none">
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-b border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-        <div className="flex-1 border-l border-white/10 [background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]"></div>
-      </div>
+                <div className="mt-5 max-w-[32rem]">
+                  <h1 className="font-mono text-[1.95rem] leading-[0.9] tracking-[-0.06em] text-white sm:text-[2.8rem] xl:text-[3.35rem]">
+                    Klick
+                  </h1>
+                  <p className="mt-4 max-w-[31rem] text-[11px] leading-6 text-white/55 sm:text-[12px]">
+                    Your website responds give it a click
+                  </p>
+                </div>
 
-      
-      <div className="relative z-10 mx-28">
-        
+                <div className="mt-5 max-w-[31rem] flex items-center justify-between rounded-md border border-white/10 bg-[#0b0b0b] px-3 h-10">
+  
+                  {/* Command */}
+                  <div className="flex items-center gap-2 font-mono text-sm text-white/80 overflow-hidden">
+                    <span className="text-white/40">$</span>
+                    <code className="truncate">{installCommand}</code>
+                  </div>
+
+                  {/* Copy button */}
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="ml-3 text-xs text-white/60 hover:text-white transition"
+                  >
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <GhostButton href="https://github.com/devsterdev">
+                    <GithubIcon size={14} className="cursor-default" />
+                    Github
+                  </GhostButton>
+                  <GhostButton href="#preview-panels" invert>
+                    Get Started
+                    <ArrowRight size={14} />
+                  </GhostButton>
+                </div>
+              </div>
+            </section>
+
+            <section id="preview-panels" className="min-h-0 overflow-hidden px-5 py-5 md:px-8 md:py-6">
+              <div className="grid h-full gap-3 grid-rows-3">
+                <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent p-5">
+                  <CornerBrackets muted />
+                </div>
+                <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent] p-3">
+                  <CornerBrackets muted />
+                </div>
+                <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent p-3">
+                  <CornerBrackets muted />
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
   )
