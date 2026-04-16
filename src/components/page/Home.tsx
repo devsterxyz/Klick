@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { ArrowRight, Check, Copy } from 'lucide-react'
 import GithubIcon from '../icons/GithubIcon'
+import VariationCard from '../VariationCard'
+
 
 const railSegments = Array.from({ length: 8 })
 const installCommand = 'npx shadcn@latest add button card tabs'
@@ -85,16 +87,23 @@ const Home = () => {
           <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
             <section className="flex min-h-0 flex-col border-b border-white/10 lg:border-b-0 lg:border-r">
               <div className="flex flex-1 flex-col px-5 py-5 md:px-8 md:py-6">
-                <div className="inline-flex items-center gap-2 border border-dashed border-white/20 px-3 py-1 font-sans text-[10px] font-light text-white/75 mt-10">
+                {/* <div className="inline-flex items-center gap-2 border border-dashed border-white/20 px-3 py-1 font-sans text-[10px] font-light text-white/75 mt-10">
                   <span className="h-1.5 w-1.5 bg-white" />
                   v1 &middot; Early Preview
-                </div>
+                </div> */}
+
+                <VariationCard title="01. The Original">
+                  <div className="inline-flex items-center gap-2 border border-dashed border-white/20 px-3 py-1 font-sans text-[10px] font-light text-white/75">
+                    <span className="h-1.5 w-1.5 bg-white" />
+                    v1 &middot; Early Preview
+                  </div>
+                </VariationCard>
 
                 <div className="mt-5 max-w-[32rem]">
-                  <h1 className="font-mono text-[1.95rem] leading-[0.9] tracking-[-0.06em] text-white sm:text-[2.8rem] xl:text-[3.35rem]">
+                  <h1 className="font-pixel text-[1.95rem] leading-[0.9] tracking-[-0.06em] text-white sm:text-[2.8rem] xl:text-[3.35rem]">
                     Klick
                   </h1>
-                  <p className="mt-4 max-w-[31rem] text-[11px] leading-6 text-white/55 sm:text-[12px]">
+                  <p className="mt-4 max-w-[31rem] text-[11px] leading-6 text-white/55 sm:text-[12px] font-pixel">
                     Your website responds give it a click
                   </p>
                 </div>
@@ -132,16 +141,16 @@ const Home = () => {
             </section>
 
             <section id="preview-panels" className="min-h-0 overflow-hidden px-5 py-5 md:px-8 md:py-6">
-              <div className="grid h-full gap-3 grid-rows-3">
+              <div className="grid h-full gap-3 grid-rows-2">
                 <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent p-5">
                   <CornerBrackets muted />
                 </div>
                 <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent] p-3">
                   <CornerBrackets muted />
                 </div>
-                <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent p-3">
-                  <CornerBrackets muted />
-                </div>
+                  {/* <div className="relative min-h-0 border border-dashed border-white/12 bg-transparent p-3">
+                    <CornerBrackets muted />
+                  </div> */}
               </div>
             </section>
           </div>
@@ -152,3 +161,5 @@ const Home = () => {
 }
 
 export default Home
+
+

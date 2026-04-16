@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&family=Pixelify+Sans:wght@400..700&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -5,6 +8,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @custom-variant dark (&:is(.dark *));
+
+.font-jersey {
+  font-family: 'Jersey 25', cursive;
+}
+
+.font-pixel {
+  font-family: 'Pixelify Sans', sans-serif;
+}
 
 @theme inline {
     --font-heading: var(--font-sans);
