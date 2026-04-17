@@ -63,12 +63,13 @@ type EffectCardProps = {
   Wrapper?: ComponentType<{ children: ReactNode }>;
 };
 
-
 const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
   const content = (
     <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center group-hover:border-[#333] group-hover:bg-[#0a0a0a]">
-      <div className="absolute top-0 left-0 w-[6px] h-[6px] border-t border-l border-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-      <div className="absolute bottom-0 right-0 w-[6px] h-[6px] border-b border-r border-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      
+      {/* 🔥 Reused Corner Borders */}
+      <CornerBrackets />
+
       <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 group-hover:opacity-0 transition-opacity duration-300">
         CLICK
       </span>
@@ -98,3 +99,12 @@ const CardBox = (): JSX.Element=> {
     </div>
   );
 };
+
+const CornerBrackets = () => (
+  <>
+    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+  </>
+);

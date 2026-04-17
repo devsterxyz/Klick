@@ -4,7 +4,7 @@ import { motion, useAnimate } from "motion/react";
 
 const TwitterXIcon = forwardRef<AnimatedIconHandle, AnimatedIconProps>(
   (
-    { size = 24, color = "currentColor", strokeWidth = 2, className = "" },
+    { size = 17, color = "currentColor", strokeWidth = 2, className = "" },
     ref,
   ) => {
     const [scope, animate] = useAnimate();

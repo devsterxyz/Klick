@@ -10,9 +10,13 @@ const Navbar = () => {
           <div className="font-mono text-[1.05rem] tracking-[-0.06em] text-white/88">
             Klick
           </div>
-          <div className='flex gap-4'>
-            <GithubIcon />
-            <TwitterXIcon />
+          <div className='flex gap-4 items-center'>
+            <button className='flex items-center justify-center bg-black h-7 w-7 border hover:bg-neutral-950'>
+              <GithubIcon />
+            </button>
+            <button className='flex items-center justify-center bg-black h-7 w-7 border hover:bg-neutral-950'>  
+              <TwitterXIcon />
+            </button>
           </div>
         </div>
       </div>
