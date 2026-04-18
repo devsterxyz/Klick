@@ -52,6 +52,7 @@ const GhostButton = ({
   return (
     <a
       href={href}
+      target='_blank'
       className={`group relative inline-flex h-8 items-center justify-center gap-2 overflow-hidden border border-dashed px-3 text-[12px] transition ${
         invert
           ? 'border-white bg-white text-black hover:bg-neutral-200'
@@ -94,12 +95,6 @@ const Home = () => {
                     v1 &middot; Early Preview
                   </div>
                 </VariationCard>
-                {/* <VariationCard title="07. Editorial Underscore">
-                  <div className="inline-flex items-center gap-2 border-b border-white/40 pb-0.5 px-1 font-sans text-[11px] font-medium text-white tracking-wide">
-                    <span className="text-[14px] leading-none font-serif mt-1">*</span>
-                    v1 &middot; Early Preview
-                  </div>
-                </VariationCard> */}
 
                 <div className="mt-5 max-w-[32rem]">
                   <h1 className="font-geist-pixel text-[2.2rem] leading-[0.9] tracking-[-0.06em] text-white sm:text-[3.1rem] xl:text-[3.75rem]">

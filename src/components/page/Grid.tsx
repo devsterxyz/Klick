@@ -36,21 +36,50 @@ import ClickSynapse from "../animations/ClickSynapse";
 import ClickTesseract from "../animations/ClickTesseract";
 import ClickWarp from "../animations/ClickWarp";
 
+const railSegments = Array.from({ length: 8 });
+
+const railSegmentClass =
+  "[background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]";
+
+const PatternRail = ({ side }: { side: "left" | "right" }): JSX.Element => {
+  const sideBorder = side === "left" ? "border-r" : "border-l";
+
+  return (
+    <div
+      className={`pointer-events-none absolute inset-y-0 ${side === "left" ? "left-0" : "right-0"} flex w-14 flex-col text-white/8 sm:w-20 xl:w-28`}
+    >
+      {railSegments.map((_, index) => (
+        <div
+          key={`${side}-${index}`}
+          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? "border-b" : ""} border-white/10 ${railSegmentClass}`}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Grid = (): JSX.Element => {
   return (
-    <div className="grid grid-cols-4 gap-4 px-50">
-      <EffectCard title="Warp" Wrapper={ClickWarp} />
-      <EffectCard title="2" Wrapper={ClickBlast}/>
-      <EffectCard title="3" />
-      <EffectCard title="4" />
-      <EffectCard title="5" />
-      <EffectCard title="6" />
-      <EffectCard title="7" />
-      <EffectCard title="8" />
-      <EffectCard title="9" />
-      <EffectCard title="10" />
-      <EffectCard title="10" />
-      <EffectCard title="10" />
+    <div className="relative overflow-hidden bg-transparent text-white">
+      <PatternRail side="left" />
+      <PatternRail side="right" />
+
+      <div className="relative z-10 mx-14 border-x border-white/10 sm:mx-20 xl:mx-28">
+        <div className="grid grid-cols-4 gap-4 px-10 py-10">
+          <EffectCard title="Warp" Wrapper={ClickWarp} />
+          <EffectCard title="2" Wrapper={ClickBlast} />
+          <EffectCard title="3" />
+          <EffectCard title="4" />
+          <EffectCard title="5" />
+          <EffectCard title="6" />
+          <EffectCard title="7" />
+          <EffectCard title="8" />
+          <EffectCard title="9" />
+          <EffectCard title="10" />
+          <EffectCard title="10" />
+          <EffectCard title="10" />
+        </div>
+      </div>
     </div>
   );
 };
