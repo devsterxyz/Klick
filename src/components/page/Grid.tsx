@@ -39,7 +39,7 @@ import ClickWarp from "../animations/ClickWarp";
 const railSegments = Array.from({ length: 8 });
 
 const railSegmentClass =
-  "[background-image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_50%)] [background-size:7px_7px]";
+  'bg-[repeating-linear-gradient(315deg,rgba(0,0,0,0.1)_0,rgba(0,0,0,0.1)_1px,transparent_0,transparent_50%)] dark:bg-[repeating-linear-gradient(315deg,rgba(255,255,255,0.08)_0,rgba(255,255,255,0.08)_1px,transparent_0,transparent_50%)] bg-[length:7px_7px]'
 
 const PatternRail = ({ side }: { side: "left" | "right" }): JSX.Element => {
   const sideBorder = side === "left" ? "border-r" : "border-l";
@@ -51,7 +51,7 @@ const PatternRail = ({ side }: { side: "left" | "right" }): JSX.Element => {
       {railSegments.map((_, index) => (
         <div
           key={`${side}-${index}`}
-          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? "border-b" : ""} border-white/10 ${railSegmentClass}`}
+          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? "border-b" : ""} border-black/20 dark:border-white/20 ${railSegmentClass}`}
         />
       ))}
     </div>
@@ -60,11 +60,11 @@ const PatternRail = ({ side }: { side: "left" | "right" }): JSX.Element => {
 
 const Grid = (): JSX.Element => {
   return (
-    <div className="relative overflow-hidden bg-transparent text-white">
+    <div className="relative overflow-hidden bg-white dark:bg-black text-black dark:text-white">
       <PatternRail side="left" />
       <PatternRail side="right" />
 
-      <div className="relative z-10 mx-14 border-x border-white/10 sm:mx-20 xl:mx-28">
+      <div className="relative z-10 mx-14 border-x border-b border-black/20 dark:border-white/10 sm:mx-20 xl:mx-28">
         <div className="grid grid-cols-4 gap-4 px-10 py-10">
           <EffectCard title="Warp" Wrapper={ClickWarp} />
           <EffectCard title="2" Wrapper={ClickBlast} />
