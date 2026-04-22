@@ -79,7 +79,7 @@ const Home = () => {
   }
 
   return (
-    <div className="relative h-[calc(100vh-64px)] overflow-hidden bg-white dark:bg-black text-black dark:text-white">
+    <div className="relative h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white mt-16">
       <PatternRail side="left" />
       <PatternRail side="right" />
 
@@ -139,10 +139,10 @@ const Home = () => {
 
             <section id="preview-panels" className="min-h-0 overflow-hidden px-5 py-5 md:px-8 md:py-6">
               <div className="grid h-full gap-3 grid-rows-2">
-                <div className="relative min-h-0 border border-dashed border-black/10 dark:border-white/12 bg-transparent p-5">
+                <div className="relative min-h-0 border border-dashed border-black/30 dark:border-white/20 bg-transparent p-5">
                   <CornerBrackets muted />
                 </div>
-                <div className="relative min-h-0 border border-dashed border-black/10 dark:border-white/12 bg-transparent] p-3">
+                <div className="relative min-h-0 border border-dashed border-black/30 dark:border-white/20 bg-transparent p-3">
                   <CornerBrackets muted />
                 </div>
               </div>

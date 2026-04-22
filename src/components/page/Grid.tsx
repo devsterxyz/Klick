@@ -60,7 +60,7 @@ const PatternRail = ({ side }: { side: "left" | "right" }): JSX.Element => {
 
 const Grid = (): JSX.Element => {
   return (
-    <div className="relative overflow-hidden bg-white dark:bg-black text-black dark:text-white">
+    <div className="relative overflow-hidden bg-transparent text-black dark:text-white">
       <PatternRail side="left" />
       <PatternRail side="right" />
 
@@ -92,30 +92,73 @@ type EffectCardProps = {
   Wrapper?: ComponentType<{ children: ReactNode }>;
 };
 
+// const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
+//   const content = (
+//     <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center group-hover:border-[#333] group-hover:bg-[#0a0a0a]">
+      
+//       {/* 🔥 Reused Corner Borders */}
+//       <CornerBrackets />
+
+//       <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+//         CLICK
+//       </span>
+//     </div>
+//   );
+
+//   return (
+//     <div className="group flex flex-col space-y-3 cursor-default">
+//       <div className="flex items-center h-4">
+//         <span className="text-[10px] font-mono tracking-[0.15em] font-bold text-[#555] group-hover:text-white transition-colors duration-200">
+//           {title}
+//         </span>
+//       </div>
+//       {Wrapper ? <Wrapper>{content}</Wrapper> : content}
+//     </div>
+//   );
+// };
+
 const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
   const content = (
-    <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center group-hover:border-[#333] group-hover:bg-[#0a0a0a]">
-      
-      {/* 🔥 Reused Corner Borders */}
+    <div
+      className="relative w-40 aspect-[1.3/1] flex items-center justify-center
+      border border-gray-200 dark:border-[#151515]
+      bg-white dark:bg-[#050505]
+      transition-all duration-300
+      group-hover:border-gray-400 dark:group-hover:border-[#333]
+      group-hover:bg-gray-50 dark:group-hover:bg-[#0a0a0a]
+      shadow-sm group-hover:shadow-md"
+    >
       <CornerBrackets />
 
-      <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+      <span
+        className="text-[9px] font-mono tracking-[0.2em] uppercase
+        text-gray-400 dark:text-[#222]
+        opacity-100 group-hover:opacity-0
+        transition-opacity duration-300"
+      >
         CLICK
       </span>
     </div>
   );
 
   return (
-    <div className="group flex flex-col space-y-3 cursor-default">
+    <div className="group flex flex-col space-y-3 cursor-default p-4">
       <div className="flex items-center h-4">
-        <span className="text-[10px] font-mono tracking-[0.15em] font-bold text-[#555] group-hover:text-white transition-colors duration-200">
+        <span
+          className="text-[10px] font-mono tracking-[0.15em] font-bold uppercase
+          text-gray-500 dark:text-[#555]
+          group-hover:text-black dark:group-hover:text-white
+          transition-colors duration-200"
+        >
           {title}
         </span>
       </div>
+
       {Wrapper ? <Wrapper>{content}</Wrapper> : content}
     </div>
   );
 };
+
 const CardBox = (): JSX.Element=> {
   return (
     <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center hover:border-[#333] hover:bg-[#0a0a0a]">
@@ -129,11 +172,41 @@ const CardBox = (): JSX.Element=> {
   );
 };
 
+// const CornerBrackets = () => (
+//   <>
+//     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+//     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+//     <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+//     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+//   </>
+// );
+
+
 const CornerBrackets = () => (
   <>
-    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
+    <div className="absolute top-0 left-0 w-1.5 h-1.5 
+      border-t border-l 
+      border-gray-300 dark:border-white/20 
+      group-hover:border-gray-500 dark:group-hover:border-white 
+      transition-all duration-300" 
+    />
+    <div className="absolute top-0 right-0 w-1.5 h-1.5 
+      border-t border-r 
+      border-gray-300 dark:border-white/20 
+      group-hover:border-gray-500 dark:group-hover:border-white 
+      transition-all duration-300" 
+    />
+    <div className="absolute bottom-0 left-0 w-1.5 h-1.5 
+      border-b border-l 
+      border-gray-300 dark:border-white/20 
+      group-hover:border-gray-500 dark:group-hover:border-white 
+      transition-all duration-300" 
+    />
+    <div className="absolute bottom-0 right-0 w-1.5 h-1.5 
+      border-b border-r 
+      border-gray-300 dark:border-white/20 
+      group-hover:border-gray-500 dark:group-hover:border-white 
+      transition-all duration-300" 
+    />
   </>
 );

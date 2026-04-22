@@ -6,7 +6,7 @@ import Grid from './components/page/Grid'
 
 const App = () => {
   return (
-    <div className='overflow-hidden bg-white dark:bg-black text-black dark:text-white'>
+    <div className='overflow-hidden bg-neutral-50 dark:bg-neutral-950 text-black dark:text-white'>
         <Navbar />
         <Home />
         <Grid />
