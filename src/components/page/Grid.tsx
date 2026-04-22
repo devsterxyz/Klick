@@ -35,49 +35,49 @@ import ClickSplash from "../animations/ClickSplash";
 import ClickSynapse from "../animations/ClickSynapse";
 import ClickTesseract from "../animations/ClickTesseract";
 import ClickWarp from "../animations/ClickWarp";
-
-const railSegments = Array.from({ length: 8 });
-
-const railSegmentClass =
-  'bg-[repeating-linear-gradient(315deg,rgba(0,0,0,0.1)_0,rgba(0,0,0,0.1)_1px,transparent_0,transparent_50%)] dark:bg-[repeating-linear-gradient(315deg,rgba(255,255,255,0.08)_0,rgba(255,255,255,0.08)_1px,transparent_0,transparent_50%)] bg-[length:7px_7px]'
-
-const PatternRail = ({ side }: { side: "left" | "right" }): JSX.Element => {
-  const sideBorder = side === "left" ? "border-r" : "border-l";
-
-  return (
-    <div
-      className={`pointer-events-none absolute inset-y-0 ${side === "left" ? "left-0" : "right-0"} flex w-14 flex-col text-white/8 sm:w-20 xl:w-28`}
-    >
-      {railSegments.map((_, index) => (
-        <div
-          key={`${side}-${index}`}
-          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? "border-b" : ""} border-black/20 dark:border-white/20 ${railSegmentClass}`}
-        />
-      ))}
-    </div>
-  );
-};
+import { Link } from "react-router-dom";
 
 const Grid = (): JSX.Element => {
   return (
     <div className="relative overflow-hidden bg-transparent text-black dark:text-white">
-      <PatternRail side="left" />
-      <PatternRail side="right" />
-
-      <div className="relative z-10 mx-14 border-x border-b border-black/20 dark:border-white/10 sm:mx-20 xl:mx-28">
+      <div className="relative z-10 w-full border-x border-b border-black/20 dark:border-white/10">
         <div className="grid grid-cols-4 gap-4 px-10 py-10">
-          <EffectCard title="Warp" Wrapper={ClickWarp} />
-          <EffectCard title="2" Wrapper={ClickBlast} />
-          <EffectCard title="3" />
-          <EffectCard title="4" />
-          <EffectCard title="5" />
-          <EffectCard title="6" />
-          <EffectCard title="7" />
-          <EffectCard title="8" />
-          <EffectCard title="9" />
-          <EffectCard title="10" />
-          <EffectCard title="10" />
-          <EffectCard title="10" />
+          <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
+          <EffectCard title="Binary" Wrapper={ClickBinary} to="/Binary" />
+          <EffectCard title="Blast" Wrapper={ClickBlast} to="/Blast" />
+          <EffectCard title="Bullet Time" Wrapper={ClickBulletTime} to="/BulletTime" />
+          <EffectCard title="Droplet" Wrapper={ClickDroplet} to="/Droplet" />
+          <EffectCard title="Embers" Wrapper={ClickEmbers} to="/Embers" />
+          <EffectCard title="Fire" Wrapper={ClickFire} to="/Fire" />
+          <EffectCard title="Fire Trail" Wrapper={ClickFireTrail} to="/FireTrail" />
+          <EffectCard title="Firework" Wrapper={ClickFirework} to="/Firework" />
+          <EffectCard title="Fission" Wrapper={ClickFission} to="/Fission" />
+          <EffectCard title="Flame" Wrapper={ClickFlame} to="/Flame" />
+          <EffectCard title="Float" Wrapper={ClickFloat} to="/Float" />
+          <EffectCard title="Flow Field" Wrapper={ClickFlowField} to="/FlowField" />
+          <EffectCard title="Focus" Wrapper={ClickFocus} to="/Focus" />
+          <EffectCard title="Fusion" Wrapper={ClickFusion} to="/Fusion" />
+          <EffectCard title="Geo" Wrapper={ClickGeo} to="/Geo" />
+          <EffectCard title="Ghost" Wrapper={ClickGhost} to="/Ghost" />
+          <EffectCard title="Heart" Wrapper={ClickHeart} to="/Heart" />
+          <EffectCard title="Holo Sphere" Wrapper={ClickHoloSphere} to="/HoloSphere" />
+          <EffectCard title="Matrix Rain" Wrapper={ClickMatrixRain} to="/MatrixRain" />
+          <EffectCard title="Ping" Wrapper={ClickPing} to="/Ping" />
+          <EffectCard title="Quantum" Wrapper={ClickQuantum} to="/Quantum" />
+          <EffectCard title="Radiate" Wrapper={ClickRadiate} to="/Radiate" />
+          <EffectCard title="Rain" Wrapper={ClickRain} to="/Rain" />
+          <EffectCard title="Ripple" Wrapper={ClickRipple} to="/Ripple" />
+          <EffectCard title="Ripple Matrix" Wrapper={ClickRippleMatrix} to="/RippleMatrix" />
+          <EffectCard title="Shatter" Wrapper={ClickShatter} to="/Shatter" />
+          <EffectCard title="Skull" Wrapper={ClickSkull} to="/Skull" />
+          <EffectCard title="Smoke" Wrapper={ClickSmoke} to="/Smoke" />
+          <EffectCard title="Spark" Wrapper={ClickSpark} to="/Spark" />
+          <EffectCard title="Spark2" Wrapper={ClickSpark2} to="/Spark2" />
+          <EffectCard title="Sparkle" Wrapper={ClickSparkle} to="/Sparkle" />
+          <EffectCard title="Splash" Wrapper={ClickSplash} to="/Splash" />
+          <EffectCard title="Synapse" Wrapper={ClickSynapse} to="/Synapse" />
+          <EffectCard title="Tesseract" Wrapper={ClickTesseract} to="/Tesseract" />
+          <EffectCard title="Warp" Wrapper={ClickWarp} to="/Warp" />
         </div>
       </div>
     </div>
@@ -86,38 +86,13 @@ const Grid = (): JSX.Element => {
 
 export default Grid;
 
-
 type EffectCardProps = {
   title: string;
   Wrapper?: ComponentType<{ children: ReactNode }>;
+  to: string;
 };
 
-// const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
-//   const content = (
-//     <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center group-hover:border-[#333] group-hover:bg-[#0a0a0a]">
-      
-//       {/* 🔥 Reused Corner Borders */}
-//       <CornerBrackets />
-
-//       <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-//         CLICK
-//       </span>
-//     </div>
-//   );
-
-//   return (
-//     <div className="group flex flex-col space-y-3 cursor-default">
-//       <div className="flex items-center h-4">
-//         <span className="text-[10px] font-mono tracking-[0.15em] font-bold text-[#555] group-hover:text-white transition-colors duration-200">
-//           {title}
-//         </span>
-//       </div>
-//       {Wrapper ? <Wrapper>{content}</Wrapper> : content}
-//     </div>
-//   );
-// };
-
-const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
+const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
   const content = (
     <div
       className="relative w-40 aspect-[1.3/1] flex items-center justify-center
@@ -142,7 +117,7 @@ const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
   );
 
   return (
-    <div className="group flex flex-col space-y-3 cursor-default p-4">
+    <div className="group flex flex-col space-y-3 cursor-default p-4 items-center">
       <div className="flex items-center h-4">
         <span
           className="text-[10px] font-mono tracking-[0.15em] font-bold uppercase
@@ -154,12 +129,18 @@ const EffectCard = ({ title, Wrapper }: EffectCardProps): JSX.Element => {
         </span>
       </div>
 
-      {Wrapper ? <Wrapper>{content}</Wrapper> : content}
+      {Wrapper ? <Wrapper>{content}</Wrapper> : content} 
+        <Link
+          className="px-6 py-2.5 bg-black text-white rounded-lg font-medium hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
+          to={to}
+        >
+          Get Started
+        </Link>
     </div>
   );
 };
 
-const CardBox = (): JSX.Element=> {
+const CardBox = (): JSX.Element => {
   return (
     <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center hover:border-[#333] hover:bg-[#0a0a0a]">
       <div className="absolute top-0 left-0 w-[6px] h-[6px] border-t border-l border-white opacity-0 hover:opacity-100 transition-opacity duration-200" />
@@ -172,41 +153,35 @@ const CardBox = (): JSX.Element=> {
   );
 };
 
-// const CornerBrackets = () => (
-//   <>
-//     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-//     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-//     <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-//     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white opacity-20 group-hover:opacity-100 transition-all duration-300" />
-//   </>
-// );
-
-
 const CornerBrackets = () => (
   <>
-    <div className="absolute top-0 left-0 w-1.5 h-1.5 
+    <div
+      className="absolute top-0 left-0 w-1.5 h-1.5 
       border-t border-l 
       border-gray-300 dark:border-white/20 
       group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300" 
+      transition-all duration-300"
     />
-    <div className="absolute top-0 right-0 w-1.5 h-1.5 
+    <div
+      className="absolute top-0 right-0 w-1.5 h-1.5 
       border-t border-r 
       border-gray-300 dark:border-white/20 
       group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300" 
+      transition-all duration-300"
     />
-    <div className="absolute bottom-0 left-0 w-1.5 h-1.5 
+    <div
+      className="absolute bottom-0 left-0 w-1.5 h-1.5 
       border-b border-l 
       border-gray-300 dark:border-white/20 
       group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300" 
+      transition-all duration-300"
     />
-    <div className="absolute bottom-0 right-0 w-1.5 h-1.5 
+    <div
+      className="absolute bottom-0 right-0 w-1.5 h-1.5 
       border-b border-r 
       border-gray-300 dark:border-white/20 
       group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300" 
+      transition-all duration-300"
     />
   </>
 );

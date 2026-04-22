@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "./components/ThemeContext";
+import { BrowserRouter } from 'react-router-dom'
 
 const rootElement = document.getElementById("root");
 
@@ -10,7 +11,9 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <ThemeProvider>
-    <App />
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </BrowserRouter>
 );

@@ -1,15 +1,93 @@
 import React from 'react'
 import Home from './components/page/Home'
 import Navbar from './components/Navbar'
-import Grid from './components/page/Grid'
+import { Route, Routes } from 'react-router-dom'
+import Agitate from './component-page/Agitate'
+import Binary from './component-page/Binary'
+import Blast from './component-page/Blast'
+import BulletTime from './component-page/BulletTime'
+import Droplet from './component-page/Droplet'
+import Embers from './component-page/Embers'
+import Fire from './component-page/Fire'
+import FireTrail from './component-page/FireTrail'
+import Firework from './component-page/Firework'
+import Fission from './component-page/Fission'
+import Flame from './component-page/Flame'
+import Float from './component-page/Float'
+import FlowField from './component-page/FlowField'
+import Focus from './component-page/Focus'
+import Fusion from './component-page/Fusion'
+import Geo from './component-page/Geo'
+import Ghost from './component-page/Ghost'
+import Heart from './component-page/Heart'
+import HoloSphere from './component-page/HoloSphere'
+import MatrixRain from './component-page/MatrixRain'
+import Ping from './component-page/Ping'
+import Quantum from './component-page/Quantum'
+import Radiate from './component-page/Radiate'
+import Rain from './component-page/Rain'
+import Ripple from './component-page/Ripple'
+import RippleMatrix from './component-page/RippleMatrix'
+import Shatter from './component-page/Shatter'
+import Skull from './component-page/Skull'
+import Smoke from './component-page/Smoke'
+import Spark from './component-page/Spark'
+import Spark2 from './component-page/Spark2'
+import Sparkle from './component-page/Sparkle'
+import Splash from './component-page/Splash'
+import Synapse from './component-page/Synapse'
+import Tesseract from './component-page/Tesseract'
+import Warp from './component-page/Warp'
 
+const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
 
 const App = () => {
   return (
-    <div className='overflow-hidden bg-neutral-50 dark:bg-neutral-950 text-black dark:text-white'>
-        <Navbar />
-        <Home />
-        <Grid />
+    <div className="min-h-screen overflow-hidden bg-neutral-50 text-black dark:bg-neutral-950 dark:text-white">
+      <Navbar />
+      <main className="relative">
+        <div className={`relative z-10 ${contentInsetClass}`}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Agitate" element={<Agitate />} />
+            <Route path="/Binary" element={<Binary />} />
+            <Route path="/Blast" element={<Blast />} />
+            <Route path="/BulletTime" element={<BulletTime />} />
+            <Route path="/Droplet" element={<Droplet />} />
+            <Route path="/Embers" element={<Embers />} />
+            <Route path="/Fire" element={<Fire />} />
+            <Route path="/FireTrail" element={<FireTrail />} />
+            <Route path="/Firework" element={<Firework />} />
+            <Route path="/Fission" element={<Fission />} />
+            <Route path="/Flame" element={<Flame />} />
+            <Route path="/Float" element={<Float />} />
+            <Route path="/FlowField" element={<FlowField />} />
+            <Route path="/Focus" element={<Focus />} />
+            <Route path="/Fusion" element={<Fusion />} />
+            <Route path="/Geo" element={<Geo />} />
+            <Route path="/Ghost" element={<Ghost />} />
+            <Route path="/Heart" element={<Heart />} />
+            <Route path="/HoloSphere" element={<HoloSphere />} />
+            <Route path="/MatrixRain" element={<MatrixRain />} />
+            <Route path="/Ping" element={<Ping />} />
+            <Route path="/Quantum" element={<Quantum />} />
+            <Route path="/Radiate" element={<Radiate />} />
+            <Route path="/Rain" element={<Rain />} />
+            <Route path="/Ripple" element={<Ripple />} />
+            <Route path="/RippleMatrix" element={<RippleMatrix />} />
+            <Route path="/Shatter" element={<Shatter />} />
+            <Route path="/Skull" element={<Skull />} />
+            <Route path="/Smoke" element={<Smoke />} />
+            <Route path="/Spark" element={<Spark />} />
+            <Route path="/Spark2" element={<Spark2 />} />
+            <Route path="/Sparkle" element={<Sparkle />} />
+            <Route path="/Splash" element={<Splash />} />
+            <Route path="/Synapse" element={<Synapse />} />
+            <Route path="/Tesseract" element={<Tesseract />} />
+            <Route path="/Warp" element={<Warp />} />
+          </Routes>
+        </div>
+      </main>
     </div>
   )
 }

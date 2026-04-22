@@ -43,7 +43,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         theme,
         toggleTheme,
         contrastColor: theme === "dark" ? "#fff" : "#000",
-      }}
+      }
+    }
     >
       {children}
     </ThemeContext.Provider>
