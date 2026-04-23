@@ -36,6 +36,7 @@ import ClickSynapse from "../animations/ClickSynapse";
 import ClickTesseract from "../animations/ClickTesseract";
 import ClickWarp from "../animations/ClickWarp";
 import { Link } from "react-router-dom";
+import StudioButtonDiagonal from "../StudioButtonDiagonal";
 
 const Grid = (): JSX.Element => {
   return (
@@ -106,8 +107,8 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
       <CornerBrackets />
 
       <span
-        className="text-[9px] font-mono tracking-[0.2em] uppercase
-        text-gray-400 dark:text-[#222]
+        className="text-[12px] font-mono tracking-[0.2em] uppercase
+        text-gray-500 dark:text-[#222]
         opacity-100 group-hover:opacity-0
         transition-opacity duration-300"
       >
@@ -131,10 +132,10 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
 
       {Wrapper ? <Wrapper>{content}</Wrapper> : content} 
         <Link
-          className="px-6 py-2.5 bg-black text-white rounded-lg font-medium hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
+          className=""
           to={to}
         >
-          Get Started
+          <StudioButtonDiagonal />
         </Link>
     </div>
   );

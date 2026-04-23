@@ -43,7 +43,15 @@ const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
 
 const App = () => {
   return (
-    <div className="min-h-screen overflow-hidden bg-neutral-50 text-black dark:bg-neutral-950 dark:text-white">
+    <div className="min-h-screen w-full relative">
+  {/* Radial Gradient Background from Bottom */}
+  <div
+    className="absolute inset-0 z-0 dark:bg-[radial-gradient(125%_125%_at_50%_90%,#0B0B0B_10%,#000000_100%)] bg-[radial-gradient(125%_125%_at_50%_90%,#EDEDED_30%,#FFFFFF_100%)]"
+  />
+     {/* Your Content/Components */}
+
+    {/* <div className="min-h-screen overflow-hidden bg-neutral-100 text-black dark:bg-zinc-950 dark:text-white"> */}
+    <div className="min-h-screen overflow-hidden text-black dark:text-white">
       <Navbar />
       <main className="relative">
         <div className={`relative z-10 ${contentInsetClass}`}>
@@ -88,6 +96,7 @@ const App = () => {
           </Routes>
         </div>
       </main>
+    </div>
     </div>
   )
 }

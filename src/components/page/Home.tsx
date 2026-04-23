@@ -82,7 +82,7 @@ const Home = () => {
       <PatternRail side="left" />
       <PatternRail side="right" />
       <div className="px-14 sm:px-20 xl:px-28">
-        <div className="relative h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white mt-16">
+        <div className="relative h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white ">
           <div className="relative z-10 flex h-full w-full border-x border-b border-black/20 dark:border-white/10">
             <div className="flex min-w-0 flex-1 flex-col">  
               <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
@@ -97,7 +97,7 @@ const Home = () => {
                     </VariationCard>
 
                     <div className="mt-5 max-w-[32rem]">
-                      <h1 className="font-geist-pixel text-[2.2rem] leading-[0.9] tracking-[-0.06em]  sm:text-[3.1rem] xl:text-[3.75rem]">
+                      <h1 className="font-geist-pixel text-[2.2rem] leading-[0.9] tracking-wide  sm:text-[3.1rem] xl:text-[3.75rem]">
                         Klick
                       </h1>
                       <p className="mt-4 max-w-[31rem] text-[11px] leading-6 text-black/55 dark:text-white/55 sm:text-[12px]">
