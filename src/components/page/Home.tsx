@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import GithubIcon from '../icons/GithubIcon'
 import VariationCard from '../VariationCard'
 import Grid from './Grid'
+import { useLocation } from 'react-router-dom'
 
 const railSegments = Array.from({ length: 29 })
 const installCommand = 'npx shadcn@latest add button card tabs'
@@ -66,6 +67,24 @@ const PatternRail = ({ side }: { side: 'left' | 'right' }) => {
 
 const Home = () => {
   const [copied, setCopied] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!location.hash) {
+      return
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(location.hash.slice(1))
+
+      target?.scrollIntoView({
+        block: location.hash === '#effects-grid' ? 'start' : 'center',
+        behavior: 'smooth',
+      })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash])
 
   const handleCopy = async () => {
     try {
@@ -158,4 +177,3 @@ const Home = () => {
 }
 
 export default Home
-

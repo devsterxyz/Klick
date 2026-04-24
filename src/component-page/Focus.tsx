@@ -1,12 +1,13 @@
 import React from 'react'
 import PageRails from './PageRails'
+import BackToGridLink from '@/components/BackToGridLink'
 
 const Focus = () => {
   return (
-    <PageRails segmentCount={10}>
-      <div className="mt-16 min-h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white">
+    <PageRails segmentCount={6}>
+      <div className="min-h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white">
         <div className="min-h-[calc(100vh-64px)] w-full border-x border-b border-black/20 px-6 py-8 dark:border-white/10 md:px-10">
-          Focus
+          <BackToGridLink />
         </div>
       </div>
     </PageRails>

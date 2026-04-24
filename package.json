@@ -17,6 +17,7 @@
     "geist": "^1.7.0",
     "lucide-react": "^1.7.0",
     "motion": "^12.38.0",
+    "mx-icons": "^1.0.31",
     "radix-ui": "^1.4.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

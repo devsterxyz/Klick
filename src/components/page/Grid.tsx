@@ -40,9 +40,9 @@ import StudioButtonDiagonal from "../StudioButtonDiagonal";
 
 const Grid = (): JSX.Element => {
   return (
-    <div className="relative overflow-hidden bg-transparent text-black dark:text-white">
+    <div id="effects-grid" className="relative scroll-mt-16 overflow-hidden bg-transparent text-black dark:text-white">
       <div className="relative z-10 w-full border-x border-b border-black/20 dark:border-white/10">
-        <div className="grid grid-cols-4 gap-4 px-10 py-10">
+        <div className="flex flex-wrap w-full justify-center gap-x-10">
           <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
           <EffectCard title="Binary" Wrapper={ClickBinary} to="/Binary" />
           <EffectCard title="Blast" Wrapper={ClickBlast} to="/Blast" />
@@ -94,6 +94,8 @@ type EffectCardProps = {
 };
 
 const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
+  const cardId = `effect-${to.replace('/', '').toLowerCase()}`
+
   const content = (
     <div
       className="relative w-40 aspect-[1.3/1] flex items-center justify-center
@@ -118,7 +120,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
   );
 
   return (
-    <div className="group flex flex-col space-y-3 cursor-default p-4 items-center">
+    <div id={cardId} className="group flex scroll-mt-24 flex-col space-y-3 cursor-default p-4 items-center">
       <div className="flex items-center h-4">
         <span
           className="text-[10px] font-mono tracking-[0.15em] font-bold uppercase
