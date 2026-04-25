@@ -1,4 +1,4 @@
-import React, { ReactNode, ComponentType, JSX } from "react";
+import React, { JSX } from "react";
 import ClickBinary from "../animations/ClickBinary";
 import ClickAgitate from "../animations/ClickAgitate";
 import ClickBlast from "../animations/ClickBlast";
@@ -35,14 +35,13 @@ import ClickSplash from "../animations/ClickSplash";
 import ClickSynapse from "../animations/ClickSynapse";
 import ClickTesseract from "../animations/ClickTesseract";
 import ClickWarp from "../animations/ClickWarp";
-import { Link } from "react-router-dom";
-import StudioButtonDiagonal from "../StudioButtonDiagonal";
+import EffectCard from "../EffectCard";
 
 const Grid = (): JSX.Element => {
   return (
     <div id="effects-grid" className="relative scroll-mt-16 overflow-hidden bg-transparent text-black dark:text-white">
       <div className="relative z-10 w-full border-x border-b border-black/20 dark:border-white/10">
-        <div className="flex flex-wrap w-full justify-center gap-x-10">
+        <div className="flex flex-wrap w-full justify-center gap-x-20 gap-y-10 px-15">
           <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
           <EffectCard title="Binary" Wrapper={ClickBinary} to="/Binary" />
           <EffectCard title="Blast" Wrapper={ClickBlast} to="/Blast" />
@@ -86,105 +85,3 @@ const Grid = (): JSX.Element => {
 };
 
 export default Grid;
-
-type EffectCardProps = {
-  title: string;
-  Wrapper?: ComponentType<{ children: ReactNode }>;
-  to: string;
-};
-
-const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
-  const cardId = `effect-${to.replace('/', '').toLowerCase()}`
-
-  const content = (
-    <div
-      className="relative w-40 aspect-[1.3/1] flex items-center justify-center
-      border border-gray-200 dark:border-[#151515]
-      bg-white dark:bg-[#050505]
-      transition-all duration-300
-      group-hover:border-gray-400 dark:group-hover:border-[#333]
-      group-hover:bg-gray-50 dark:group-hover:bg-[#0a0a0a]
-      shadow-sm group-hover:shadow-md"
-    >
-      <CornerBrackets />
-
-      <span
-        className="text-[12px] font-mono tracking-[0.2em] uppercase
-        text-gray-500 dark:text-[#222]
-        opacity-100 group-hover:opacity-0
-        transition-opacity duration-300"
-      >
-        CLICK
-      </span>
-    </div>
-  );
-
-  return (
-    <div id={cardId} className="group flex scroll-mt-24 flex-col space-y-3 cursor-default p-4 items-center">
-      <div className="flex items-center h-4">
-        <span
-          className="text-[10px] font-mono tracking-[0.15em] font-bold uppercase
-          text-gray-500 dark:text-[#555]
-          group-hover:text-black dark:group-hover:text-white
-          transition-colors duration-200"
-        >
-          {title}
-        </span>
-      </div>
-
-      {Wrapper ? <Wrapper>{content}</Wrapper> : content} 
-        <Link
-          className=""
-          to={to}
-        >
-          <StudioButtonDiagonal />
-        </Link>
-    </div>
-  );
-};
-
-const CardBox = (): JSX.Element => {
-  return (
-    <div className="relative w-40 aspect-[1.3/1] border border-[#151515] bg-[#050505] transition-colors duration-300 flex items-center justify-center hover:border-[#333] hover:bg-[#0a0a0a]">
-      <div className="absolute top-0 left-0 w-[6px] h-[6px] border-t border-l border-white opacity-0 hover:opacity-100 transition-opacity duration-200" />
-      <div className="absolute bottom-0 right-0 w-[6px] h-[6px] border-b border-r border-white opacity-0 hover:opacity-100 transition-opacity duration-200" />
-
-      <span className="text-[9px] font-mono tracking-[0.2em] text-[#222] opacity-100 hover:opacity-0 transition-opacity duration-300">
-        CLICK
-      </span>
-    </div>
-  );
-};
-
-const CornerBrackets = () => (
-  <>
-    <div
-      className="absolute top-0 left-0 w-1.5 h-1.5 
-      border-t border-l 
-      border-gray-300 dark:border-white/20 
-      group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300"
-    />
-    <div
-      className="absolute top-0 right-0 w-1.5 h-1.5 
-      border-t border-r 
-      border-gray-300 dark:border-white/20 
-      group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300"
-    />
-    <div
-      className="absolute bottom-0 left-0 w-1.5 h-1.5 
-      border-b border-l 
-      border-gray-300 dark:border-white/20 
-      group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300"
-    />
-    <div
-      className="absolute bottom-0 right-0 w-1.5 h-1.5 
-      border-b border-r 
-      border-gray-300 dark:border-white/20 
-      group-hover:border-gray-500 dark:group-hover:border-white 
-      transition-all duration-300"
-    />
-  </>
-);

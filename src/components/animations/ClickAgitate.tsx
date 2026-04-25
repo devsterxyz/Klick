@@ -1,4 +1,5 @@
-import { useRef, useEffect, useCallback, ReactNode } from 'react';
+import { useRef, useEffect, useCallback, ReactNode } from "react";
+import { useTheme } from "../ThemeContext";
 
 type Particle = {
   x: number;
@@ -12,30 +13,33 @@ type Particle = {
 type ClickAgitateProps = {
   strokeColor?: string;
   particleCount?: number;
-  minSpeed?: number;
-  maxSpeed?: number;
-  jitterAmp?: number;
-  jitterDecay?: number;
-  trailOpacity?: number;
   duration?: number;
+  particleSize?: number;
   children?: ReactNode;
 };
 
 const ClickAgitate = ({
-  strokeColor = '#fff',
+  strokeColor,
   particleCount = 25,
-  minSpeed = 2,
-  maxSpeed = 6,
-  jitterAmp = 12,
-  jitterDecay = 0.95,
-  trailOpacity = 0.5,
-  duration = 1500,
+  duration = 1200,
+  particleSize = 2,
   children,
 }: ClickAgitateProps) => {
+  const { contrastColor } = useTheme();
+  const activeStrokeColor = strokeColor ?? contrastColor;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // physics defaults
+  const minSpeed = 2;
+  const maxSpeed = 6;
+  const jitterAmp = 10;
+  const jitterDecay = 0.94;
+  const drag = 0.98;
+  const trailOpacity = 0.5;
+
+  // resize canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -44,10 +48,8 @@ const ClickAgitate = ({
 
     const resize = () => {
       const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+      canvas.width = width;
+      canvas.height = height;
     };
 
     const ro = new ResizeObserver(resize);
@@ -56,10 +58,11 @@ const ClickAgitate = ({
     return () => ro.disconnect();
   }, []);
 
+  // animation loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const draw = (timestamp: number) => {
@@ -70,20 +73,30 @@ const ClickAgitate = ({
         if (elapsed >= duration) return false;
 
         const progress = elapsed / duration;
-        const alpha = Math.max(0, 1 - progress);
 
+        // smoother fade (ease-out)
+        const alpha = Math.pow(1 - progress, 1.5);
+
+        // motion
         p.x += p.vx;
         p.y += p.vy;
 
+        // drag (smooth slowdown)
+        p.vx *= drag;
+        p.vy *= drag;
+
+        // jitter
         p.amp *= jitterDecay;
 
         const jx = p.x + (Math.random() - 0.5) * p.amp;
         const jy = p.y + (Math.random() - 0.5) * p.amp;
 
-        ctx.fillStyle = strokeColor;
+        // particle
+        ctx.fillStyle = activeStrokeColor;
         ctx.globalAlpha = alpha;
-        ctx.fillRect(jx, jy, 2, 2);
+        ctx.fillRect(jx, jy, particleSize, particleSize);
 
+        // trail
         ctx.beginPath();
         ctx.moveTo(jx, jy);
         ctx.lineTo(
@@ -91,9 +104,10 @@ const ClickAgitate = ({
           jy - p.vy * 2 + (Math.random() - 0.5) * p.amp
         );
         ctx.lineWidth = 1;
-        ctx.strokeStyle = strokeColor;
+        ctx.strokeStyle = activeStrokeColor;
         ctx.globalAlpha = alpha * trailOpacity;
         ctx.stroke();
+
         ctx.globalAlpha = 1;
 
         return true;
@@ -104,44 +118,50 @@ const ClickAgitate = ({
 
     animIdRef.current = requestAnimationFrame(draw);
     return () => {
-      if (animIdRef.current !== null) {
-        cancelAnimationFrame(animIdRef.current);
-      }
+      if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
     };
-  }, [strokeColor, duration, jitterDecay, trailOpacity]);
+  }, [activeStrokeColor, duration, particleSize]);
 
+  // click handler
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
+
       const rect = canvas.getBoundingClientRect();
       const cx = e.clientX - rect.left;
       const cy = e.clientY - rect.top;
+
       const now = performance.now();
 
-      const newParticles: Particle[] = Array.from({ length: particleCount }, () => {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
-        return {
-          x: cx,
-          y: cy,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          amp: jitterAmp,
-          startTime: now,
-        };
-      });
+      const newParticles: Particle[] = Array.from(
+        { length: particleCount },
+        () => {
+          const angle = Math.random() * Math.PI * 2;
+          const speed =
+            minSpeed + Math.random() * (maxSpeed - minSpeed);
+
+          return {
+            x: cx,
+            y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            amp: jitterAmp,
+            startTime: now,
+          };
+        }
+      );
 
       particlesRef.current.push(...newParticles);
     },
-    [particleCount, minSpeed, maxSpeed, jitterAmp]
+    [particleCount]
   );
 
   return (
     <div className="relative w-fit h-fit" onClick={handleClick}>
       <canvas
         ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
+        className="absolute inset-0 w-full h-full pointer-events-none z-10"
       />
       {children}
     </div>

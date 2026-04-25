@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, Variants } from "motion/react";
+import { useTheme } from "./ThemeContext";
 
 type Direction = {
   x: number;
@@ -8,24 +9,6 @@ type Direction = {
 
 type ButtonProps = {
   text?: string;
-};
-
-const cornerVariants: Variants = {
-  initial: {
-    x: 0,
-    y: 0,
-    borderColor: "#6B7280",
-  },
-  hover: (direction: Direction) => ({
-    x: direction.x,
-    y: direction.y,
-    borderColor: "rgba(255, 255, 255, 1)",
-  }),
-  tap: (direction: Direction) => ({
-    x: direction.x * -0.6,
-    y: direction.y * -0.6,
-    borderColor: "rgba(255, 255, 255, 1)",
-  }),
 };
 
 const springConfig = {
@@ -37,9 +20,36 @@ const springConfig = {
 const StudioButtonDiagonal: React.FC<ButtonProps> = ({
   text = "GET EFFECT",
 }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const fillColor = isDark ? "#ffffff" : "#000000";
+  const idleTextColor = isDark ? "text-white" : "text-black";
+  const hoverTextColor = isDark
+    ? "group-hover/studio-button:text-black"
+    : "group-hover/studio-button:text-white";
+  const cornerIdleColor = isDark ? "#6B7280" : "#9CA3AF";
+
+  const cornerVariants: Variants = {
+    initial: {
+      x: 0,
+      y: 0,
+      borderColor: cornerIdleColor,
+    },
+    hover: (direction: Direction) => ({
+      x: direction.x,
+      y: direction.y,
+      borderColor: fillColor,
+    }),
+    tap: (direction: Direction) => ({
+      x: direction.x * -0.6,
+      y: direction.y * -0.6,
+      borderColor: fillColor,
+    }),
+  };
+
   return (
     <motion.div
-      className="relative group cursor-pointer select-none"
+      className="relative group/studio-button cursor-pointer select-none"
       initial="initial"
       whileHover="hover"
       whileTap="tap"
@@ -55,7 +65,7 @@ const StudioButtonDiagonal: React.FC<ButtonProps> = ({
           key={i}
           custom={corner.dir}
           variants={cornerVariants}
-          transition={springConfig}
+          // transition={springConfig}
           className={`absolute ${corner.pos} w-1.5 h-1.5 ${corner.border} z-30 pointer-events-none`}
         />
       ))}
@@ -67,22 +77,23 @@ const StudioButtonDiagonal: React.FC<ButtonProps> = ({
       >
         {/* Pattern */}
         <div
-          className="absolute inset-0 opacity-10 z-0 transition-opacity group-hover:opacity-0"
+          className="absolute inset-0 opacity-10 z-0 transition-opacity group-hover/studio-button:opacity-0"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(45deg, transparent, transparent 7px, #fff 7px, #fff 8px)",
+              `repeating-linear-gradient(45deg, transparent, transparent 7px, ${fillColor} 7px, ${fillColor} 8px)`,
             backgroundSize: "11.3px 11.3px",
           }}
         />
 
         {/* Diagonal Fill */}
         <motion.div
-          className="absolute bg-white z-10"
+          className="absolute z-10"
           style={{
             top: 0,
             left: 0,
             width: "200%",
             height: "200%",
+            backgroundColor: fillColor,
             originX: 0,
             originY: 0,
           }}
@@ -93,7 +104,7 @@ const StudioButtonDiagonal: React.FC<ButtonProps> = ({
           transition={{ type: "spring", damping: 28, stiffness: 150, mass: 0.6 }}
         />
 
-        <span className="relative z-20 transition-colors duration-500 group-hover:text-black text-white font-mono text-[10px] tracking-[0.3em] font-bold uppercase">
+        <span className={`relative z-20 transition-colors duration-500 ${hoverTextColor} ${idleTextColor} font-mono text-[10px] tracking-[0.3em] font-bold uppercase`}>
           {text}
         </span>
       </motion.button>

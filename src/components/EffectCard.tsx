@@ -1,0 +1,59 @@
+import React, { ComponentType, JSX, ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+import CornerBrackets from './CornerBrackets'
+import StudioButtonDiagonal from './StudioButtonDiagonal'
+
+type EffectCardProps = {
+  title: string
+  Wrapper?: ComponentType<{ children: ReactNode }>
+  to: string
+}
+
+const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
+  const cardId = `effect-${to.replace('/', '').toLowerCase()}`
+
+  const content = (
+    <div
+      className="relative w-40 aspect-[1.3/1] flex items-center justify-center
+      border border-gray-200 dark:border-[#151515]
+      bg-white dark:bg-[#050505]
+      transition-all duration-300
+      group-hover/effect-card:border-gray-400 dark:group-hover/effect-card:border-[#333]
+      group-hover/effect-card:bg-gray-50 dark:group-hover/effect-card:bg-[#0a0a0a]
+      shadow-sm group-hover/effect-card:shadow-md"
+    >
+      <CornerBrackets />
+
+      <span
+        className="text-[12px] font-mono tracking-[0.2em] uppercase
+        text-gray-500 dark:text-[#222]
+        opacity-100 group-hover/effect-card:opacity-0
+        transition-opacity duration-300"
+      >
+        CLICK
+      </span>
+    </div>
+  )
+
+  return (
+    <div id={cardId} className="group/effect-card flex scroll-mt-24 flex-col space-y-3 cursor-default p-4 items-center">
+      <div className="flex items-center h-4">
+        <span
+          className="text-[10px] font-mono tracking-[0.15em] font-bold uppercase
+          text-gray-500 dark:text-[#555]
+          group-hover/effect-card:text-black dark:group-hover/effect-card:text-white
+          transition-colors duration-200"
+        >
+          {title}
+        </span>
+      </div>
+
+      {Wrapper ? <Wrapper>{content}</Wrapper> : content}
+      <Link className="" to={to}>
+        <StudioButtonDiagonal />
+      </Link>
+    </div>
+  )
+}
+
+export default EffectCard
