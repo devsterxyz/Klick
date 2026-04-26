@@ -1,5 +1,26 @@
 import React, { useState } from "react";
 
+const tokenPattern =
+  /(\{\/\*[\s\S]*?\*\/\}|<\/?[A-Z][A-Za-z0-9.]*|<\/?|\/?>|[A-Za-z_$][\w$-]*(?==)|"[^"]*"|'[^']*'|\b\d+(?:\.\d+)?\b|[{}=])/g;
+
+const getTokenColor = (token: string) => {
+  if (/^\{\/\*/.test(token)) return "#6A9955";
+  if (/^<\/?[A-Z]/.test(token)) return "#4EC9B0";
+  if (/^["']/.test(token)) return "#CE9178";
+  if (/^\d/.test(token)) return "#B5CEA8";
+  if (/^[A-Za-z_$][\w$-]*$/.test(token)) return "#9CDCFE";
+  if (/^[{}]$/.test(token)) return "#FFD700";
+  if (/^(<\/?|\/?>|=)$/.test(token)) return "#808080";
+  return "#D4D4D4";
+};
+
+const renderHighlightedCode = (code: string) =>
+  code.split(tokenPattern).map((token, index) => (
+    <span key={`${token}-${index}`} style={{ color: getTokenColor(token) }}>
+      {token}
+    </span>
+  ));
+
 /**
  * Terminal / SnippetBox Component
  * A clean box for multi-line code snippets with a copy button.
@@ -50,7 +71,7 @@ const Terminal = ({ code, fileName }: { code: string; fileName?: string }): Reac
       {/* Code */}
       <div className="p-4 font-mono text-sm text-black/80 dark:text-white/80 overflow-x-auto">
         <pre className="whitespace-pre">
-          <code>{code}</code>
+          <code>{renderHighlightedCode(code)}</code>
         </pre>
       </div>
     </div>

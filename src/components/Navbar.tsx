@@ -16,7 +16,7 @@ const Navbar = () => {
     <header className="relative z-10 bg-transparent border border-b-black/20 dark:border-b-white/20 w-full z-50 ">
 
     {/* <header className="fixed z-10 bg-transparent border border-b-black/20 dark:border-b-white/20 w-full z-50 "> */}
-      <div className="mx-14 border-x border-x-black/20 dark:border-x-white/20 sm:mx-20 xl:mx-28">
+      <div className="mx-12 border-x border-x-black/20 dark:border-x-white/20 sm:mx-[78px] xl:mx-[110px]">
         <div className="flex h-16 items-center justify-between px-6 md:px-10">
           <Link to="/" className="font-mono text-[22px] font-semibold tracking-normal">
             Klick

@@ -7,15 +7,18 @@ import SliderField from '../SliderField'
 import Terminal from '../Terminal'
 
 const Agitate = () => {
-  const [particleCount, setParticleCount] = useState(25)
-  const [area, setArea] = useState(50)
-  const [particleSize, setParticleSize] = useState(3)
+  const [particleCount, setParticleCount] = useState(17)
+  const [particleSize, setParticleSize] = useState(4)
   const [duration, setDuration] = useState(400)
+  const [strokeColor, setStrokeColor] = useState("#22d3ee")
+
+  const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 
   const code = `<ClickAgitate
-  particleCount={10}
-  particleSize={4}
-  duration={0.6}
+  particleCount=${particleCount}
+  particleSize=${particleSize}
+  duration=${duration}
+  strokeColor="${strokeColor}"
 >
   {/*Content div*/}
 </ClickAgitate>`;
@@ -30,6 +33,7 @@ const Agitate = () => {
               particleCount={particleCount}
               particleSize={particleSize}
               duration={duration}
+              strokeColor={strokeColor}
               > 
                 <div
                   className="group/effect-card relative w-75 aspect-[1.1/1] flex items-center justify-center
@@ -44,9 +48,30 @@ const Agitate = () => {
                 </div>
               </ClickAgitate>
               <div className='mt-5'>
-                <SliderField title="Agitation" min={0} max={100} value={particleCount} onChange={setParticleCount} />
+                <SliderField title="Agitation" min={0} max={50} value={particleCount} onChange={setParticleCount} />
                 <SliderField title="Size" min={1} max={10} value={particleSize} onChange={setParticleSize} />
                 <SliderField title="Duration" min={100} max={1200} value={duration} onChange={setDuration} />
+                <div className="w-59 max-w-md mb-6">
+                  <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+                    Color
+                  </div>
+                  <div className="flex gap-3">
+                    {colorOptions.map((color) => (
+                      <button
+                        key={color}
+                        type="button"
+                        aria-label={`Set particle color to ${color}`}
+                        onClick={() => setStrokeColor(color)}
+                        className={`h-6 w-6 rounded-full border transition-transform duration-200 ${
+                          strokeColor === color
+                            ? "scale-110 border-black dark:border-white"
+                            : "border-black/20 dark:border-white/20"
+                        }`}
+                        style={{ backgroundColor: color }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             <div className='w-180'>
