@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import PageRails from './PageRails'
 import BackToGridLink from '@/components/BackToGridLink'
 import CornerBrackets from '@/components/CornerBrackets'
+import InstallationOptions from '@/components/InstallationOptions'
+import clickAgitateCode from '@/components/animations/ClickAgitate.tsx?raw'
 import ClickAgitate from '../animations/ClickAgitate'
 import SliderField from '../SliderField'
 import Terminal from '../Terminal'
@@ -76,6 +78,15 @@ const Agitate = () => {
             </div>
             <div className='w-180'>
               <Terminal code={code} />
+              <div className='mt-5'>
+                <h1 className='text-2xl'>
+                  Installation
+                </h1>
+                <InstallationOptions
+                  CLICode="npx shadcn@latest add click-agitate"
+                  ManualCode={clickAgitateCode}
+                />
+              </div>
             </div>
           </div>
         </div>

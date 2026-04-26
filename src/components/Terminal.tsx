@@ -3,20 +3,20 @@ import React, { useState } from "react";
 const tokenPattern =
   /(\{\/\*[\s\S]*?\*\/\}|<\/?[A-Z][A-Za-z0-9.]*|<\/?|\/?>|[A-Za-z_$][\w$-]*(?==)|"[^"]*"|'[^']*'|\b\d+(?:\.\d+)?\b|[{}=])/g;
 
-const getTokenColor = (token: string) => {
-  if (/^\{\/\*/.test(token)) return "#6A9955";
-  if (/^<\/?[A-Z]/.test(token)) return "#4EC9B0";
-  if (/^["']/.test(token)) return "#CE9178";
-  if (/^\d/.test(token)) return "#B5CEA8";
-  if (/^[A-Za-z_$][\w$-]*$/.test(token)) return "#9CDCFE";
-  if (/^[{}]$/.test(token)) return "#FFD700";
-  if (/^(<\/?|\/?>|=)$/.test(token)) return "#808080";
-  return "#D4D4D4";
+const getTokenClassName = (token: string) => {
+  if (/^\{\/\*/.test(token)) return "text-emerald-700 dark:text-emerald-400";
+  if (/^<\/?[A-Z]/.test(token)) return "text-teal-700 dark:text-teal-300";
+  if (/^["']/.test(token)) return "text-orange-700 dark:text-orange-300";
+  if (/^\d/.test(token)) return "text-violet-700 dark:text-violet-300";
+  if (/^[A-Za-z_$][\w$-]*$/.test(token)) return "text-sky-700 dark:text-sky-300";
+  if (/^[{}]$/.test(token)) return "text-amber-700 dark:text-amber-300";
+  if (/^(<\/?|\/?>|=)$/.test(token)) return "text-neutral-600 dark:text-neutral-400";
+  return "text-neutral-900 dark:text-neutral-100";
 };
 
 const renderHighlightedCode = (code: string) =>
   code.split(tokenPattern).map((token, index) => (
-    <span key={`${token}-${index}`} style={{ color: getTokenColor(token) }}>
+    <span key={`${token}-${index}`} className={getTokenClassName(token)}>
       {token}
     </span>
   ));
@@ -46,12 +46,12 @@ const Terminal = ({ code, fileName }: { code: string; fileName?: string }): Reac
   };
 
   return (
-    <div className="w-full max-w-[31rem] rounded-md border border-black/10 dark:border-white/10 bg-neutral-100 dark:bg-[#0b0b0b] overflow-hidden transition-all duration-200">
+    <div className="w-full max-w-[42rem] rounded-md border border-black/10 dark:border-white/10 bg-neutral-100 dark:bg-[#0b0b0b] overflow-hidden transition-all duration-200">
       
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-black/5 dark:border-white/5">
         <span className="text-[10px] font-mono text-black/40 dark:text-white/40 uppercase tracking-widest">
-          {fileName || "Usage"}
+          {fileName || "App.tsx"}
         </span>
 
         <button
