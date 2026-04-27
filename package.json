@@ -8,10 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "registry:build": "shadcn build"
+    "registry:build": "shadcn build",
+    "postinstall": "true"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.8",
