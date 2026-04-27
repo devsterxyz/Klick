@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "klick",
+  "homepage": "https://klick.com",
+  "items": [
+    {
+      "name": "ClickBlast",
+      "type": "registry:block",
+      "title": "Blast",
+      "description": "A simple blast effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBlast/ClickBlast.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
