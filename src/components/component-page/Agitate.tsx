@@ -12,7 +12,7 @@ const Agitate = () => {
   const [particleCount, setParticleCount] = useState(17);
   const [particleSize, setParticleSize] = useState(4);
   const [duration, setDuration] = useState(400);
-  const [strokeColor, setStrokeColor] = useState("#22d3ee");
+  const [strokeColor, setStrokeColor] = useState("#ffffff");
 
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"];
 
