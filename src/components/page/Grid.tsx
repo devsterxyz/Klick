@@ -36,6 +36,9 @@ import ClickSynapse from "../animation/ClickSynapse";
 import ClickTesseract from "../animation/ClickTesseract";
 import ClickWarp from "../animation/ClickWarp";
 import EffectCard from "../EffectCard";
+import ClickPrompt from "../animation/ClickPrompt";
+import ClickDoubleSonar from "../animation/ClickDoubleSonar";
+import ClickBoundingBox from "../animation/ClickBoundingBox";
 
 const Grid = (): JSX.Element => {
   return (
@@ -103,12 +106,16 @@ const Grid = (): JSX.Element => {
           <EffectCard title="Sparkle" Wrapper={ClickSparkle} to="/Sparkle" />
           <EffectCard title="Splash" Wrapper={ClickSplash} to="/Splash" />
           <EffectCard title="Synapse" Wrapper={ClickSynapse} to="/Synapse" />
+          <EffectCard title="promp" Wrapper={ClickPrompt} to="/Synapse" />
           <EffectCard
             title="Tesseract"
             Wrapper={ClickTesseract}
             to="/Tesseract"
           />
-          <EffectCard title="Warp" Wrapper={ClickWarp} to="/Warp" />
+
+          <ClickBoundingBox>
+            <button>Click me</button>
+          </ClickBoundingBox>
         </div>
       </div>
     </div>
