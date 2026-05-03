@@ -24,7 +24,7 @@ const InstallationOptions = ({ CLICode, ManualCode }: InstallationOptionsProps) 
             key={option.id}
             type="button"
             onClick={() => setSelectedOption(option.id)}
-            className={`px-4 py-1.5 font-mono text-xs transition-colors duration-200 ${
+            className={`px-4 py-1.5 font-sans text-xs font-medium transition-colors duration-200 ${
               selectedOption === option.id
                 ? "bg-black text-white dark:bg-white dark:text-black"
                 : "text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"

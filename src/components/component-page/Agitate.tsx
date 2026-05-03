@@ -26,8 +26,8 @@ const Agitate = () => {
 </ClickAgitate>`;
   return (
     <PageRails segmentCount={6}>
-      <div className="min-h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white">
-        <div className="min-h-[calc(100vh-64px)] w-full border-x border-b border-black/20 px-6 py-8 dark:border-white/10 md:px-10">
+      <div className="min-h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white">
+        <div className="min-h-[calc(100vh-80px)] w-full border-x border-b border-black/20 px-6 py-8 dark:border-white/10 md:px-10">
           <BackToGridLink />
           <div className="w-full h-full flex mt-5 ml-5">
             <div className="flex-1">
@@ -72,7 +72,7 @@ const Agitate = () => {
                   onChange={setDuration}
                 />
                 <div className="w-59 max-w-md mb-6">
-                  <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+                  <div className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
                     Color
                   </div>
                   <div className="flex gap-3">

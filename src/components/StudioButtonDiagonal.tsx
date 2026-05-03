@@ -104,7 +104,7 @@ const StudioButtonDiagonal: React.FC<ButtonProps> = ({
           transition={{ type: "spring", damping: 28, stiffness: 150, mass: 0.6 }}
         />
 
-        <span className={`relative z-20 transition-colors duration-500 ${hoverTextColor} ${idleTextColor} font-mono text-[10px] tracking-[0.3em] font-bold uppercase`}>
+        <span className={`relative z-20 transition-colors duration-500 ${hoverTextColor} ${idleTextColor} font-sans text-[10px] tracking-[0.3em] font-bold uppercase`}>
           {text}
         </span>
       </motion.button>

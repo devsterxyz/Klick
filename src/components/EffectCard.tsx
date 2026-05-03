@@ -25,7 +25,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
       <CornerBrackets />
 
       <span
-        className="text-[12px] font-mono tracking-[0.2em] uppercase
+        className="text-[12px] font-sans tracking-[0.2em] uppercase
         text-gray-500 dark:text-[#222]
         opacity-100 group-hover/effect-card:opacity-0
         transition-opacity duration-300"
@@ -39,7 +39,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
     <div id={cardId} className="group/effect-card flex scroll-mt-24 flex-col space-y-3 cursor-default p-4 items-center">
       <div className="flex items-center h-4">
         <span
-          className="text-[10px] font-mono tracking-[0.15em] font-bold uppercase
+          className="text-[10px] font-sans tracking-[0.15em] font-bold uppercase
           text-gray-500 dark:text-[#555]
           group-hover/effect-card:text-black dark:group-hover/effect-card:text-white
           transition-colors duration-200"

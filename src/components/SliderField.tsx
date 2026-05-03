@@ -18,7 +18,7 @@ const SliderField = ({
   return (
     <div className="w-59 max-w-md mb-6 group">
       {/* Label + Value */}
-      <div className="flex justify-between items-end mb-2 font-mono">
+      <div className="flex justify-between items-end mb-2 font-sans">
         <span className="text-[11px] uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
           {title}
         </span>

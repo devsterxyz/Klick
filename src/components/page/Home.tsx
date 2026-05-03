@@ -36,9 +36,9 @@ const GhostButton = ({
     <a
       href={href}
       target='_blank'
-      className={`group relative inline-flex h-8 items-center justify-center gap-2 overflow-hidden border border-dashed px-3 text-[12px] transition ${
+      className={`group relative inline-flex h-9 items-center justify-center gap-2 overflow-hidden border border-dashed px-4 text-[13px] font-medium transition ${
         invert
-          ? 'border-white bg-white text-black hover:bg-neutral-200'
+          ? 'border-black bg-black text-white hover:bg-neutral-900 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200'
           : 'border-black/20 text-black hover:border-black/40 hover:bg-black/[0.03] dark:border-white/20 dark:text-white dark:hover:border-white/40 dark:hover:bg-white/[0.03]'
       }`}
     >
@@ -101,33 +101,33 @@ const Home = () => {
       <PatternRail side="left" />
       <PatternRail side="right" />
       <div className="px-14 sm:px-20 xl:px-28">
-        <div className="relative h-[calc(100vh-64px)] overflow-hidden bg-transparent text-black dark:text-white ">
+        <div className="relative h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white ">
           <div className="relative z-10 flex h-full w-full border-x border-b border-black/20 dark:border-white/10">
             <div className="flex min-w-0 flex-1 flex-col">  
               <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
                 <section className="flex min-h-0 flex-col border-b border-black/20 dark:border-white/10 lg:border-b-0 lg:border-r">
-                  <div className="flex flex-1 flex-col px-5 py-5 md:px-8 md:py-6">
+                  <div className="flex flex-1 flex-col px-6 py-7 md:px-9 md:py-8 lg:px-10 mt-16 lg:mt-[4.5rem]">
 
                     <VariationCard title="01. The Original">
-                      <div className="inline-flex items-center gap-2 border border-dashed border-black/20 dark:border-white/20 px-3 py-1 font-sans text-[10px] font-light group">
-                        <span className="h-1.5 w-1.5 bg-black dark:bg-white group-hover:bg-green-500 dark:group-hover:bg-green-500" />
+                      <div className="inline-flex items-center gap-2.5 border border-dashed border-black/20 dark:border-white/20 px-3.5 py-1.5 font-sans text-[11px] font-medium group">
+                        <span className="h-2 w-2 bg-black dark:bg-white group-hover:bg-green-500 dark:group-hover:bg-green-500" />
                         v1 &middot; Early Preview
                       </div>
                     </VariationCard>
 
-                    <div className="mt-5 max-w-[32rem]">
-                      <h1 className="font-geist-pixel text-[2.2rem] leading-[0.9] tracking-wide  sm:text-[3.1rem] xl:text-[3.75rem]">
-                        Klick
+                    <div className="mt-6 max-w-[36rem]">
+                      <h1 className="font-geist-pixel text-[2.6rem] leading-[0.95] tracking-wide sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.35rem]">
+                        Click effects for sharper interfaces
                       </h1>
-                      <p className="mt-4 max-w-[31rem] text-[11px] leading-6 text-black/55 dark:text-white/55 sm:text-[12px]">
-                        Your website responds give it a click
+                      <p className="mt-5 max-w-[32rem] text-[15px] leading-7 text-black/55 dark:text-white/55 sm:text-base">
+                        Add responsive click feedback to buttons, cards, and controls with small animation wrappers built for React.
                       </p>
                     </div>
 
-                    <div className="mt-5 max-w-[31rem] flex items-center justify-between rounded-md border border border-black/10 dark:border-white/10 bg-neutral-100 dark:bg-[#0b0b0b] px-3 h-10">
+                    <div className="mt-6 flex h-12 max-w-[34rem] items-center justify-between rounded-md border border-black/10 bg-neutral-100 px-4 dark:border-white/10 dark:bg-[#0b0b0b]">
     
                       {/* Command */}
-                      <div className="flex items-center gap-2 font-mono text-sm text-black/80 dark:text-white/80 overflow-hidden">
+                      <div className="flex items-center gap-2.5 overflow-hidden font-mono text-sm text-black/80 dark:text-white/80">
                         <span className="text-black/40 dark:text-white/40">$</span>
                         <code className="truncate">{installCommand}</code>
                       </div>
@@ -136,21 +136,21 @@ const Home = () => {
                       <button
                         type="button"
                         onClick={handleCopy}
-                        className="ml-3 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition"
+                        className="ml-3 shrink-0 text-xs font-medium text-black/60 transition hover:text-black dark:text-white/60 dark:hover:text-white"
                       >
                         {copied ? "Copied" : "Copy"}
                       </button>
 
                     </div>
 
-                    <div className="mt-4 flex flex-wrap gap-3">
+                    <div className="mt-5 flex flex-wrap gap-3">
                       <GhostButton href="https://github.com/devsterdev">
-                        <GithubIcon size={14} className="cursor-default" />
+                        <GithubIcon size={15} className="cursor-default" />
                         Github
                       </GhostButton>
                       <GhostButton href="#preview-panels" invert>
                         Get Started
-                        <ArrowRight color="currentColor" size={14} />
+                        <ArrowRight color="currentColor" size={15} />
                       </GhostButton>
                     </div>
                   </div>
