@@ -2,15 +2,35 @@ import React, { ComponentType, JSX, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import CornerBrackets from './CornerBrackets'
 import StudioButtonDiagonal from './StudioButtonDiagonal'
+import { useTheme } from './ThemeContext'
+
+type EffectWrapperProps = {
+  children?: ReactNode
+  color?: string
+  strokeColor?: string
+  fillColor?: string
+  dotColor?: string
+  textColor?: string
+  shardColor?: string
+}
 
 type EffectCardProps = {
   title: string
-  Wrapper?: ComponentType<{ children: ReactNode }>
+  Wrapper?: ComponentType<any>
   to: string
 }
 
 const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
+  const { contrastColor } = useTheme()
   const cardId = `effect-${to.replace('/', '').toLowerCase()}`
+  const effectColorProps: EffectWrapperProps = {
+    color: contrastColor,
+    strokeColor: contrastColor,
+    fillColor: contrastColor,
+    dotColor: contrastColor,
+    textColor: contrastColor,
+    shardColor: contrastColor,
+  }
 
   const content = (
     <div
@@ -48,7 +68,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
         </span>
       </div>
 
-      {Wrapper ? <Wrapper>{content}</Wrapper> : content}
+      {Wrapper ? <Wrapper {...effectColorProps}>{content}</Wrapper> : content}
       <Link className="" to={to}>
         <StudioButtonDiagonal />
       </Link>

@@ -46,7 +46,7 @@ const App = () => {
     <div className="min-h-screen w-full relative">
   {/* Radial Gradient Background from Bottom */}
   <div
-    className="absolute inset-0 z-0 dark:bg-[radial-gradient(125%_125%_at_50%_90%,#0B0B0B_10%,#000000_100%)] bg-[radial-gradient(125%_125%_at_50%_90%,#EDEDED_30%,#FFFFFF_100%)]"
+    className="absolute inset-0 z-0 dark:bg-black "
   />
      {/* Your Content/Components */}
 

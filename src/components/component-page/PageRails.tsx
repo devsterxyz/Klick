@@ -15,16 +15,17 @@ type PageRailsProps = {
 
 const PatternRail = ({ side, segmentCount }: PatternRailProps) => {
   const sideBorder = side === 'left' ? 'border-r' : 'border-l'
-  const railSegments = Array.from({ length: segmentCount })
+  const railSegments = Array.from({ length: segmentCount * 8 })
 
   return (
     <div
-      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} flex w-14 flex-col text-white/8 sm:w-20 xl:w-28`}
+      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} flex w-14 flex-col overflow-hidden text-white/8 sm:w-20 xl:w-28`}
+      style={{ '--rail-segments': segmentCount } as React.CSSProperties}
     >
       {railSegments.map((_, index) => (
         <div
           key={`${side}-${index}`}
-          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? 'border-b' : ''} border-black/20 dark:border-white/20 ${railSegmentClass}`}
+          className={`h-[calc((100vh-80px)/var(--rail-segments))] shrink-0 ${sideBorder} ${index !== railSegments.length - 1 ? 'border-b' : ''} border-black/20 dark:border-white/20 ${railSegmentClass}`}
         />
       ))}
     </div>
