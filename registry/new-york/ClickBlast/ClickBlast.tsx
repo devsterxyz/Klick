@@ -14,6 +14,7 @@ type ClickBlastProps = {
   particleCount?: number;
   minSpeed?: number;
   maxSpeed?: number;
+  spread?: number;
   friction?: number;
   minSize?: number;
   maxSize?: number;
@@ -26,6 +27,7 @@ const ClickBlast = ({
   particleCount = 40,
   minSpeed = 3,
   maxSpeed = 10,
+  spread = 1,
   friction = 0.85,
   minSize = 1.5,
   maxSize = 3.5,
@@ -60,6 +62,7 @@ const ClickBlast = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -73,10 +76,12 @@ const ClickBlast = ({
         const progress = elapsed / duration;
         const alpha = Math.max(0, 1 - progress);
 
+        // spread controls how far particles travel
         p.vx *= friction;
         p.vy *= friction;
-        p.x += p.vx;
-        p.y += p.vy;
+
+        p.x += p.vx * spread;
+        p.y += p.vy * spread;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -98,12 +103,13 @@ const ClickBlast = ({
         cancelAnimationFrame(animIdRef.current);
       }
     };
-  }, [fillColor, duration, friction]);
+  }, [fillColor, duration, friction, spread]);
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
+
       const rect = canvas.getBoundingClientRect();
       const cx = e.clientX - rect.left;
       const cy = e.clientY - rect.top;
@@ -113,6 +119,7 @@ const ClickBlast = ({
         { length: particleCount },
         () => {
           const angle = Math.random() * Math.PI * 2;
+
           const speed =
             minSpeed + Math.random() * (maxSpeed - minSpeed);
 
@@ -130,7 +137,13 @@ const ClickBlast = ({
 
       particlesRef.current.push(...newParticles);
     },
-    [particleCount, minSpeed, maxSpeed, minSize, maxSize]
+    [
+      particleCount,
+      minSpeed,
+      maxSpeed,
+      minSize,
+      maxSize,
+    ]
   );
 
   return (

@@ -23,7 +23,7 @@ interface ClickBlackHoleProps {
 
 const ClickBlackHole = ({
   color = '#fff',
-  dotSize = 1.5,
+  dotSize = 2,
   count = 40,
   decay = 0.01,
   minDist = 60,
@@ -36,6 +36,29 @@ const ClickBlackHole = ({
   const particlesRef = useRef<BlackHoleParticle[]>([]);
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
+  const optionsRef = useRef({
+    color,
+    dotSize,
+    count,
+    decay,
+    minDist,
+    maxDist,
+    accretion,
+    coreRadius,
+  });
+
+  useEffect(() => {
+    optionsRef.current = {
+      color,
+      dotSize,
+      count,
+      decay,
+      minDist,
+      maxDist,
+      accretion,
+      coreRadius,
+    };
+  }, [color, dotSize, count, decay, minDist, maxDist, accretion, coreRadius]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -85,6 +108,12 @@ const ClickBlackHole = ({
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const {
+        color: currentColor,
+        dotSize: currentDotSize,
+        accretion: currentAccretion,
+        coreRadius: currentCoreRadius,
+      } = optionsRef.current;
 
       // Collect unique centers to draw cores
       const centers = new Map<string, { cx: number; cy: number; life: number }>();
@@ -94,7 +123,7 @@ const ClickBlackHole = ({
         if (p.life <= 0) return false;
 
         // Accretion — spiral inward
-        p.dist *= accretion;
+        p.dist *= currentAccretion;
 
         // Keplerian-like speed: faster as dist shrinks
         p.angle += 3 / Math.max(5, p.dist);
@@ -103,9 +132,9 @@ const ClickBlackHole = ({
         const py = p.cy + Math.sin(p.angle) * p.dist;
 
         ctx.globalAlpha = Math.max(0, p.life);
-        ctx.fillStyle = color;
+        ctx.fillStyle = currentColor;
         ctx.beginPath();
-        ctx.arc(px, py, dotSize, 0, Math.PI * 2);
+        ctx.arc(px, py, currentDotSize, 0, Math.PI * 2);
         ctx.fill();
 
         // Track center for core drawing
@@ -121,8 +150,8 @@ const ClickBlackHole = ({
       for (const { cx, cy, life } of centers.values()) {
         ctx.globalAlpha = Math.max(0, life * 0.5);
         ctx.beginPath();
-        ctx.arc(cx, cy, coreRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = color;
+        ctx.arc(cx, cy, currentCoreRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = currentColor;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -148,15 +177,21 @@ const ClickBlackHole = ({
     const rect = canvas.getBoundingClientRect();
     const cx = e.clientX - rect.left;
     const cy = e.clientY - rect.top;
+    const {
+      count: currentCount,
+      minDist: currentMinDist,
+      maxDist: currentMaxDist,
+      decay: currentDecay,
+    } = optionsRef.current;
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < currentCount; i++) {
       particlesRef.current.push({
         cx,
         cy,
         angle: Math.random() * Math.PI * 2,
-        dist: minDist + Math.random() * maxDist,
+        dist: currentMinDist + Math.random() * currentMaxDist,
         life: 1.0,
-        decay,
+        decay: currentDecay,
       });
     }
 

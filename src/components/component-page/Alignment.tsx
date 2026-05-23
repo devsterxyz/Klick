@@ -1,47 +1,45 @@
 import React, { useState } from 'react'
-import PageRails from './PageRails'
-import BackToGridLink from '@/components/BackToGridLink'
 import ComponentPageLayout from './layout'
-import clickBlastCode from '../../../registry/new-york/ClickBlast/ClickBlast.tsx?raw'
-import ClickBlast from '../../../registry/new-york/ClickBlast/ClickBlast'
+import clickAlignmentCode from "@/components/animation/ClickAlignment.tsx?raw";
+import CornerBrackets from '../CornerBrackets'
 import SliderField from '../SliderField'
 import { ColorPicker, ColorPreview } from './layout'
-import CornerBrackets from '@/components/CornerBrackets'
+import ClickAlignment from '../animation/ClickAlignment';
 
-const Blast = () => {
-  const [particleCount, setParticleCount] = useState(40)
-  const [spread, setSpread] = useState(1)
-  const [duration, setDuration] = useState(1200)
+const Alignment = () => {
+  const [dotSize, setDotSize] = useState(2)
+  const [count, setCount] = useState(20)
+  const [spread, setSpread] = useState(80)
   const [strokeColor, setStrokeColor] = useState("#ffffff")
 
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"];
 
-  const code = `<ClickBlast
-    particleCount={${particleCount}}
+  const code = `<ClickAlignment
+    dotSize={${dotSize}}
+    count={${count}}
     spread={${spread}}
-    duration={${duration}}
-    strokeColor="${strokeColor}"
+    color="${strokeColor}"
   >
     {/*Content div*/}
-  </ClickBlast>`
+  </ClickAlignment>`;
   return (
     <ComponentPageLayout
-      title="Blast"
+      title="Alignment"
       code={code}
-      cliCode="npx shadcn@latest add click-blast"
-      manualCode={clickBlastCode}
-      controlTitle="Tune the burst"
-      controlDescription="Shape how noisy, fast, and visible each click feels."
+      cliCode="npx shadcn@latest add click-alignment"
+      manualCode={clickAlignmentCode}
+      controlTitle="Tune the grid"
+      controlDescription="Shape the dot size, density, and alignment spread."
       controlAdornment={<ColorPreview color={strokeColor} />}
       preview={
-        <ClickBlast
-          particleCount={particleCount}
+        <ClickAlignment
+          dotSize={dotSize}
+          count={count}
           spread={spread}
-          duration={duration}
-          fillColor={strokeColor}
+          color={strokeColor}
         >
           <div
-            aria-label="Blast preview target"
+            aria-label="Alignment preview target"
             className="group/effect-card relative flex aspect-square w-[min(18rem,66vw)] items-center justify-center
             border border-black/15 bg-neutral-50 shadow-[0_24px_80px_-45px_rgba(0,0,0,0.65)]
             transition-all duration-300 hover:-translate-y-1 hover:border-black/35 hover:bg-white hover:shadow-[0_34px_90px_-46px_rgba(0,0,0,0.85)]
@@ -52,30 +50,31 @@ const Blast = () => {
               Click
             </span>
           </div>
-        </ClickBlast>
+        </ClickAlignment>
       }
       controls={
         <>
           <SliderField
-            title="particleCount"
-            min={20}
-            max={80}
-            value={particleCount}
-            onChange={(value) => setParticleCount(value)}
-          />
-          <SliderField
-            title="Spread"
+            title="dotSize"
             min={1}
             max={5}
-            value={spread}
-            onChange={(value) => setSpread(value)}
+            step={0.5}
+            value={dotSize}
+            onChange={(value) => setDotSize(value)}
           />
           <SliderField
-            title="Duration"
-            min={500}
-            max={2000}
-            value={duration}
-            onChange={(value) => setDuration(value)}
+            title="count"
+            min={10}
+            max={50}
+            value={count}
+            onChange={(value) => setCount(value)}
+          />
+          <SliderField
+            title="spread"
+            min={50}
+            max={200}
+            value={spread}
+            onChange={(value) => setSpread(value)}
           />
           <ColorPicker
             value={strokeColor}
@@ -85,7 +84,7 @@ const Blast = () => {
         </>
       }
     />
-  )
+  );
 }
 
-export default Blast
+export default Alignment

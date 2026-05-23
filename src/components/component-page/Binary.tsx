@@ -1,103 +1,89 @@
-import React, { useState } from "react";
-import PageRails from "./PageRails";
-import BackToGridLink from "@/components/BackToGridLink";
-import clickBinaryCode from "@/components/animation/ClickBinary.tsx?raw";
-import ClickBinary from "../animation/ClickBinary";
-import CornerBrackets from "../CornerBrackets";
-import SliderField from "../SliderField";
-import Terminal from "../Terminal";
+import React, { useState } from 'react'
+import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
+import clickBinaryCode from '../animation/ClickBinary.tsx?raw'
+import ClickBinary from '../animation/ClickBinary'
+import SliderField from '../SliderField'
+import CornerBrackets from '../CornerBrackets'
 
 const Binary = () => {
-  const [particleCount, setParticleCount] = useState(10);
-  const [fontSize, setFontSize] = useState(12);
-  const [spreadRadius, setSpreadRadius] = useState(60);
-  const [duration, setDuration] = useState(800);
+  const [particleCount, setParticleCount] = useState(10)
+  const [spreadRadius, setspreadRadius] = useState(60)
+  const [fontSize, setFontSize] = useState(12)
+  const [textColor, setTextColor] = useState("#ffffff")
+
+  const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 
   const code = `<ClickBinary
-  particleCount={${particleCount}}
-  fontSize={${fontSize}}
-  spreadRadius={${spreadRadius}}
-  duration={${duration}}
->
-  {/*Content div*/}
-</ClickBinary>`;
+    fontSize={${fontSize}}
+    spreadRadius={${spreadRadius}}
+    particleCount={${particleCount}}
+    textColor="${textColor}"
+  >
+    {/*Content div*/}
+  </ClickBinary>`
 
   return (
-    <PageRails segmentCount={29}>
-      <div className="min-h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white">
-        <div className="min-h-[calc(100vh-80px)] w-full border-x border-b border-black/20 px-6 py-8 dark:border-white/10 md:px-10">
-          <BackToGridLink />
-          <div className="mt-5 ml-5 flex h-full w-full flex-col gap-8">
-            <div className="flex items-start gap-10">
-              <div>
-                <ClickBinary
-                  particleCount={particleCount}
-                  fontSize={fontSize}
-                  spreadRadius={spreadRadius}
-                  duration={duration}
-                >
-                  <div
-                    className="group/effect-card relative w-75 aspect-[1.1/1] flex items-center justify-center
-                    border border-gray-200 dark:border-[#151515]
-                    bg-white dark:bg-[#050505]
-                    transition-all duration-300
-                    group-hover/effect-card:border-gray-400 dark:group-hover/effect-card:border-[#333]
-                    group-hover/effect-card:bg-gray-50 dark:group-hover/effect-card:bg-[#0a0a0a]
-                    shadow-sm group-hover/effect-card:shadow-md"
-                  >
-                    <CornerBrackets />
-                  </div>
-                </ClickBinary>
-              </div>
-              <div>
-                <SliderField
-                  title="Particles"
-                  min={1}
-                  max={50}
-                  value={particleCount}
-                  onChange={setParticleCount}
-                />
-                <SliderField
-                  title="Font Size"
-                  min={8}
-                  max={32}
-                  value={fontSize}
-                  onChange={setFontSize}
-                />
-                <SliderField
-                  title="Spread"
-                  min={20}
-                  max={140}
-                  value={spreadRadius}
-                  onChange={setSpreadRadius}
-                />
-                <SliderField
-                  title="Duration"
-                  min={200}
-                  max={1600}
-                  value={duration}
-                  onChange={setDuration}
-                />
-              </div>
-            </div>
-            <div className="w-full max-w-[42rem]">
-              <Terminal code={code} />
-              <div className="mt-5">
-                <h1 className="text-2xl">Installation</h1>
-                <div className="mt-4 flex flex-col gap-5">
-                  <Terminal
-                    code="npx shadcn@latest add click-binary"
-                    fileName="CLI"
-                  />
-                  <Terminal code={clickBinaryCode} fileName="Manual" />
-                </div>
-              </div>
-            </div>
+    <ComponentPageLayout
+      title="Binary"
+      code={code}
+      cliCode="npx shadcn@latest add click-binary"
+      manualCode={clickBinaryCode}
+      controlTitle="Tune the digits"
+      controlDescription="Shape the size, spread, and density of each binary burst."
+      controlAdornment={<ColorPreview color={textColor} />}
+      preview={
+        <ClickBinary
+          particleCount={particleCount}
+          spreadRadius={spreadRadius}
+          fontSize={fontSize}
+          textColor={textColor}
+        >
+          <div
+            aria-label="Binary preview target"
+            className="group/effect-card relative flex aspect-square w-[min(18rem,66vw)] items-center justify-center
+            border border-black/15 bg-neutral-50 shadow-[0_24px_80px_-45px_rgba(0,0,0,0.65)]
+            transition-all duration-300 hover:-translate-y-1 hover:border-black/35 hover:bg-white hover:shadow-[0_34px_90px_-46px_rgba(0,0,0,0.85)]
+            dark:border-white/10 dark:bg-[#020202] dark:shadow-[0_24px_80px_-45px_rgba(255,255,255,0.32)] dark:hover:border-white/30 dark:hover:bg-[#080808]"
+          >
+            <CornerBrackets />
+            <span className="font-mono text-sm uppercase tracking-[0.24em] text-black/25 transition-colors duration-300 group-hover/effect-card:text-black/45 dark:text-white/20 dark:group-hover/effect-card:text-white/40">
+              Click
+            </span>
           </div>
-        </div>
-      </div>
-    </PageRails>
-  );
-};
+        </ClickBinary>
+      }
+      controls={
+        <>
+          <SliderField
+            title="fontSize"
+            min={1}
+            max={25}
+            value={fontSize}
+            onChange={(value) => setFontSize(value)}
+          />
+          <SliderField
+            title="spread Radius"
+            min={30}
+            max={150}
+            value={spreadRadius}
+            onChange={(value) => setspreadRadius(value)}
+          />
+          <SliderField
+            title="Particle Count"
+            min={5}
+            max={35}
+            value={particleCount}
+            onChange={(value) => setParticleCount(value)}
+          />
+          <ColorPicker
+            value={textColor}
+            colors={colorOptions}
+            onChange={(value) => setTextColor(value)}
+          />
+        </>
+      }
+    />
+  )
+}
 
-export default Binary;
+export default Binary

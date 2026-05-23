@@ -38,6 +38,8 @@ import Splash from './components/component-page/Splash'
 import Synapse from './components/component-page/Synapse'
 import Tesseract from './components/component-page/Tesseract'
 import Warp from './components/component-page/Warp'
+import Alignment from './components/component-page/Alignment'
+import BlackHole from './components/component-page/BlackHole'
 
 const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
 
@@ -58,7 +60,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Agitate" element={<Agitate />} />
+            <Route path="/Alignment" element={<Alignment />} />
             <Route path="/Binary" element={<Binary />} />
+            <Route path="/BlackHole" element={<BlackHole />} />
             <Route path="/Blast" element={<Blast />} />
             <Route path="/BulletTime" element={<BulletTime />} />
             <Route path="/Droplet" element={<Droplet />} />

@@ -4,6 +4,7 @@ type SliderFieldProps = {
   title: string;
   min?: number;
   max?: number;
+  step?: number;
   value: number;
   onChange: (val: number) => void;
 };
@@ -12,6 +13,7 @@ const SliderField = ({
   title,
   min = 0,
   max = 100,
+  step = 1,
   value,
   onChange,
 }: SliderFieldProps) => {
@@ -37,8 +39,9 @@ const SliderField = ({
           type="range"
           min={min}
           max={max}
+          step={step}
           value={value}
-          onChange={(e) => onChange(parseInt(e.target.value))}
+          onChange={(e) => onChange(parseFloat(e.target.value))}
           className="absolute w-full appearance-none bg-transparent cursor-pointer z-10 focus:outline-none
             [&::-webkit-slider-runnable-track]:appearance-none
             [&::-webkit-slider-thumb]:appearance-none

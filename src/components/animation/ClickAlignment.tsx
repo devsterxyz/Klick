@@ -13,27 +13,31 @@ interface ClickAlignmentProps {
   color?: string;
   dotSize?: number;
   count?: number;
-  decay?: number;
   spread?: number;
-  gridSize?: number;
-  easeSpeed?: number;
   children?: ReactNode;
 }
 
 const ClickAlignment = ({
   color = '#fff',
-  dotSize = 1.5,
+  dotSize = 2,
   count = 20,
-  decay = 0.015,
   spread = 80,
-  gridSize = 15,
-  easeSpeed = 0.15,
   children,
 }: ClickAlignmentProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dotsRef = useRef<AlignDot[]>([]);
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
+  const optionsRef = useRef({ color, dotSize, count, spread });
+
+  // KEEPING EVERYTHING ELSE EXACTLY THE SAME
+  const decay = 0.015;
+  const gridSize = 15;
+  const easeSpeed = 0.15;
+
+  useEffect(() => {
+    optionsRef.current = { color, dotSize, count, spread };
+  }, [color, dotSize, count, spread]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -83,18 +87,24 @@ const ClickAlignment = ({
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const { color: currentColor, dotSize: currentDotSize } =
+        optionsRef.current;
 
       dotsRef.current = dotsRef.current.filter((p: AlignDot) => {
         p.life -= p.decay;
         if (p.life <= 0) return false;
 
-        // Ease toward snapped grid position
         p.x += (p.tx - p.x) * easeSpeed;
         p.y += (p.ty - p.y) * easeSpeed;
 
         ctx.globalAlpha = Math.max(0, p.life);
-        ctx.fillStyle = color;
-        ctx.fillRect(p.x - dotSize, p.y - dotSize, dotSize * 2, dotSize * 2);
+        ctx.fillStyle = currentColor;
+        ctx.fillRect(
+          p.x - currentDotSize,
+          p.y - currentDotSize,
+          currentDotSize * 2,
+          currentDotSize * 2
+        );
 
         return true;
       });
@@ -117,18 +127,23 @@ const ClickAlignment = ({
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const rect = canvas.getBoundingClientRect();
     const cx = e.clientX - rect.left;
     const cy = e.clientY - rect.top;
+    const { count: currentCount, spread: currentSpread } = optionsRef.current;
 
-    for (let i = 0; i < count; i++) {
-      // Random start position around click
-      const startX = cx + (Math.random() - 0.5) * spread;
-      const startY = cy + (Math.random() - 0.5) * spread;
+    for (let i = 0; i < currentCount; i++) {
+      const startX = cx + (Math.random() - 0.5) * currentSpread;
+      const startY = cy + (Math.random() - 0.5) * currentSpread;
 
-      // Snap target to nearest grid intersection
-      const tx = Math.round((cx + (Math.random() - 0.5) * spread) / gridSize) * gridSize;
-      const ty = Math.round((cy + (Math.random() - 0.5) * spread) / gridSize) * gridSize;
+      const tx =
+        Math.round((cx + (Math.random() - 0.5) * currentSpread) / gridSize) *
+        gridSize;
+
+      const ty =
+        Math.round((cy + (Math.random() - 0.5) * currentSpread) / gridSize) *
+        gridSize;
 
       dotsRef.current.push({
         x: startX,
