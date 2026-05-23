@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import GithubIcon from '../icons/GithubIcon'
 import VariationCard from '../VariationCard'
 import Grid from './Grid'
 import { useLocation } from 'react-router-dom'
+import CursorAnimation from '../CursorAnimation'
 
 const railSegments = Array.from({ length: 29 })
 const installCommand = 'npx shadcn@latest add button card tabs'
@@ -156,14 +157,12 @@ const Home = () => {
                   </div>
                 </section>
 
-                <section id="preview-panels" className="min-h-0 overflow-hidden px-5 py-5 md:px-8 md:py-6">
-                  <div className="grid h-full gap-3 grid-rows-2">
-                    <div className="relative min-h-0 border border-dashed border-black/30 dark:border-white/20 bg-transparent p-5">
+                <section id="preview-panels" className="min-h-0 overflow-hidden px-5 py-5 md:px-8 md:py-6 relative w-full">
+                  <div className="flex h-full w-full">
+                    <div className="relative min-h-0 overflow-hidden border border-dashed border-black/30 dark:border-white/20 bg-transparent p-5 flex flex-1">
                       <CornerBrackets muted />
-                    </div>
-                    <div className="relative min-h-0 border border-dashed border-black/30 dark:border-white/20 bg-transparent p-3">
-                      <CornerBrackets muted />
-                    </div>
+                      <CursorAnimation className="h-full w-full" />
+                    </div>  
                   </div>
                 </section>
               </div>
