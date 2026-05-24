@@ -34,7 +34,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
 
   const content = (
     <div
-      className="relative w-40 aspect-[1.3/1] flex items-center justify-center
+      className="relative flex aspect-square w-48 items-center justify-center
       border border-gray-200 dark:border-[#151515]
       bg-white dark:bg-[#050505]
       transition-all duration-300
@@ -56,7 +56,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
   )
 
   return (
-    <div id={cardId} className="group/effect-card flex scroll-mt-24 flex-col space-y-3 cursor-default p-4 items-center">
+    <div id={cardId} className="group/effect-card flex w-56 scroll-mt-24 cursor-default flex-col items-center gap-3">
       <div className="flex items-center h-4">
         <span
           className="text-[10px] font-sans tracking-[0.15em] font-bold uppercase
