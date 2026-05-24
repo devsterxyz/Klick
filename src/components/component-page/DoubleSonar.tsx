@@ -1,44 +1,45 @@
-import React, { useState } from "react";
-import CornerBrackets from "@/components/CornerBrackets";
-import clickAgitateCode from "@/components/animation/ClickAgitate.tsx?raw";
-import ClickAgitate from "../animation/ClickAgitate";
-import SliderField from "../SliderField";
-import ComponentPageLayout, { ColorPicker, ColorPreview } from "./layout";
+import React, { useState } from 'react'
+import ComponentPageLayout from './layout'
+import ClickDoubleSonar from '../animation/ClickDoubleSonar'
+import ClickDoubleSonarCode from '../animation/ClickDoubleSonar.tsx?raw'
+import CornerBrackets from '../CornerBrackets'
+import SliderField from '../SliderField'
+import { ColorPicker, ColorPreview } from './layout'
 
-const Agitate = () => {
-  const [particleCount, setParticleCount] = useState(17)
-  const [particleSize, setParticleSize] = useState(4)
-  const [duration, setDuration] = useState(1200)
+const DoubleSonar = () => {
+  const [lineWidth, setLineWidth] = useState(2)
+  const [speed, setSpeed] = useState(2)
+  const [gap, setGap] = useState(15)
   const [strokeColor, setStrokeColor] = useState("#ffffff")
 
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 
-  const code = `<ClickAgitate
-  particleCount={${particleCount}}
-  particleSize={${particleSize}}
-  duration={${duration}}
+  const code = `<ClickDoubleSonar
+  lineWidth={${lineWidth}}
+  speed={${speed}}
+  gap={${gap}}
   strokeColor="${strokeColor}"
 >
   {/*Content div*/}
-</ClickAgitate>`
+</ClickDoubleSonar>`
   return (
     <ComponentPageLayout
-      title="Agitate"
+      title="Double Sonar"
       code={code}
       cliCode="npx shadcn@latest add click-agitate"
-      manualCode={clickAgitateCode}
+      manualCode={ClickDoubleSonarCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."
       controlAdornment={<ColorPreview color={strokeColor} />}
       preview={
-        <ClickAgitate
-          particleCount={particleCount}
-          particleSize={particleSize}
-          duration={duration}
-          strokeColor={strokeColor}
+        <ClickDoubleSonar
+          lineWidth={lineWidth}
+          speed={speed}
+          gap={gap}
+          color={strokeColor}
         >
           <div
-            aria-label="Agitate preview target"
+            aria-label="DoubleSonar preview target"
             className="group/effect-card relative flex aspect-square w-[min(18rem,66vw)] items-center justify-center
             border border-black/15 bg-neutral-50 shadow-[0_24px_80px_-45px_rgba(0,0,0,0.65)]
             transition-all duration-300 hover:-translate-y-1 hover:border-black/35 hover:bg-white hover:shadow-[0_34px_90px_-46px_rgba(0,0,0,0.85)]
@@ -49,30 +50,30 @@ const Agitate = () => {
               Click
             </span>
           </div>
-        </ClickAgitate>
+        </ClickDoubleSonar>
       }
       controls={
         <>
           <SliderField
-            title="Agitation"
-            min={0}
-            max={50}
-            value={particleCount}
-            onChange={(value) => setParticleCount(value)}
+            title="lineWidth"
+            min={1}
+            max={5}
+            value={lineWidth}
+            onChange={(value) => setLineWidth(value)}
           />
           <SliderField
-            title="Size"
+            title="speed"
             min={1}
             max={10}
-            value={particleSize}
-            onChange={(value) => setParticleSize(value)}
+            value={speed}
+            onChange={(value) => setSpeed(value)}
           />
           <SliderField
-            title="Duration"
-            min={500}
-            max={2000}
-            value={duration}
-            onChange={(value) => setDuration(value)}
+            title="gap"
+            min={10}
+            max={30}
+            value={gap}
+            onChange={(value) => setGap(value)}
           />
           <ColorPicker
             value={strokeColor}
@@ -85,4 +86,4 @@ const Agitate = () => {
   )
 }
 
-export default Agitate;
+export default DoubleSonar

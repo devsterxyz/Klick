@@ -15,13 +15,13 @@ const Alignment = () => {
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"];
 
   const code = `<ClickAlignment
-    dotSize={${dotSize}}
-    count={${count}}
-    spread={${spread}}
-    color="${strokeColor}"
-  >
-    {/*Content div*/}
-  </ClickAlignment>`;
+  dotSize={${dotSize}}
+  count={${count}}
+  spread={${spread}}
+  color="${strokeColor}"
+>
+  {/*Content div*/}
+</ClickAlignment>`;
   return (
     <ComponentPageLayout
       title="Alignment"

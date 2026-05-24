@@ -40,6 +40,14 @@ import Tesseract from './components/component-page/Tesseract'
 import Warp from './components/component-page/Warp'
 import Alignment from './components/component-page/Alignment'
 import BlackHole from './components/component-page/BlackHole'
+import BoundingBox from './components/component-page/BoundingBox'
+import Diffusion from './components/component-page/Diffusion'
+import DoubleSonar from './components/component-page/DoubleSonar'
+import Generative from './components/component-page/Generative'
+import Load from './components/component-page/Load'
+import Sonar from './components/component-page/Sonar'
+import SuperNova from './components/component-page/SuperNova'
+import Prompt from './components/component-page/Prompt'
 
 const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
 
@@ -64,7 +72,10 @@ const App = () => {
             <Route path="/Binary" element={<Binary />} />
             <Route path="/BlackHole" element={<BlackHole />} />
             <Route path="/Blast" element={<Blast />} />
+            <Route path="/BoundingBox" element={<BoundingBox />} />
             <Route path="/BulletTime" element={<BulletTime />} />
+            <Route path="/Diffusion" element={<Diffusion />} />
+            <Route path="/DoubleSonar" element={<DoubleSonar />} />
             <Route path="/Droplet" element={<Droplet />} />
             <Route path="/Embers" element={<Embers />} />
             <Route path="/Fire" element={<Fire />} />
@@ -76,12 +87,15 @@ const App = () => {
             <Route path="/FlowField" element={<FlowField />} />
             <Route path="/Focus" element={<Focus />} />
             <Route path="/Fusion" element={<Fusion />} />
+            <Route path="/Generative" element={<Generative />} />
             <Route path="/Geo" element={<Geo />} />
             <Route path="/Ghost" element={<Ghost />} />
             <Route path="/Heart" element={<Heart />} />
             <Route path="/HoloSphere" element={<HoloSphere />} />
+            <Route path="/Load" element={<Load />} />
             <Route path="/MatrixRain" element={<MatrixRain />} />
             <Route path="/Ping" element={<Ping />} />
+            <Route path="/Prompt" element={<Prompt />} />
             <Route path="/Quantum" element={<Quantum />} />
             <Route path="/Radiate" element={<Radiate />} />
             <Route path="/Rain" element={<Rain />} />
@@ -90,9 +104,12 @@ const App = () => {
             <Route path="/Shatter" element={<Shatter />} />
             <Route path="/Skull" element={<Skull />} />
             <Route path="/Smoke" element={<Smoke />} />
+            <Route path="/Sonar" element={<Sonar />} />
             <Route path="/Spark" element={<Spark />} />
             <Route path="/Spark2" element={<Spark2 />} />
             <Route path="/Sparkle" element={<Sparkle />} />
+            <Route path="/Supernova" element={<SuperNova />} />
+            <Route path="/SuperNova" element={<SuperNova />} />
             <Route path="/Splash" element={<Splash />} />
             <Route path="/Synapse" element={<Synapse />} />
             <Route path="/Tesseract" element={<Tesseract />} />

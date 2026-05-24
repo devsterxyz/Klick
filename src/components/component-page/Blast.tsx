@@ -17,13 +17,13 @@ const Blast = () => {
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"];
 
   const code = `<ClickBlast
-    particleCount={${particleCount}}
-    spread={${spread}}
-    duration={${duration}}
-    strokeColor="${strokeColor}"
-  >
-    {/*Content div*/}
-  </ClickBlast>`
+  particleCount={${particleCount}}
+  spread={${spread}}
+  duration={${duration}}
+  strokeColor="${strokeColor}"
+>
+  {/*Content div*/}
+</ClickBlast>`
   return (
     <ComponentPageLayout
       title="Blast"

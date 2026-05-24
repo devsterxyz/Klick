@@ -14,13 +14,13 @@ const Binary = () => {
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 
   const code = `<ClickBinary
-    fontSize={${fontSize}}
-    spreadRadius={${spreadRadius}}
-    particleCount={${particleCount}}
-    textColor="${textColor}"
-  >
-    {/*Content div*/}
-  </ClickBinary>`
+  fontSize={${fontSize}}
+  spreadRadius={${spreadRadius}}
+  particleCount={${particleCount}}
+  textColor="${textColor}"
+>
+  {/*Content div*/}
+</ClickBinary>`
 
   return (
     <ComponentPageLayout

@@ -1,44 +1,45 @@
 import React, { useState } from 'react'
-import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickBulletTimeCode from '@/components/animation/ClickBulletTime.tsx?raw'
-import ClickBulletTime from '../animation/ClickBulletTime'
-import SliderField from '../SliderField'
+import ComponentPageLayout from './layout'
+import ClickDiffusion from '../animation/ClickDiffusion'
+import ClickDiffusionCode from '../animation/ClickDiffusion.tsx?raw'
 import CornerBrackets from '../CornerBrackets'
+import SliderField from '../SliderField'
+import { ColorPicker, ColorPreview } from './layout'
 
-const BulletTime = () => {
-  const [count, setCount] = useState(15)
-  const [friction, setFriction] = useState(0.91)
-  const [maxRadius, setMaxRadius] = useState(100)
+const Diffusion = () => {
+  const [dotSize, setDotSize] = useState(2)
+  const [count, setCount] = useState(30)
+  const [radius, setRadius] = useState(25)
   const [strokeColor, setStrokeColor] = useState("#ffffff");
 
   const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"];
 
-  const code = `<ClickBulletTime
+  const code = `<ClickDiffusion
+  dotSize={${dotSize}}
   count={${count}}
-  friction={${friction}}
-  maxRadius={${maxRadius}}
-  color="${strokeColor}"
+  radius={${radius}}
+  strokeColor="${strokeColor}"
 >
   {/*Content div*/}
-</ClickBulletTime>`
+</ClickDiffusion>`
   return (
     <ComponentPageLayout
-      title="Bullet Time"
+      title="Agitate"
       code={code}
-      cliCode="npx shadcn@latest add click-bullet-time"
-      manualCode={clickBulletTimeCode}
+      cliCode="npx shadcn@latest add click-agitate"
+      manualCode={ClickDiffusionCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."
       controlAdornment={<ColorPreview color={strokeColor} />}
       preview={
-        <ClickBulletTime
+        <ClickDiffusion
+          dotSize={dotSize}
           count={count}
-          friction={friction}
-          maxRadius={maxRadius}
+          radius={radius}
           color={strokeColor}
         >
           <div
-            aria-label="clickBulletTime preview target"
+            aria-label="Diffusion preview target"
             className="group/effect-card relative flex aspect-square w-[min(18rem,66vw)] items-center justify-center
             border border-black/15 bg-neutral-50 shadow-[0_24px_80px_-45px_rgba(0,0,0,0.65)]
             transition-all duration-300 hover:-translate-y-1 hover:border-black/35 hover:bg-white hover:shadow-[0_34px_90px_-46px_rgba(0,0,0,0.85)]
@@ -49,33 +50,30 @@ const BulletTime = () => {
               Click
             </span>
           </div>
-        </ClickBulletTime>
+        </ClickDiffusion>
       }
       controls={
         <>
           <SliderField
+            title="dotSize"
+            min={1}
+            max={5}
+            value={dotSize}
+            onChange={(value) => setDotSize(value)}
+          />
+          <SliderField
             title="count"
-            min={8}
-            max={25}
-            step={1}
+            min={10}
+            max={70}
             value={count}
             onChange={(value) => setCount(value)}
           />
           <SliderField
-            title="friction"
-            min={0.9}
-            max={0.99}
-            step={0.01}
-            value={friction}
-            onChange={(value) => setFriction(value)}
-          />
-          <SliderField
-            title="maxRadius"
-            min={40}
-            max={200}
-            step={1}
-            value={maxRadius}
-            onChange={(value) => setMaxRadius(value)}
+            title="radius"
+            min={10}
+            max={100}
+            value={radius}
+            onChange={(value) => setRadius(value)}
           />
           <ColorPicker
             value={strokeColor}
@@ -88,4 +86,4 @@ const BulletTime = () => {
   )
 }
 
-export default BulletTime
+export default Diffusion

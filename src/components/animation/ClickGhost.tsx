@@ -41,7 +41,6 @@ const ClickGhost = ({
   size = 24,
   wobble = 1.5,
   decay = 0.015,
-  color = 'white',
   children,
 }: ClickGhostProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

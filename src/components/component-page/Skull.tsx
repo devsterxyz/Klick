@@ -1,16 +1,46 @@
-import React from 'react'
-import PageRails from './PageRails'
-import BackToGridLink from '@/components/BackToGridLink'
+import React, { useState } from 'react'
+import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
+import clickSkullCode from '@/components/animation/ClickSkull.tsx?raw'
+import ClickSkull from '../animation/ClickSkull'
+import SliderField from '../SliderField'
+import PreviewTarget from './PreviewTarget'
+
+const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 
 const Skull = () => {
+  const [color, setColor] = useState("#ffffff")
+  const [count, setCount] = useState(5)
+  const [gravity, setGravity] = useState(0.2)
+  const [sizeMax, setSizeMax] = useState(24)
+
+  const code = `<ClickSkull
+  color="${color}"
+  count={${count}}
+  gravity={${gravity}}
+  sizeMax={${sizeMax}}
+>
+  {/*Content div*/}
+</ClickSkull>`
+
   return (
-    <PageRails segmentCount={6}>
-      <div className="min-h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white">
-        <div className="min-h-[calc(100vh-80px)] w-full border-x border-b border-black/20 px-6 py-8 dark:border-white/10 md:px-10">
-          <BackToGridLink />
-        </div>
-      </div>
-    </PageRails>
+    <ComponentPageLayout
+      title="Skull"
+      code={code}
+      cliCode="npx shadcn@latest add click-skull"
+      manualCode={clickSkullCode}
+      controlTitle="Tune the skulls"
+      controlDescription="Shape the color, count, gravity, and max size."
+      controlAdornment={<ColorPreview color={color} />}
+      preview={<ClickSkull color={color} count={count} gravity={gravity} sizeMax={sizeMax}><PreviewTarget label="Skull" /></ClickSkull>}
+      controls={
+        <>
+          <ColorPicker value={color} colors={colorOptions} onChange={setColor} />
+          <SliderField title="count" min={1} max={20} step={1} value={count} onChange={setCount} />
+          <SliderField title="gravity" min={0} max={1} step={0.05} value={gravity} onChange={setGravity} />
+          <SliderField title="sizeMax" min={12} max={60} step={1} value={sizeMax} onChange={setSizeMax} />
+        </>
+      }
+    />
   )
 }
 

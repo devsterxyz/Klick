@@ -1,16 +1,46 @@
-import React from 'react'
-import PageRails from './PageRails'
-import BackToGridLink from '@/components/BackToGridLink'
+import React, { useState } from 'react'
+import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
+import clickRippleMatrixCode from '@/components/animation/ClickRippleMatrix.tsx?raw'
+import ClickRippleMatrix from '../animation/ClickRippleMatrix'
+import SliderField from '../SliderField'
+import PreviewTarget from './PreviewTarget'
+
+const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 
 const RippleMatrix = () => {
+  const [dotColor, setDotColor] = useState("#ffffff")
+  const [gridRadius, setGridRadius] = useState(3)
+  const [gridSpacing, setGridSpacing] = useState(15)
+  const [waveSpeed, setWaveSpeed] = useState(0.2)
+
+  const code = `<ClickRippleMatrix
+  dotColor="${dotColor}"
+  gridRadius={${gridRadius}}
+  gridSpacing={${gridSpacing}}
+  waveSpeed={${waveSpeed}}
+>
+  {/*Content div*/}
+</ClickRippleMatrix>`
+
   return (
-    <PageRails segmentCount={6}>
-      <div className="min-h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white">
-        <div className="min-h-[calc(100vh-80px)] w-full border-x border-b border-black/20 px-6 py-8 dark:border-white/10 md:px-10">
-          <BackToGridLink />
-        </div>
-      </div>
-    </PageRails>
+    <ComponentPageLayout
+      title="Ripple Matrix"
+      code={code}
+      cliCode="npx shadcn@latest add click-ripple-matrix"
+      manualCode={clickRippleMatrixCode}
+      controlTitle="Tune the matrix"
+      controlDescription="Shape the dot color, grid size, spacing, and wave speed."
+      controlAdornment={<ColorPreview color={dotColor} />}
+      preview={<ClickRippleMatrix dotColor={dotColor} gridRadius={gridRadius} gridSpacing={gridSpacing} waveSpeed={waveSpeed}><PreviewTarget label="Ripple Matrix" /></ClickRippleMatrix>}
+      controls={
+        <>
+          <ColorPicker value={dotColor} colors={colorOptions} onChange={setDotColor} />
+          <SliderField title="gridRadius" min={1} max={8} step={1} value={gridRadius} onChange={setGridRadius} />
+          <SliderField title="gridSpacing" min={8} max={32} step={1} value={gridSpacing} onChange={setGridSpacing} />
+          <SliderField title="waveSpeed" min={0.05} max={0.8} step={0.05} value={waveSpeed} onChange={setWaveSpeed} />
+        </>
+      }
+    />
   )
 }
 

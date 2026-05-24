@@ -23,8 +23,8 @@ type ClickRippleProps = {
 
 const ClickRipple = ({
   color = '#fff',
-  lineWidth = 0.1,
-  maxRadius = 20,
+  lineWidth = 0.5,
+  maxRadius = 50,
   duration = 600,
   rippleCount = 5,
   children,

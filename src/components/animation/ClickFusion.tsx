@@ -106,7 +106,7 @@ const ClickFusion = ({
         }
 
         if (allArrived) {
-          group.burstR += 2;
+          group.burstR = Math.min(group.burstR + 2, burstRadius);
           ctx.beginPath();
           ctx.arc(group.cx, group.cy, group.burstR, 0, Math.PI * 2);
           ctx.lineWidth = 1.5;
