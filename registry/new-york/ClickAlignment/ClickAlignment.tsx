@@ -19,13 +19,13 @@ interface ClickAlignmentProps {
   children?: ReactNode;
 }
 
-const ClickAlignment = ({
+export default function ClickAlignment({
   color = '#fff',
   dotSize = 2,
   count = 20,
   spread = 80,
   children,
-}: ClickAlignmentProps) => {
+}: ClickAlignmentProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dotsRef = useRef<AlignDot[]>([]);
   const isRunningRef = useRef<boolean>(false);
@@ -170,5 +170,3 @@ const ClickAlignment = ({
     </div>
   );
 };
-
-export default ClickAlignment;

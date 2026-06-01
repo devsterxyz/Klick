@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickLoadCode from '@/components/animation/ClickLoad.tsx?raw'
-import ClickLoad from '../animation/ClickLoad'
+import clickLoadCode from '../../../registry/new-york/ClickLoad/ClickLoad.tsx?raw'
+import ClickLoad from '../../../registry/new-york/ClickLoad/ClickLoad'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -24,7 +24,7 @@ const Load = () => {
     <ComponentPageLayout
       title="Load"
       code={code}
-      cliCode="npx shadcn@latest add click-load"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-load.json"
       manualCode={clickLoadCode}
       controlTitle="Tune the loader"
       controlDescription="Shape the color, fade, and loading speed."

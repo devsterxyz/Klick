@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFocusCode from '@/components/animation/ClickFocus.tsx?raw'
-import ClickFocus from '../animation/ClickFocus'
+import clickFocusCode from '../../../registry/new-york/ClickFocus/ClickFocus.tsx?raw'
+import ClickFocus from '../../../registry/new-york/ClickFocus/ClickFocus'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Focus = () => {
     <ComponentPageLayout
       title="Focus"
       code={code}
-      cliCode="npx shadcn@latest add click-focus"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-focus.json"
       manualCode={clickFocusCode}
       controlTitle="Tune the focus"
       controlDescription="Shape the bracket color, size, line width, and starting distance."

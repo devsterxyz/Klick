@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickBulletTimeCode from '@/components/animation/ClickBulletTime.tsx?raw'
-import ClickBulletTime from '../animation/ClickBulletTime'
+import clickBulletTimeCode from '../../../registry/new-york/ClickBulletTime/ClickBulletTime.tsx?raw'
+import ClickBulletTime from '../../../registry/new-york/ClickBulletTime/ClickBulletTime'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -25,7 +25,7 @@ const BulletTime = () => {
     <ComponentPageLayout
       title="Bullet Time"
       code={code}
-      cliCode="npx shadcn@latest add click-bullet-time"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-bullet-time.json"
       manualCode={clickBulletTimeCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

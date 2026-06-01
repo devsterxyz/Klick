@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import clickFireCode from '@/components/animation/ClickFire.tsx?raw'
-import ClickFire from '../animation/ClickFire'
+import clickFireCode from '../../../registry/new-york/ClickFire/ClickFire.tsx?raw'
+import ClickFire from '../../../registry/new-york/ClickFire/ClickFire'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -22,7 +22,7 @@ const Fire = () => {
     <ComponentPageLayout
       title="Fire"
       code={code}
-      cliCode="npx shadcn@latest add click-fire"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fire.json"
       manualCode={clickFireCode}
       controlTitle="Tune the fire"
       controlDescription="Shape the flame count and particle size."

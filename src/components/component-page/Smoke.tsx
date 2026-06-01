@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSmokeCode from '@/components/animation/ClickSmoke.tsx?raw'
-import ClickSmoke from '../animation/ClickSmoke'
+import clickSmokeCode from '../../../registry/new-york/ClickSmoke/ClickSmoke.tsx?raw'
+import ClickSmoke from '../../../registry/new-york/ClickSmoke/ClickSmoke'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Smoke = () => {
     <ComponentPageLayout
       title="Smoke"
       code={code}
-      cliCode="npx shadcn@latest add click-smoke"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-smoke.json"
       manualCode={clickSmokeCode}
       controlTitle="Tune the smoke"
       controlDescription="Shape the color, puff count, spread, and radius."

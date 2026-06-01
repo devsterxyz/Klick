@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickGeoCode from '@/components/animation/ClickGeo.tsx?raw'
-import ClickGeo from '../animation/ClickGeo'
+import clickGeoCode from '../../../registry/new-york/ClickGeo/ClickGeo.tsx?raw'
+import ClickGeo from '../../../registry/new-york/ClickGeo/ClickGeo'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -22,7 +22,7 @@ const Geo = () => {
     <ComponentPageLayout
       title="Geo"
       code={code}
-      cliCode="npx shadcn@latest add click-geo"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-geo.json"
       manualCode={clickGeoCode}
       controlTitle="Tune the geometry"
       controlDescription="Shape the line color and width."

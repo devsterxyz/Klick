@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import clickHeartCode from '@/components/animation/ClickHeart.tsx?raw'
-import ClickHeart from '../animation/ClickHeart'
+import clickHeartCode from '../../../registry/new-york/ClickHeart/ClickHeart.tsx?raw'
+import ClickHeart from '../../../registry/new-york/ClickHeart/ClickHeart'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -22,7 +22,7 @@ const Heart = () => {
     <ComponentPageLayout
       title="Heart"
       code={code}
-      cliCode="npx shadcn@latest add click-heart"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-heart.json"
       manualCode={clickHeartCode}
       controlTitle="Tune the hearts"
       controlDescription="Shape the count and size range."

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickRainCode from '@/components/animation/ClickRain.tsx?raw'
-import ClickRain from '../animation/ClickRain'
+import clickRainCode from '../../../registry/new-york/ClickRain/ClickRain.tsx?raw'
+import ClickRain from '../../../registry/new-york/ClickRain/ClickRain'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Rain = () => {
     <ComponentPageLayout
       title="Rain"
       code={code}
-      cliCode="npx shadcn@latest add click-rain"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-rain.json"
       manualCode={clickRainCode}
       controlTitle="Tune the rain"
       controlDescription="Shape the stroke color, drop count, spread, and streak height."

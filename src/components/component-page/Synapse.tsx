@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSynapseCode from '@/components/animation/ClickSynapse.tsx?raw'
-import ClickSynapse from '../animation/ClickSynapse'
+import clickSynapseCode from '../../../registry/new-york/ClickSynapse/ClickSynapse.tsx?raw'
+import ClickSynapse from '../../../registry/new-york/ClickSynapse/ClickSynapse'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Synapse = () => {
     <ComponentPageLayout
       title="Synapse"
       code={code}
-      cliCode="npx shadcn@latest add click-synapse"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-synapse.json"
       manualCode={clickSynapseCode}
       controlTitle="Tune the synapse"
       controlDescription="Shape the color, node count, burst speed, and connection distance."

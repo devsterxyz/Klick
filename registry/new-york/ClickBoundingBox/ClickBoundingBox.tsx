@@ -1,4 +1,5 @@
 "use client"
+
 import { useRef, useEffect, ReactNode } from 'react';
 
 interface BoundingBox {
@@ -22,7 +23,7 @@ interface ClickBoundingBoxProps {
   children?: ReactNode;
 }
 
-const ClickBoundingBox = ({
+export default function ClickBoundingBox({
   color = '#fff',
   lineWidth = 1,
   decay = 0.015,
@@ -30,7 +31,7 @@ const ClickBoundingBox = ({
   maxSize = 60,
   cornerLen = 8,
   children,
-}: ClickBoundingBoxProps) => {
+}: ClickBoundingBoxProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const boxesRef = useRef<BoundingBox[]>([]);
   const isRunningRef = useRef<boolean>(false);
@@ -192,5 +193,3 @@ const ClickBoundingBox = ({
     </div>
   );
 };
-
-export default ClickBoundingBox;

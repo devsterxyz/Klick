@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFlameCode from '@/components/animation/ClickFlame.tsx?raw'
-import ClickFlame from '../animation/ClickFlame'
+import clickFlameCode from '../../../registry/new-york/ClickFlame/ClickFlame.tsx?raw'
+import ClickFlame from '../../../registry/new-york/ClickFlame/ClickFlame'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Flame = () => {
     <ComponentPageLayout
       title="Flame"
       code={code}
-      cliCode="npx shadcn@latest add click-flame"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-flame.json"
       manualCode={clickFlameCode}
       controlTitle="Tune the flame"
       controlDescription="Shape the color, particle count, and spread."

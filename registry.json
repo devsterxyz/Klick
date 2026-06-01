@@ -4,13 +4,13 @@
   "homepage": "https://klick.com",
   "items": [
     {
-      "name": "click-blast",
+      "name": "click-binary",
       "type": "registry:ui",
-      "title": "Blast",
-      "description": "A simple blast effect component.",
+      "title": "Binary",
+      "description": "A simple binary effect component.",
       "files": [
         {
-          "path": "registry/new-york/ClickBlast/ClickBlast.tsx",
+          "path": "registry/new-york/ClickBinary/ClickBinary.tsx",
           "type": "registry:component"
         }
       ]
@@ -40,18 +40,6 @@
       ]
     },
     {
-      "name": "click-binary",
-      "type": "registry:ui",
-      "title": "Binary",
-      "description": "A simple binary effect component.",
-      "files": [
-        {
-          "path": "registry/new-york/ClickBinary/ClickBinary.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
       "name": "click-black-hole",
       "type": "registry:ui",
       "title": "Black Hole",
@@ -64,6 +52,18 @@
       ]
     },
     {
+      "name": "click-blast",
+      "type": "registry:ui",
+      "title": "Blast",
+      "description": "A simple blast effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBlast/ClickBlast.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "click-bounding-box",
       "type": "registry:ui",
       "title": "Bounding Box",
@@ -71,6 +71,486 @@
       "files": [
         {
           "path": "registry/new-york/ClickBoundingBox/ClickBoundingBox.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-bullet-time",
+      "type": "registry:ui",
+      "title": "Bullet Time",
+      "description": "A simple bullet time effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBulletTime/ClickBulletTime.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-diffusion",
+      "type": "registry:ui",
+      "title": "Diffusion",
+      "description": "A simple diffusion effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickDiffusion/ClickDiffusion.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-double-sonar",
+      "type": "registry:ui",
+      "title": "Double Sonar",
+      "description": "A simple double sonar effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickDoubleSonar/ClickDoubleSonar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-droplet",
+      "type": "registry:ui",
+      "title": "Droplet",
+      "description": "A simple droplet effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickDroplet/ClickDroplet.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-embers",
+      "type": "registry:ui",
+      "title": "Embers",
+      "description": "A simple embers effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickEmbers/ClickEmbers.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-fire",
+      "type": "registry:ui",
+      "title": "Fire",
+      "description": "A simple fire effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFire/ClickFire.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-fire-trail",
+      "type": "registry:ui",
+      "title": "Fire Trail",
+      "description": "A simple fire trail effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFireTrail/ClickFireTrail.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-firework",
+      "type": "registry:ui",
+      "title": "Firework",
+      "description": "A simple firework effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFirework/ClickFirework.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-fission",
+      "type": "registry:ui",
+      "title": "Fission",
+      "description": "A simple fission effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFission/ClickFission.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-flame",
+      "type": "registry:ui",
+      "title": "Flame",
+      "description": "A simple flame effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFlame/ClickFlame.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-float",
+      "type": "registry:ui",
+      "title": "Float",
+      "description": "A simple float effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFloat/ClickFloat.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-flow-field",
+      "type": "registry:ui",
+      "title": "Flow Field",
+      "description": "A simple flow field effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFlowField/ClickFlowField.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-focus",
+      "type": "registry:ui",
+      "title": "Focus",
+      "description": "A simple focus effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFocus/ClickFocus.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-fusion",
+      "type": "registry:ui",
+      "title": "Fusion",
+      "description": "A simple fusion effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickFusion/ClickFusion.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-generative",
+      "type": "registry:ui",
+      "title": "Generative",
+      "description": "A simple generative effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickGenerative/ClickGenerative.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-geo",
+      "type": "registry:ui",
+      "title": "Geo",
+      "description": "A simple geo effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickGeo/ClickGeo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-ghost",
+      "type": "registry:ui",
+      "title": "Ghost",
+      "description": "A simple ghost effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickGhost/ClickGhost.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-heart",
+      "type": "registry:ui",
+      "title": "Heart",
+      "description": "A simple heart effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickHeart/ClickHeart.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-holo-sphere",
+      "type": "registry:ui",
+      "title": "Holo Sphere",
+      "description": "A simple holo sphere effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickHoloSphere/ClickHoloSphere.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-load",
+      "type": "registry:ui",
+      "title": "Load",
+      "description": "A simple load effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickLoad/ClickLoad.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-matrix-rain",
+      "type": "registry:ui",
+      "title": "Matrix Rain",
+      "description": "A simple matrix rain effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickMatrixRain/ClickMatrixRain.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-ping",
+      "type": "registry:ui",
+      "title": "Ping",
+      "description": "A simple ping effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickPing/ClickPing.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-quantum",
+      "type": "registry:ui",
+      "title": "Quantum",
+      "description": "A simple quantum effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickQuantum/ClickQuantum.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-radiate",
+      "type": "registry:ui",
+      "title": "Radiate",
+      "description": "A simple radiate effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickRadiate/ClickRadiate.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-rain",
+      "type": "registry:ui",
+      "title": "Rain",
+      "description": "A simple rain effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickRain/ClickRain.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-ripple",
+      "type": "registry:ui",
+      "title": "Ripple",
+      "description": "A simple ripple effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickRipple/ClickRipple.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-ripple-matrix",
+      "type": "registry:ui",
+      "title": "Ripple Matrix",
+      "description": "A simple ripple matrix effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickRippleMatrix/ClickRippleMatrix.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-shatter",
+      "type": "registry:ui",
+      "title": "Shatter",
+      "description": "A simple shatter effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickShatter/ClickShatter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-skull",
+      "type": "registry:ui",
+      "title": "Skull",
+      "description": "A simple skull effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSkull/ClickSkull.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-smoke",
+      "type": "registry:ui",
+      "title": "Smoke",
+      "description": "A simple smoke effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSmoke/ClickSmoke.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-sonar",
+      "type": "registry:ui",
+      "title": "Sonar",
+      "description": "A simple sonar effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSonar/ClickSonar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-spark",
+      "type": "registry:ui",
+      "title": "Spark",
+      "description": "A simple spark effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSpark/ClickSpark.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-spark2",
+      "type": "registry:ui",
+      "title": "Spark2",
+      "description": "A simple spark2 effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSpark2/ClickSpark2.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-sparkle",
+      "type": "registry:ui",
+      "title": "Sparkle",
+      "description": "A simple sparkle effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSparkle/ClickSparkle.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-splash",
+      "type": "registry:ui",
+      "title": "Splash",
+      "description": "A simple splash effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSplash/ClickSplash.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-supernova",
+      "type": "registry:ui",
+      "title": "Supernova",
+      "description": "A simple supernova effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSupernova/ClickSupernova.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-synapse",
+      "type": "registry:ui",
+      "title": "Synapse",
+      "description": "A simple synapse effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSynapse/ClickSynapse.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-tesseract",
+      "type": "registry:ui",
+      "title": "Tesseract",
+      "description": "A simple tesseract effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickTesseract/ClickTesseract.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-warp",
+      "type": "registry:ui",
+      "title": "Warp",
+      "description": "A simple warp effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickWarp/ClickWarp.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-prompt",
+      "type": "registry:ui",
+      "title": "Prompt",
+      "description": "A simple prompt effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickPrompt/ClickPrompt.tsx",
           "type": "registry:component"
         }
       ]

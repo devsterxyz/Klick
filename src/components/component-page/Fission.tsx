@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFissionCode from '@/components/animation/ClickFission.tsx?raw'
-import ClickFission from '../animation/ClickFission'
+import clickFissionCode from '../../../registry/new-york/ClickFission/ClickFission.tsx?raw'
+import ClickFission from '../../../registry/new-york/ClickFission/ClickFission'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -24,7 +24,7 @@ const Fission = () => {
     <ComponentPageLayout
       title="Fission"
       code={code}
-      cliCode="npx shadcn@latest add click-fission"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fission.json"
       manualCode={clickFissionCode}
       controlTitle="Tune the fission"
       controlDescription="Shape the color, duration, and spread."

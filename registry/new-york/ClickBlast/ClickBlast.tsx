@@ -24,7 +24,7 @@ type ClickBlastProps = {
   children?: ReactNode;
 };
 
-const ClickBlast = ({
+export default function ClickBlast({
   fillColor = '#fff',
   particleCount = 40,
   minSpeed = 3,
@@ -35,7 +35,7 @@ const ClickBlast = ({
   maxSize = 3.5,
   duration = 1200,
   children,
-}: ClickBlastProps) => {
+}: ClickBlastProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
@@ -158,5 +158,3 @@ const ClickBlast = ({
     </div>
   );
 };
-
-export default ClickBlast;

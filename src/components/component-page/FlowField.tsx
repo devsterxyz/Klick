@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFlowFieldCode from '@/components/animation/ClickFlowField.tsx?raw'
-import ClickFlowField from '../animation/ClickFlowField'
+import clickFlowFieldCode from '../../../registry/new-york/ClickFlowField/ClickFlowField.tsx?raw'
+import ClickFlowField from '../../../registry/new-york/ClickFlowField/ClickFlowField'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const FlowField = () => {
     <ComponentPageLayout
       title="Flow Field"
       code={code}
-      cliCode="npx shadcn@latest add click-flow-field"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-flow-field.json"
       manualCode={clickFlowFieldCode}
       controlTitle="Tune the flow field"
       controlDescription="Shape the dot color, count, starting speed, and field scale."

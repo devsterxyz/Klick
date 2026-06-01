@@ -1,4 +1,5 @@
 "use client"
+
 import { useRef, useEffect, useCallback, ReactNode } from 'react';
 
 type Particle = {
@@ -23,7 +24,7 @@ type ClickBinaryProps = {
   children?: ReactNode;
 };
 
-const ClickBinary = ({
+export default function ClickBinary({
   textColor = '#fff',
   fontSize = 12,
   particleCount = 10,
@@ -32,7 +33,7 @@ const ClickBinary = ({
   easing = 'ease-out',
   chars = ['0', '1'],
   children,
-}: ClickBinaryProps) => {
+}: ClickBinaryProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
 
@@ -165,5 +166,3 @@ const ClickBinary = ({
     </div>
   );
 };
-
-export default ClickBinary;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSpark2Code from '@/components/animation/ClickSpark2.tsx?raw'
-import ClickSpark2 from '../animation/ClickSpark2'
+import clickSpark2Code from '../../../registry/new-york/ClickSpark2/ClickSpark2.tsx?raw'
+import ClickSpark2 from '../../../registry/new-york/ClickSpark2/ClickSpark2'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Spark2 = () => {
     <ComponentPageLayout
       title="Spark2"
       code={code}
-      cliCode="npx shadcn@latest add click-spark2"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-spark2.json"
       manualCode={clickSpark2Code}
       controlTitle="Tune the sparks"
       controlDescription="Shape the color, count, speed, and friction."

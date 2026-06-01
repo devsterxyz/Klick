@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSkullCode from '@/components/animation/ClickSkull.tsx?raw'
-import ClickSkull from '../animation/ClickSkull'
+import clickSkullCode from '../../../registry/new-york/ClickSkull/ClickSkull.tsx?raw'
+import ClickSkull from '../../../registry/new-york/ClickSkull/ClickSkull'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Skull = () => {
     <ComponentPageLayout
       title="Skull"
       code={code}
-      cliCode="npx shadcn@latest add click-skull"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-skull.json"
       manualCode={clickSkullCode}
       controlTitle="Tune the skulls"
       controlDescription="Shape the color, count, gravity, and max size."

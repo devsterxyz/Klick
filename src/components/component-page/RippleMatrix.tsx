@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickRippleMatrixCode from '@/components/animation/ClickRippleMatrix.tsx?raw'
-import ClickRippleMatrix from '../animation/ClickRippleMatrix'
+import clickRippleMatrixCode from '../../../registry/new-york/ClickRippleMatrix/ClickRippleMatrix.tsx?raw'
+import ClickRippleMatrix from '../../../registry/new-york/ClickRippleMatrix/ClickRippleMatrix'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const RippleMatrix = () => {
     <ComponentPageLayout
       title="Ripple Matrix"
       code={code}
-      cliCode="npx shadcn@latest add click-ripple-matrix"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ripple-matrix.json"
       manualCode={clickRippleMatrixCode}
       controlTitle="Tune the matrix"
       controlDescription="Shape the dot color, grid size, spacing, and wave speed."

@@ -1,4 +1,5 @@
 "use client"
+
 import { useRef, useEffect, ReactNode } from 'react';
 
 interface BlackHoleParticle {
@@ -22,7 +23,7 @@ interface ClickBlackHoleProps {
   children?: ReactNode;
 }
 
-const ClickBlackHole = ({
+export default function ClickBlackHole({
   color = '#fff',
   dotSize = 2,
   count = 40,
@@ -32,7 +33,7 @@ const ClickBlackHole = ({
   accretion = 0.93,
   coreRadius = 8,
   children,
-}: ClickBlackHoleProps) => {
+}: ClickBlackHoleProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<BlackHoleParticle[]>([]);
   const isRunningRef = useRef<boolean>(false);
@@ -209,5 +210,3 @@ const ClickBlackHole = ({
     </div>
   );
 };
-
-export default ClickBlackHole;

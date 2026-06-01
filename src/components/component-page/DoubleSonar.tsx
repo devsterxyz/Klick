@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import ClickDoubleSonar from '../animation/ClickDoubleSonar'
-import ClickDoubleSonarCode from '../animation/ClickDoubleSonar.tsx?raw'
+import ClickDoubleSonar from '../../../registry/new-york/ClickDoubleSonar/ClickDoubleSonar'
+import ClickDoubleSonarCode from '../../../registry/new-york/ClickDoubleSonar/ClickDoubleSonar.tsx?raw'
 import CornerBrackets from '../CornerBrackets'
 import SliderField from '../SliderField'
 import { ColorPicker, ColorPreview } from './layout'
@@ -26,7 +26,7 @@ const DoubleSonar = () => {
     <ComponentPageLayout
       title="Double Sonar"
       code={code}
-      cliCode="npx shadcn@latest add click-agitate"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-double-sonar.json"
       manualCode={ClickDoubleSonarCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

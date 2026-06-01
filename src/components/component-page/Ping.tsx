@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickPingCode from '@/components/animation/ClickPing.tsx?raw'
-import ClickPing from '../animation/ClickPing'
+import clickPingCode from '../../../registry/new-york/ClickPing/ClickPing.tsx?raw'
+import ClickPing from '../../../registry/new-york/ClickPing/ClickPing'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Ping = () => {
     <ComponentPageLayout
       title="Ping"
       code={code}
-      cliCode="npx shadcn@latest add click-ping"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ping.json"
       manualCode={clickPingCode}
       controlTitle="Tune the ping"
       controlDescription="Shape the color, ring width, dot size, and radius."

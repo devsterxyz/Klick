@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickRadiateCode from '@/components/animation/ClickRadiate.tsx?raw'
-import ClickRadiate from '../animation/ClickRadiate'
+import clickRadiateCode from '../../../registry/new-york/ClickRadiate/ClickRadiate.tsx?raw'
+import ClickRadiate from '../../../registry/new-york/ClickRadiate/ClickRadiate'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Radiate = () => {
     <ComponentPageLayout
       title="Radiate"
       code={code}
-      cliCode="npx shadcn@latest add click-radiate"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-radiate.json"
       manualCode={clickRadiateCode}
       controlTitle="Tune the radiance"
       controlDescription="Shape the ray color, count, line width, and max speed."

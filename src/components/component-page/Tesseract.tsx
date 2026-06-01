@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickTesseractCode from '@/components/animation/ClickTesseract.tsx?raw'
-import ClickTesseract from '../animation/ClickTesseract'
+import clickTesseractCode from '../../../registry/new-york/ClickTesseract/ClickTesseract.tsx?raw'
+import ClickTesseract from '../../../registry/new-york/ClickTesseract/ClickTesseract'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Tesseract = () => {
     <ComponentPageLayout
       title="Tesseract"
       code={code}
-      cliCode="npx shadcn@latest add click-tesseract"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-tesseract.json"
       manualCode={clickTesseractCode}
       controlTitle="Tune the tesseract"
       controlDescription="Shape the stroke color, size, growth, and rotation."

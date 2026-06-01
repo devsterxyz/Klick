@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickShatterCode from '@/components/animation/ClickShatter.tsx?raw'
-import ClickShatter from '../animation/ClickShatter'
+import clickShatterCode from '../../../registry/new-york/ClickShatter/ClickShatter.tsx?raw'
+import ClickShatter from '../../../registry/new-york/ClickShatter/ClickShatter'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Shatter = () => {
     <ComponentPageLayout
       title="Shatter"
       code={code}
-      cliCode="npx shadcn@latest add click-shatter"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-shatter.json"
       manualCode={clickShatterCode}
       controlTitle="Tune the shatter"
       controlDescription="Shape the shard color, count, size, and spread."

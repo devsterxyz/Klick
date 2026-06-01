@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickDropletCode from '@/components/animation/ClickDroplet.tsx?raw'
-import ClickDroplet from '../animation/ClickDroplet'
+import clickDropletCode from '../../../registry/new-york/ClickDroplet/ClickDroplet.tsx?raw'
+import ClickDroplet from '../../../registry/new-york/ClickDroplet/ClickDroplet'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Droplet = () => {
     <ComponentPageLayout
       title="Droplet"
       code={code}
-      cliCode="npx shadcn@latest add click-droplet"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-droplet.json"
       manualCode={clickDropletCode}
       controlTitle="Tune the droplet"
       controlDescription="Shape the splash count, ripple speed, and fade time."

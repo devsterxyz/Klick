@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSupernovaCode from '@/components/animation/ClickSupernova.tsx?raw'
-import ClickSupernova from '../animation/ClickSupernova'
+import clickSupernovaCode from '../../../registry/new-york/ClickSupernova/ClickSupernova.tsx?raw'
+import ClickSupernova from '../../../registry/new-york/ClickSupernova/ClickSupernova'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const SuperNova = () => {
     <ComponentPageLayout
       title="Supernova"
       code={code}
-      cliCode="npx shadcn@latest add click-supernova"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-supernova.json"
       manualCode={clickSupernovaCode}
       controlTitle="Tune the supernova"
       controlDescription="Shape the color, ejecta count, dot size, and ring speed."

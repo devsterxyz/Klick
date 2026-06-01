@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickHoloSphereCode from '@/components/animation/ClickHoloSphere.tsx?raw'
-import ClickHoloSphere from '../animation/ClickHoloSphere'
+import clickHoloSphereCode from '../../../registry/new-york/ClickHoloSphere/ClickHoloSphere.tsx?raw'
+import ClickHoloSphere from '../../../registry/new-york/ClickHoloSphere/ClickHoloSphere'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const HoloSphere = () => {
     <ComponentPageLayout
       title="Holo Sphere"
       code={code}
-      cliCode="npx shadcn@latest add click-holo-sphere"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-holo-sphere.json"
       manualCode={clickHoloSphereCode}
       controlTitle="Tune the holo sphere"
       controlDescription="Shape the dot color, point count, dot size, and sphere size."

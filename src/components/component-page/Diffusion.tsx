@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import ClickDiffusion from '../animation/ClickDiffusion'
-import ClickDiffusionCode from '../animation/ClickDiffusion.tsx?raw'
+import ClickDiffusion from '../../../registry/new-york/ClickDiffusion/ClickDiffusion'
+import ClickDiffusionCode from '../../../registry/new-york/ClickDiffusion/ClickDiffusion.tsx?raw'
 import CornerBrackets from '../CornerBrackets'
 import SliderField from '../SliderField'
 import { ColorPicker, ColorPreview } from './layout'
@@ -24,9 +24,9 @@ const Diffusion = () => {
 </ClickDiffusion>`
   return (
     <ComponentPageLayout
-      title="Agitate"
+      title="Diffusion"
       code={code}
-      cliCode="npx shadcn@latest add click-agitate"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-diffusion.json"
       manualCode={ClickDiffusionCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

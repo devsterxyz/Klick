@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickMatrixRainCode from '@/components/animation/ClickMatrixRain.tsx?raw'
-import ClickMatrixRain from '../animation/ClickMatrixRain'
+import clickMatrixRainCode from '../../../registry/new-york/ClickMatrixRain/ClickMatrixRain.tsx?raw'
+import ClickMatrixRain from '../../../registry/new-york/ClickMatrixRain/ClickMatrixRain'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -24,7 +24,7 @@ const MatrixRain = () => {
     <ComponentPageLayout
       title="Matrix Rain"
       code={code}
-      cliCode="npx shadcn@latest add click-matrix-rain"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-matrix-rain.json"
       manualCode={clickMatrixRainCode}
       controlTitle="Tune the matrix rain"
       controlDescription="Shape the text color, column count, and trail length."

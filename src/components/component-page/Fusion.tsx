@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFusionCode from '@/components/animation/ClickFusion.tsx?raw'
-import ClickFusion from '../animation/ClickFusion'
+import clickFusionCode from '../../../registry/new-york/ClickFusion/ClickFusion.tsx?raw'
+import ClickFusion from '../../../registry/new-york/ClickFusion/ClickFusion'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Fusion = () => {
     <ComponentPageLayout
       title="Fusion"
       code={code}
-      cliCode="npx shadcn@latest add click-fusion"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fusion.json"
       manualCode={clickFusionCode}
       controlTitle="Tune the fusion"
       controlDescription="Shape the color, particle count, burst radius, and spread."

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFireworkCode from '@/components/animation/ClickFirework.tsx?raw'
-import ClickFirework from '../animation/ClickFirework'
+import clickFireworkCode from '../../../registry/new-york/ClickFirework/ClickFirework.tsx?raw'
+import ClickFirework from '../../../registry/new-york/ClickFirework/ClickFirework'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Firework = () => {
     <ComponentPageLayout
       title="Firework"
       code={code}
-      cliCode="npx shadcn@latest add click-firework"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-firework.json"
       manualCode={clickFireworkCode}
       controlTitle="Tune the firework"
       controlDescription="Shape the burst color, count, gravity, and drag."

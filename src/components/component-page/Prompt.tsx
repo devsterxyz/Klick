@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickPromptCode from '@/components/animation/ClickPrompt.tsx?raw'
-import ClickPrompt from '../animation/ClickPrompt'
+import clickPromptCode from '../../../registry/new-york/ClickPrompt/ClickPrompt.tsx?raw'
+import ClickPrompt from '../../../registry/new-york/ClickPrompt/ClickPrompt'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -22,7 +22,7 @@ const Prompt = () => {
     <ComponentPageLayout
       title="Prompt"
       code={code}
-      cliCode="npx shadcn@latest add click-prompt"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-prompt.json"
       manualCode={clickPromptCode}
       controlTitle="Tune the prompt"
       controlDescription="Shape the prompt color and fade."

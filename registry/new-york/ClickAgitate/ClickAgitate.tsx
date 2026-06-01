@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useEffect, useCallback, ReactNode } from "react";
-import { useTheme } from "../../../src/components/ThemeContext";
 
 type Particle = {
   x: number;
@@ -20,15 +19,13 @@ type ClickAgitateProps = {
   children?: ReactNode;
 };
 
-const ClickAgitate = ({
-  strokeColor,
+export default function ClickAgitate({
+  strokeColor = "#ffffff",
   particleCount = 25,
   duration = 1200,
   particleSize = 2,
   children,
-}: ClickAgitateProps) => {
-  const { contrastColor } = useTheme();
-  const activeStrokeColor = strokeColor ?? contrastColor;
+}: ClickAgitateProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
@@ -94,7 +91,7 @@ const ClickAgitate = ({
         const jy = p.y + (Math.random() - 0.5) * p.amp;
 
         // particle
-        ctx.fillStyle = activeStrokeColor;
+        ctx.fillStyle = strokeColor;
         ctx.globalAlpha = alpha;
         ctx.fillRect(jx, jy, particleSize, particleSize);
 
@@ -106,7 +103,7 @@ const ClickAgitate = ({
           jy - p.vy * 2 + (Math.random() - 0.5) * p.amp
         );
         ctx.lineWidth = 1;
-        ctx.strokeStyle = activeStrokeColor;
+        ctx.strokeStyle = strokeColor;
         ctx.globalAlpha = alpha * trailOpacity;
         ctx.stroke();
 
@@ -122,7 +119,7 @@ const ClickAgitate = ({
     return () => {
       if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
     };
-  }, [activeStrokeColor, duration, particleSize]);
+  }, [strokeColor, duration, particleSize]);
 
   // click handler
   const handleClick = useCallback(
@@ -169,5 +166,3 @@ const ClickAgitate = ({
     </div>
   );
 };
-
-export default ClickAgitate;

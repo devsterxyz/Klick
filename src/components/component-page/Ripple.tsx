@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickRippleCode from '@/components/animation/ClickRipple.tsx?raw'
-import ClickRipple from '../animation/ClickRipple'
+import clickRippleCode from '../../../registry/new-york/ClickRipple/ClickRipple.tsx?raw'
+import ClickRipple from '../../../registry/new-york/ClickRipple/ClickRipple'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Ripple = () => {
     <ComponentPageLayout
       title="Ripple"
       code={code}
-      cliCode="npx shadcn@latest add click-ripple"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ripple.json"
       manualCode={clickRippleCode}
       controlTitle="Tune the ripple"
       controlDescription="Shape the color, line width, radius, and ripple count."

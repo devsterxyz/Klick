@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSonarCode from '@/components/animation/ClickSonar.tsx?raw'
-import ClickSonar from '../animation/ClickSonar'
+import clickSonarCode from '../../../registry/new-york/ClickSonar/ClickSonar.tsx?raw'
+import ClickSonar from '../../../registry/new-york/ClickSonar/ClickSonar'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Sonar = () => {
     <ComponentPageLayout
       title="Sonar"
       code={code}
-      cliCode="npx shadcn@latest add click-sonar"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-sonar.json"
       manualCode={clickSonarCode}
       controlTitle="Tune the sonar"
       controlDescription="Shape the color, dot count, spread, and sweep speed."

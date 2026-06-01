@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSparkleCode from '@/components/animation/ClickSparkle.tsx?raw'
-import ClickSparkle from '../animation/ClickSparkle'
+import clickSparkleCode from '../../../registry/new-york/ClickSparkle/ClickSparkle.tsx?raw'
+import ClickSparkle from '../../../registry/new-york/ClickSparkle/ClickSparkle'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Sparkle = () => {
     <ComponentPageLayout
       title="Sparkle"
       code={code}
-      cliCode="npx shadcn@latest add click-sparkle"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-sparkle.json"
       manualCode={clickSparkleCode}
       controlTitle="Tune the sparkle"
       controlDescription="Shape the color, count, scatter, and size."

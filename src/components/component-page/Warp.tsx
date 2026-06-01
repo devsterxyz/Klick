@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickWarpCode from '@/components/animation/ClickWarp.tsx?raw'
-import ClickWarp from '../animation/ClickWarp'
+import clickWarpCode from '../../../registry/new-york/ClickWarp/ClickWarp.tsx?raw'
+import ClickWarp from '../../../registry/new-york/ClickWarp/ClickWarp'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Warp = () => {
     <ComponentPageLayout
       title="Warp"
       code={code}
-      cliCode="npx shadcn@latest add click-warp"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-warp.json"
       manualCode={clickWarpCode}
       controlTitle="Tune the warp"
       controlDescription="Shape the color, streak count, speed, and acceleration."

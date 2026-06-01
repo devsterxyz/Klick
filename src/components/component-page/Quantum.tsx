@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickQuantumCode from '@/components/animation/ClickQuantum.tsx?raw'
-import ClickQuantum from '../animation/ClickQuantum'
+import clickQuantumCode from '../../../registry/new-york/ClickQuantum/ClickQuantum.tsx?raw'
+import ClickQuantum from '../../../registry/new-york/ClickQuantum/ClickQuantum'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Quantum = () => {
     <ComponentPageLayout
       title="Quantum"
       code={code}
-      cliCode="npx shadcn@latest add click-quantum"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-quantum.json"
       manualCode={clickQuantumCode}
       controlTitle="Tune the quantum"
       controlDescription="Shape the color, particle count, spread, and teleport timing."

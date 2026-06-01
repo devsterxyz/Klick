@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFloatCode from '@/components/animation/ClickFloat.tsx?raw'
-import ClickFloat from '../animation/ClickFloat'
+import clickFloatCode from '../../../registry/new-york/ClickFloat/ClickFloat.tsx?raw'
+import ClickFloat from '../../../registry/new-york/ClickFloat/ClickFloat'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Float = () => {
     <ComponentPageLayout
       title="Float"
       code={code}
-      cliCode="npx shadcn@latest add click-float"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-float.json"
       manualCode={clickFloatCode}
       controlTitle="Tune the float"
       controlDescription="Shape the color, particle count, horizontal spread, and sway."

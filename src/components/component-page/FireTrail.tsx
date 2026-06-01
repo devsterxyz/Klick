@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickFireTrailCode from '@/components/animation/ClickFireTrail.tsx?raw'
-import ClickFireTrail from '../animation/ClickFireTrail'
+import clickFireTrailCode from '../../../registry/new-york/ClickFireTrail/ClickFireTrail.tsx?raw'
+import ClickFireTrail from '../../../registry/new-york/ClickFireTrail/ClickFireTrail'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const FireTrail = () => {
     <ComponentPageLayout
       title="Fire Trail"
       code={code}
-      cliCode="npx shadcn@latest add click-fire-trail"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fire-trail.json"
       manualCode={clickFireTrailCode}
       controlTitle="Tune the fire trail"
       controlDescription="Shape the particle count, wave amplitude, and color."

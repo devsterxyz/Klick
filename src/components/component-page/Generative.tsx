@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickGenerativeCode from '@/components/animation/ClickGenerative.tsx?raw'
-import ClickGenerative from '../animation/ClickGenerative'
+import clickGenerativeCode from '../../../registry/new-york/ClickGenerative/ClickGenerative.tsx?raw'
+import ClickGenerative from '../../../registry/new-york/ClickGenerative/ClickGenerative'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -24,7 +24,7 @@ const Generative = () => {
     <ComponentPageLayout
       title="Generative"
       code={code}
-      cliCode="npx shadcn@latest add click-generative"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-generative.json"
       manualCode={clickGenerativeCode}
       controlTitle="Tune the generator"
       controlDescription="Shape the color, fade, and character length."

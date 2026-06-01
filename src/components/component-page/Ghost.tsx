@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import clickGhostCode from '@/components/animation/ClickGhost.tsx?raw'
-import ClickGhost from '../animation/ClickGhost'
+import clickGhostCode from '../../../registry/new-york/ClickGhost/ClickGhost.tsx?raw'
+import ClickGhost from '../../../registry/new-york/ClickGhost/ClickGhost'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -22,7 +22,7 @@ const Ghost = () => {
     <ComponentPageLayout
       title="Ghost"
       code={code}
-      cliCode="npx shadcn@latest add click-ghost"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ghost.json"
       manualCode={clickGhostCode}
       controlTitle="Tune the ghost"
       controlDescription="Shape the count, scatter, and size."

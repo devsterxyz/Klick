@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickEmbersCode from '@/components/animation/ClickEmbers.tsx?raw'
-import ClickEmbers from '../animation/ClickEmbers'
+import clickEmbersCode from '../../../registry/new-york/ClickEmbers/ClickEmbers.tsx?raw'
+import ClickEmbers from '../../../registry/new-york/ClickEmbers/ClickEmbers'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Embers = () => {
     <ComponentPageLayout
       title="Embers"
       code={code}
-      cliCode="npx shadcn@latest add click-embers"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-embers.json"
       manualCode={clickEmbersCode}
       controlTitle="Tune the embers"
       controlDescription="Shape the ember count, fall, spread, and color."

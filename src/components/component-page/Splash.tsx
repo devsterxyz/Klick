@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickSplashCode from '@/components/animation/ClickSplash.tsx?raw'
-import ClickSplash from '../animation/ClickSplash'
+import clickSplashCode from '../../../registry/new-york/ClickSplash/ClickSplash.tsx?raw'
+import ClickSplash from '../../../registry/new-york/ClickSplash/ClickSplash'
 import SliderField from '../SliderField'
 import PreviewTarget from './PreviewTarget'
 
@@ -26,7 +26,7 @@ const Splash = () => {
     <ComponentPageLayout
       title="Splash"
       code={code}
-      cliCode="npx shadcn@latest add click-splash"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-splash.json"
       manualCode={clickSplashCode}
       controlTitle="Tune the splash"
       controlDescription="Shape the dot color, count, spread speed, and gravity."
