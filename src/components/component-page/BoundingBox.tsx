@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import ClickBoundingBox from '../animation/ClickBoundingBox'
-import ClickBoundingBoxCode from '../animation/ClickBoundingBox.tsx?raw'
+import ClickBoundingBox from '../../../registry/new-york/ClickBoundingBox/ClickBoundingBox'
+import ClickBoundingBoxCode from '../../../registry/new-york/ClickBoundingBox/ClickBoundingBox.tsx?raw'
 import CornerBrackets from '../CornerBrackets'
 import SliderField from '../SliderField'
 import { ColorPicker, ColorPreview } from './layout'
 
-const BoundingBox = () => {
+export default function BoundingBox () {
   const [cornerLen, setCornerLen] = useState(8)
   const [minSize, setMinSize] = useState(40)
   const [maxSize, setMaxSize] = useState(60)
@@ -26,7 +26,7 @@ const BoundingBox = () => {
     <ComponentPageLayout
       title="Bounding Box"
       code={code}
-      cliCode="npx shadcn@latest add click-agitate"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-bounding-box.json"
       manualCode={ClickBoundingBoxCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."
@@ -86,4 +86,3 @@ const BoundingBox = () => {
   )
 }
 
-export default BoundingBox

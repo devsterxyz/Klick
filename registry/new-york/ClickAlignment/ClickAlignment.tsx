@@ -1,39 +1,45 @@
+"use client"
+
 import { useRef, useEffect, ReactNode } from 'react';
 
-interface BoundingBox {
+interface AlignDot {
   x: number;
   y: number;
-  w: number;
-  h: number;
-  targetW: number;
-  targetH: number;
+  tx: number;
+  ty: number;
   life: number;
   decay: number;
 }
 
-interface ClickBoundingBoxProps {
+interface ClickAlignmentProps {
   color?: string;
-  lineWidth?: number;
-  decay?: number;
-  minSize?: number;
-  maxSize?: number;
-  cornerLen?: number;
+  dotSize?: number;
+  count?: number;
+  spread?: number;
   children?: ReactNode;
 }
 
-const ClickBoundingBox = ({
+const ClickAlignment = ({
   color = '#fff',
-  lineWidth = 1,
-  decay = 0.015,
-  minSize = 40,
-  maxSize = 60,
-  cornerLen = 8,
+  dotSize = 2,
+  count = 20,
+  spread = 80,
   children,
-}: ClickBoundingBoxProps) => {
+}: ClickAlignmentProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const boxesRef = useRef<BoundingBox[]>([]);
+  const dotsRef = useRef<AlignDot[]>([]);
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
+  const optionsRef = useRef({ color, dotSize, count, spread });
+
+  // KEEPING EVERYTHING ELSE EXACTLY THE SAME
+  const decay = 0.015;
+  const gridSize = 15;
+  const easeSpeed = 0.15;
+
+  useEffect(() => {
+    optionsRef.current = { color, dotSize, count, spread };
+  }, [color, dotSize, count, spread]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -76,71 +82,31 @@ const ClickBoundingBox = ({
     if (!ctx) return;
 
     const draw = () => {
-      if (boxesRef.current.length === 0) {
+      if (dotsRef.current.length === 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         isRunningRef.current = false;
         return;
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const { color: currentColor, dotSize: currentDotSize } =
+        optionsRef.current;
 
-      boxesRef.current = boxesRef.current.filter((p: BoundingBox) => {
+      dotsRef.current = dotsRef.current.filter((p: AlignDot) => {
         p.life -= p.decay;
         if (p.life <= 0) return false;
 
-        // Ease toward target size
-        p.w += (p.targetW - p.w) * 0.15;
-        p.h += (p.targetH - p.h) * 0.15;
-
-        const hw = p.w / 2;
-        const hh = p.h / 2;
-        const cl = cornerLen;
+        p.x += (p.tx - p.x) * easeSpeed;
+        p.y += (p.ty - p.y) * easeSpeed;
 
         ctx.globalAlpha = Math.max(0, p.life);
-
-        ctx.save();
-        ctx.translate(p.x, p.y);
-
-        // Faint full box outline
-        ctx.beginPath();
-        ctx.rect(-hw, -hh, p.w, p.h);
-        ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = `rgba(255,255,255,${p.life * 0.3})`;
-        ctx.stroke();
-
-        // Bold corner brackets
-        ctx.beginPath();
-        // Top Left
-        ctx.moveTo(-hw, -hh + cl);
-        ctx.lineTo(-hw, -hh);
-        ctx.lineTo(-hw + cl, -hh);
-        // Top Right
-        ctx.moveTo(hw - cl, -hh);
-        ctx.lineTo(hw, -hh);
-        ctx.lineTo(hw, -hh + cl);
-        // Bottom Left
-        ctx.moveTo(-hw, hh - cl);
-        ctx.lineTo(-hw, hh);
-        ctx.lineTo(-hw + cl, hh);
-        // Bottom Right
-        ctx.moveTo(hw - cl, hh);
-        ctx.lineTo(hw, hh);
-        ctx.lineTo(hw, hh - cl);
-
-        ctx.lineWidth = lineWidth * 2;
-        ctx.strokeStyle = color;
-        ctx.stroke();
-
-        // Label tag — "OBJ 0.99"
-        ctx.fillStyle = `rgba(255,255,255,${p.life})`;
-        ctx.fillRect(-hw, -hh - 10, 36, 10);
-        ctx.fillStyle = `rgba(0,0,0,${p.life})`;
-        ctx.font = '8px monospace';
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'top';
-        ctx.fillText('OBJ 0.99', -hw + 2, -hh - 8);
-
-        ctx.restore();
+        ctx.fillStyle = currentColor;
+        ctx.fillRect(
+          p.x - currentDotSize,
+          p.y - currentDotSize,
+          currentDotSize * 2,
+          currentDotSize * 2
+        );
 
         return true;
       });
@@ -163,20 +129,33 @@ const ClickBoundingBox = ({
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
 
-    boxesRef.current.push({
-      x,
-      y,
-      w: 0,
-      h: 0,
-      targetW: minSize + Math.random() * (maxSize - minSize),
-      targetH: minSize + Math.random() * (maxSize - minSize),
-      life: 1.0,
-      decay,
-    });
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+    const { count: currentCount, spread: currentSpread } = optionsRef.current;
+
+    for (let i = 0; i < currentCount; i++) {
+      const startX = cx + (Math.random() - 0.5) * currentSpread;
+      const startY = cy + (Math.random() - 0.5) * currentSpread;
+
+      const tx =
+        Math.round((cx + (Math.random() - 0.5) * currentSpread) / gridSize) *
+        gridSize;
+
+      const ty =
+        Math.round((cy + (Math.random() - 0.5) * currentSpread) / gridSize) *
+        gridSize;
+
+      dotsRef.current.push({
+        x: startX,
+        y: startY,
+        tx,
+        ty,
+        life: 1.0,
+        decay,
+      });
+    }
 
     startLoop();
   };
@@ -192,4 +171,4 @@ const ClickBoundingBox = ({
   );
 };
 
-export default ClickBoundingBox;
+export default ClickAlignment;

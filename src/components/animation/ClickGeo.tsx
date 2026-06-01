@@ -17,12 +17,20 @@ type Shape = {
 type ClickGeoProps = {
   color?: string;
   lineWidth?: number;
+  maxRadius?: number;
+  duration?: number;
+  easing?: string;
+  shapes?: ShapeType[];
   children?: ReactNode;
 };
 
 const ClickGeo = ({
   color = '#fff',
   lineWidth = 1,
+  maxRadius = 50,
+  duration = 900,
+  easing = 'linear',
+  shapes = ['square', 'triangle'],
   children,
 }: ClickGeoProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -81,9 +89,10 @@ const ClickGeo = ({
 
       shapesRef.current = shapesRef.current.filter((p) => {
         p.life -= p.decay;
-        if (p.life <= 0) return false;
+        if (p.life <= 0 || p.r >= maxRadius) return false;
 
-        p.r += p.vr;
+        const easeFactor = easing === 'ease-out' ? Math.max(0.25, p.life) : 1;
+        p.r += p.vr * easeFactor;
         p.rot += p.vrot;
 
         ctx.globalAlpha = Math.max(0, p.life);
@@ -131,30 +140,23 @@ const ClickGeo = ({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    shapesRef.current.push(
-      {
-        shape: 'square',
+    const totalFrames = Math.max(1, duration / 16.67);
+    const decay = 1 / totalFrames;
+    const baseSpeed = maxRadius / totalFrames;
+
+    shapes.forEach((shape, index) => {
+      shapesRef.current.push({
+        shape,
         x,
         y,
         r: 0,
-        vr: 1,
+        vr: baseSpeed * (shape === 'triangle' ? 1.5 : 1),
         rot: 0,
-        vrot: 0.02,
+        vrot: (index % 2 === 0 ? 1 : -1) * (shape === 'triangle' ? 0.03 : 0.02),
         life: 1.0,
-        decay: 0.015,
-      },
-      {
-        shape: 'triangle',
-        x,
-        y,
-        r: 0,
-        vr: 1.5,
-        rot: 0,
-        vrot: -0.03,
-        life: 1.0,
-        decay: 0.015,
-      }
-    );
+        decay,
+      });
+    });
 
     startLoop();
   };

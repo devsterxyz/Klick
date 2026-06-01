@@ -1,3 +1,4 @@
+"use client"
 import { useRef, useEffect, ReactNode } from 'react';
 
 interface BlackHoleParticle {

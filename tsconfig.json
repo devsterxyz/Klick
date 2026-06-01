@@ -1,18 +1,28 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "jsx": "react-jsx",
     "strict": true,
-
     "moduleResolution": "bundler",
     "module": "ESNext",
-
     "esModuleInterop": true,
-
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["src", "registry/new-york/ClickBlast/ClickBlast.tsx"]
+  "include": [
+    "src",
+    "registry/new-york/ClickBlast/ClickBlast.tsx",
+    "registry/new-york/ClickAgitate/ClickAgitate.tsx",
+    "registry/new-york/ClickAlignment/ClickAlignment.tsx",
+    "registry/new-york/ClickBinary/ClickBinary.tsx",
+    "registry/new-york/ClickBlackHole/ClickBlackHole.tsx",
+    "registry/new-york/ClickBoundingBox/ClickBoundingBox.tsx"
+  ]
 }

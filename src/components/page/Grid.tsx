@@ -1,10 +1,10 @@
 import React, { JSX } from "react";
-import ClickBinary from "../animation/ClickBinary";
-import ClickAgitate from "../animation/ClickAgitate";
-import ClickAlignment from "../animation/ClickAlignment";
-import ClickBlackHole from "../animation/ClickBlackHole";
+import ClickBinary from "../../../registry/new-york/ClickBinary/ClickBinary";
+import ClickAgitate from "../../../registry/new-york/ClickAgitate/ClickAgitate";
+import ClickAlignment from "../../../registry/new-york/ClickAlignment/ClickAlignment";
+import ClickBlackHole from "../../../registry/new-york/ClickBlackHole/ClickBlackHole";
 import ClickBlast from "../../../registry/new-york/ClickBlast/ClickBlast";
-import ClickBoundingBox from "../animation/ClickBoundingBox";
+import ClickBoundingBox from "../../../registry/new-york/ClickBoundingBox/ClickBoundingBox";
 import ClickBulletTime from "../animation/ClickBulletTime";
 import ClickDiffusion from "../animation/ClickDiffusion";
 import ClickDoubleSonar from "../animation/ClickDoubleSonar";

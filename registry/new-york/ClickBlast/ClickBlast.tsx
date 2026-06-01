@@ -1,3 +1,5 @@
+"use client"
+
 import { useRef, useEffect, useCallback, ReactNode } from 'react';
 
 type Particle = {

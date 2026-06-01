@@ -4,13 +4,73 @@
   "homepage": "https://klick.com",
   "items": [
     {
-      "name": "ClickBlast",
-      "type": "registry:block",
+      "name": "click-blast",
+      "type": "registry:ui",
       "title": "Blast",
       "description": "A simple blast effect component.",
       "files": [
         {
           "path": "registry/new-york/ClickBlast/ClickBlast.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-agitate",
+      "type": "registry:ui",
+      "title": "Agitate",
+      "description": "A simple agitate effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickAgitate/ClickAgitate.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-alignment",
+      "type": "registry:ui",
+      "title": "Alignment",
+      "description": "A simple alignment effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickAlignment/ClickAlignment.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-binary",
+      "type": "registry:ui",
+      "title": "Binary",
+      "description": "A simple binary effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBinary/ClickBinary.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-black-hole",
+      "type": "registry:ui",
+      "title": "Black Hole",
+      "description": "A simple black hole effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBlackHole/ClickBlackHole.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-bounding-box",
+      "type": "registry:ui",
+      "title": "Bounding Box",
+      "description": "A simple bounding box effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBoundingBox/ClickBoundingBox.tsx",
           "type": "registry:component"
         }
       ]

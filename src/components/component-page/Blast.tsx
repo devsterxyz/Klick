@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import PageRails from './PageRails'
-import BackToGridLink from '@/components/BackToGridLink'
 import ComponentPageLayout from './layout'
 import clickBlastCode from '../../../registry/new-york/ClickBlast/ClickBlast.tsx?raw'
 import ClickBlast from '../../../registry/new-york/ClickBlast/ClickBlast'
@@ -8,7 +6,7 @@ import SliderField from '../SliderField'
 import { ColorPicker, ColorPreview } from './layout'
 import CornerBrackets from '@/components/CornerBrackets'
 
-const Blast = () => {
+export default function Blast() {
   const [particleCount, setParticleCount] = useState(40)
   const [spread, setSpread] = useState(1)
   const [duration, setDuration] = useState(1200)
@@ -28,7 +26,7 @@ const Blast = () => {
     <ComponentPageLayout
       title="Blast"
       code={code}
-      cliCode="npx shadcn@latest add click-blast"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-blast.json"
       manualCode={clickBlastCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."
@@ -88,4 +86,4 @@ const Blast = () => {
   )
 }
 
-export default Blast
+

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import CornerBrackets from "@/components/CornerBrackets";
-import clickAgitateCode from "@/components/animation/ClickAgitate.tsx?raw";
-import ClickAgitate from "../animation/ClickAgitate";
+import clickAgitateCode from "../../../registry/new-york/ClickAgitate/ClickAgitate.tsx?raw";
+import ClickAgitate from "../../../registry/new-york/ClickAgitate/ClickAgitate";
 import SliderField from "../SliderField";
 import ComponentPageLayout, { ColorPicker, ColorPreview } from "./layout";
 
-const Agitate = () => {
+export default function Agitate() {
   const [particleCount, setParticleCount] = useState(17)
   const [particleSize, setParticleSize] = useState(4)
   const [duration, setDuration] = useState(1200)
@@ -25,7 +25,7 @@ const Agitate = () => {
     <ComponentPageLayout
       title="Agitate"
       code={code}
-      cliCode="npx shadcn@latest add click-agitate"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-agitate.json"
       manualCode={clickAgitateCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."
@@ -85,4 +85,3 @@ const Agitate = () => {
   )
 }
 
-export default Agitate;

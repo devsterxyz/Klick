@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ClickRipple from "./animation/ClickRipple";
 import ClickShatter from "./animation/ClickShatter";
-import ClickBinary from "./animation/ClickBinary";
+import ClickBinary from "../../registry/new-york/ClickBinary/ClickBinary";
 import ClickGeo from "./animation/ClickGeo";
 import ClickFirework from "./animation/ClickFirework";
 import ClickFocus from "./animation/ClickFocus";
@@ -34,7 +34,7 @@ import ClickSpark2 from "./animation/ClickSpark2";
 import ClickSmoke from "./animation/ClickSmoke";
 import ClickBlast from "../../registry/new-york/ClickBlast/ClickBlast";
 import ClickFireTrail from "./animation/ClickFireTrail";
-import ClickAgitate from "./animation/ClickAgitate";
+import ClickAgitate from "../../registry/new-york/ClickAgitate/ClickAgitate";
 import ClickFloat from "./animation/ClickFloat";
 
 function TestingAni() {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout'
-import clickBinaryCode from '../animation/ClickBinary.tsx?raw'
-import ClickBinary from '../animation/ClickBinary'
+import clickBinaryCode from '../../../registry/new-york/ClickBinary/ClickBinary.tsx?raw'
+import ClickBinary from '../../../registry/new-york/ClickBinary/ClickBinary'
 import SliderField from '../SliderField'
 import CornerBrackets from '../CornerBrackets'
 
@@ -26,7 +26,7 @@ const Binary = () => {
     <ComponentPageLayout
       title="Binary"
       code={code}
-      cliCode="npx shadcn@latest add click-binary"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-binary.json"
       manualCode={clickBinaryCode}
       controlTitle="Tune the digits"
       controlDescription="Shape the size, spread, and density of each binary burst."

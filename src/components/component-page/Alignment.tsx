@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import ComponentPageLayout from './layout'
-import clickAlignmentCode from "@/components/animation/ClickAlignment.tsx?raw";
+import clickAlignmentCode from '../../../registry/new-york/ClickAlignment/ClickAlignment.tsx?raw'
 import CornerBrackets from '../CornerBrackets'
 import SliderField from '../SliderField'
 import { ColorPicker, ColorPreview } from './layout'
-import ClickAlignment from '../animation/ClickAlignment';
+import ClickAlignment from '../../../registry/new-york/ClickAlignment/ClickAlignment';
 
-const Alignment = () => {
+export default function Alignment() {
   const [dotSize, setDotSize] = useState(2)
   const [count, setCount] = useState(20)
   const [spread, setSpread] = useState(80)
@@ -26,7 +26,7 @@ const Alignment = () => {
     <ComponentPageLayout
       title="Alignment"
       code={code}
-      cliCode="npx shadcn@latest add click-alignment"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-alignment.json"
       manualCode={clickAlignmentCode}
       controlTitle="Tune the grid"
       controlDescription="Shape the dot size, density, and alignment spread."
@@ -86,5 +86,3 @@ const Alignment = () => {
     />
   );
 }
-
-export default Alignment

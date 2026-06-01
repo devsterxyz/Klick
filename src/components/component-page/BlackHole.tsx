@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import ComponentPageLayout, { ColorPicker, ColorPreview } from './layout';
-import ClickBlackHoleCode from '../animation/ClickBlackHole.tsx?raw';
-import ClickBlackHole from '../animation/ClickBlackHole';
+import ClickBlackHoleCode from '../../../registry/new-york/ClickBlackHole/ClickBlackHole.tsx?raw';
+import ClickBlackHole from '../../../registry/new-york/ClickBlackHole/ClickBlackHole';
 import CornerBrackets from '../CornerBrackets';
 import SliderField from '../SliderField';
 
-const BlackHole = () => {
+export default function BlackHole() {
   const [dotSize, setDotSize] = useState(2)
 
   const [strokeColor, setStrokeColor] = useState("#ffffff");
@@ -25,7 +25,7 @@ const BlackHole = () => {
     <ComponentPageLayout
       title="Black Hole"
       code={code}
-      cliCode="npx shadcn@latest add click-black-hole"
+      cliCode="npx shadcn@latest add http://localhost:5173/r/click-black-hole.json"
       manualCode={ClickBlackHoleCode}
       controlTitle="Tune the gravity"
       controlDescription="Shape the orbiting dots, core radius, and color."
@@ -85,4 +85,3 @@ const BlackHole = () => {
   )
 }
 
-export default BlackHole

@@ -1,5 +1,7 @@
+"use client"
+
 import { useRef, useEffect, useCallback, ReactNode } from "react";
-import { useTheme } from "../ThemeContext";
+import { useTheme } from "../../../src/components/ThemeContext";
 
 type Particle = {
   x: number;
