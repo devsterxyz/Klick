@@ -24,7 +24,7 @@ const Fission = () => {
     <ComponentPageLayout
       title="Fission"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fission.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-fission.json"
       manualCode={clickFissionCode}
       controlTitle="Tune the fission"
       controlDescription="Shape the color, duration, and spread."

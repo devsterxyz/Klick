@@ -26,7 +26,7 @@ const FlowField = () => {
     <ComponentPageLayout
       title="Flow Field"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-flow-field.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-flow-field.json"
       manualCode={clickFlowFieldCode}
       controlTitle="Tune the flow field"
       controlDescription="Shape the dot color, count, starting speed, and field scale."

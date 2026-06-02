@@ -26,7 +26,7 @@ const Embers = () => {
     <ComponentPageLayout
       title="Embers"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-embers.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-embers.json"
       manualCode={clickEmbersCode}
       controlTitle="Tune the embers"
       controlDescription="Shape the ember count, fall, spread, and color."

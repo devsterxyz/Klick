@@ -25,7 +25,7 @@ const BulletTime = () => {
     <ComponentPageLayout
       title="Bullet Time"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-bullet-time.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-bullet-time.json"
       manualCode={clickBulletTimeCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

@@ -576,7 +576,7 @@ export default function CursorAnimation({ className = "", showOverlay = false }:
         minHeight: 0,
         background: "transparent",
         overflow: "hidden",
-        cursor: "none",
+        cursor: "auto",
       }}
     >
       {showOverlay && (

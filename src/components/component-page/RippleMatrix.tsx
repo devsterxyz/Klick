@@ -26,7 +26,7 @@ const RippleMatrix = () => {
     <ComponentPageLayout
       title="Ripple Matrix"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ripple-matrix.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-ripple-matrix.json"
       manualCode={clickRippleMatrixCode}
       controlTitle="Tune the matrix"
       controlDescription="Shape the dot color, grid size, spacing, and wave speed."

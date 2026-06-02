@@ -26,7 +26,7 @@ const Ripple = () => {
     <ComponentPageLayout
       title="Ripple"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ripple.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-ripple.json"
       manualCode={clickRippleCode}
       controlTitle="Tune the ripple"
       controlDescription="Shape the color, line width, radius, and ripple count."

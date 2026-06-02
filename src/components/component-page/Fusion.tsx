@@ -26,7 +26,7 @@ const Fusion = () => {
     <ComponentPageLayout
       title="Fusion"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fusion.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-fusion.json"
       manualCode={clickFusionCode}
       controlTitle="Tune the fusion"
       controlDescription="Shape the color, particle count, burst radius, and spread."

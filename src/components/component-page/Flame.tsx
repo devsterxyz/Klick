@@ -26,7 +26,7 @@ const Flame = () => {
     <ComponentPageLayout
       title="Flame"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-flame.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-flame.json"
       manualCode={clickFlameCode}
       controlTitle="Tune the flame"
       controlDescription="Shape the color, particle count, and spread."

@@ -26,7 +26,7 @@ const Binary = () => {
     <ComponentPageLayout
       title="Binary"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-binary.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-binary.json"
       manualCode={clickBinaryCode}
       controlTitle="Tune the digits"
       controlDescription="Shape the size, spread, and density of each binary burst."

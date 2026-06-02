@@ -26,7 +26,7 @@ const Warp = () => {
     <ComponentPageLayout
       title="Warp"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-warp.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-warp.json"
       manualCode={clickWarpCode}
       controlTitle="Tune the warp"
       controlDescription="Shape the color, streak count, speed, and acceleration."

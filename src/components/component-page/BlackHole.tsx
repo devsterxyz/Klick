@@ -25,7 +25,7 @@ export default function BlackHole() {
     <ComponentPageLayout
       title="Black Hole"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-black-hole.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-black-hole.json"
       manualCode={ClickBlackHoleCode}
       controlTitle="Tune the gravity"
       controlDescription="Shape the orbiting dots, core radius, and color."

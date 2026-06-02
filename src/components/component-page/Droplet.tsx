@@ -26,7 +26,7 @@ const Droplet = () => {
     <ComponentPageLayout
       title="Droplet"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-droplet.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-droplet.json"
       manualCode={clickDropletCode}
       controlTitle="Tune the droplet"
       controlDescription="Shape the splash count, ripple speed, and fade time."

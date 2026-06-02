@@ -22,7 +22,7 @@ const Fire = () => {
     <ComponentPageLayout
       title="Fire"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fire.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-fire.json"
       manualCode={clickFireCode}
       controlTitle="Tune the fire"
       controlDescription="Shape the flame count and particle size."

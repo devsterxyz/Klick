@@ -26,7 +26,7 @@ const Sparkle = () => {
     <ComponentPageLayout
       title="Sparkle"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-sparkle.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-sparkle.json"
       manualCode={clickSparkleCode}
       controlTitle="Tune the sparkle"
       controlDescription="Shape the color, count, scatter, and size."

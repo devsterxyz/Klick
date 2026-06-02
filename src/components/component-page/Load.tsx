@@ -24,7 +24,7 @@ const Load = () => {
     <ComponentPageLayout
       title="Load"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-load.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-load.json"
       manualCode={clickLoadCode}
       controlTitle="Tune the loader"
       controlDescription="Shape the color, fade, and loading speed."

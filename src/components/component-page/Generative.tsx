@@ -24,7 +24,7 @@ const Generative = () => {
     <ComponentPageLayout
       title="Generative"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-generative.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-generative.json"
       manualCode={clickGenerativeCode}
       controlTitle="Tune the generator"
       controlDescription="Shape the color, fade, and character length."

@@ -24,7 +24,7 @@ const MatrixRain = () => {
     <ComponentPageLayout
       title="Matrix Rain"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-matrix-rain.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-matrix-rain.json"
       manualCode={clickMatrixRainCode}
       controlTitle="Tune the matrix rain"
       controlDescription="Shape the text color, column count, and trail length."

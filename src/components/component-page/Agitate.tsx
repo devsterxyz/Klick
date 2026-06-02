@@ -25,7 +25,7 @@ export default function Agitate() {
     <ComponentPageLayout
       title="Agitate"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-agitate.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-agitate.json"
       manualCode={clickAgitateCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

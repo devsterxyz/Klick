@@ -26,7 +26,7 @@ const HoloSphere = () => {
     <ComponentPageLayout
       title="Holo Sphere"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-holo-sphere.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-holo-sphere.json"
       manualCode={clickHoloSphereCode}
       controlTitle="Tune the holo sphere"
       controlDescription="Shape the dot color, point count, dot size, and sphere size."

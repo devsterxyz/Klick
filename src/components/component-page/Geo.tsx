@@ -22,7 +22,7 @@ const Geo = () => {
     <ComponentPageLayout
       title="Geo"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-geo.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-geo.json"
       manualCode={clickGeoCode}
       controlTitle="Tune the geometry"
       controlDescription="Shape the line color and width."

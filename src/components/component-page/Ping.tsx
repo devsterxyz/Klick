@@ -26,7 +26,7 @@ const Ping = () => {
     <ComponentPageLayout
       title="Ping"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-ping.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-ping.json"
       manualCode={clickPingCode}
       controlTitle="Tune the ping"
       controlDescription="Shape the color, ring width, dot size, and radius."

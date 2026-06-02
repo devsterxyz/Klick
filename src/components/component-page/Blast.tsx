@@ -26,7 +26,7 @@ export default function Blast() {
     <ComponentPageLayout
       title="Blast"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-blast.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-blast.json"
       manualCode={clickBlastCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

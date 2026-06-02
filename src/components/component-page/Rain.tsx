@@ -26,7 +26,7 @@ const Rain = () => {
     <ComponentPageLayout
       title="Rain"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-rain.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-rain.json"
       manualCode={clickRainCode}
       controlTitle="Tune the rain"
       controlDescription="Shape the stroke color, drop count, spread, and streak height."

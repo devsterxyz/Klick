@@ -1,6 +1,7 @@
 "use client"
 
-import { useRef, useEffect, ReactNode } from 'react';
+import { useRef, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 type Spark = {
   x: number;

@@ -26,7 +26,7 @@ const FireTrail = () => {
     <ComponentPageLayout
       title="Fire Trail"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-fire-trail.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-fire-trail.json"
       manualCode={clickFireTrailCode}
       controlTitle="Tune the fire trail"
       controlDescription="Shape the particle count, wave amplitude, and color."

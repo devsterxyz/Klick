@@ -26,7 +26,7 @@ export default function BoundingBox () {
     <ComponentPageLayout
       title="Bounding Box"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-bounding-box.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-bounding-box.json"
       manualCode={ClickBoundingBoxCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

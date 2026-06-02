@@ -26,7 +26,7 @@ const Sonar = () => {
     <ComponentPageLayout
       title="Sonar"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-sonar.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-sonar.json"
       manualCode={clickSonarCode}
       controlTitle="Tune the sonar"
       controlDescription="Shape the color, dot count, spread, and sweep speed."

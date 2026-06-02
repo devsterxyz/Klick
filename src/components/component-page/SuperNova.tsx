@@ -26,7 +26,7 @@ const SuperNova = () => {
     <ComponentPageLayout
       title="Supernova"
       code={code}
-      cliCode="npx shadcn@latest add http://localhost:5173/r/click-supernova.json"
+      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-supernova.json"
       manualCode={clickSupernovaCode}
       controlTitle="Tune the supernova"
       controlDescription="Shape the color, ejecta count, dot size, and ring speed."
