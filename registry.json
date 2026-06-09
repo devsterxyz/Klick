@@ -376,6 +376,18 @@
       ]
     },
     {
+      "name": "click-resonance",
+      "type": "registry:ui",
+      "title": "Resonance",
+      "description": "A simple resonance effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickResonance/ClickResonance.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "click-ripple",
       "type": "registry:ui",
       "title": "Ripple",
@@ -443,6 +455,18 @@
       "files": [
         {
           "path": "registry/new-york/ClickSonar/ClickSonar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-solid-ripple",
+      "type": "registry:ui",
+      "title": "Solid Ripple",
+      "description": "A simple solid ripple effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSolidRipple/ClickSolidRipple.tsx",
           "type": "registry:component"
         }
       ]

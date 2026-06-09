@@ -30,12 +30,14 @@ import ClickPing from "../../../registry/new-york/ClickPing/ClickPing";
 import ClickQuantum from "../../../registry/new-york/ClickQuantum/ClickQuantum";
 import ClickRadiate from "../../../registry/new-york/ClickRadiate/ClickRadiate";
 import ClickRain from "../../../registry/new-york/ClickRain/ClickRain";
+import ClickResonance from "../../../registry/new-york/ClickResonance/ClickResonance";
 import ClickRipple from "../../../registry/new-york/ClickRipple/ClickRipple";
 import ClickRippleMatrix from "../../../registry/new-york/ClickRippleMatrix/ClickRippleMatrix";
 import ClickShatter from "../../../registry/new-york/ClickShatter/ClickShatter";
 import ClickSkull from "../../../registry/new-york/ClickSkull/ClickSkull";
 import ClickSmoke from "../../../registry/new-york/ClickSmoke/ClickSmoke";
 import ClickSonar from "../../../registry/new-york/ClickSonar/ClickSonar";
+import ClickSolidRipple from "../../../registry/new-york/ClickSolidRipple/ClickSolidRipple";
 import ClickSpark from "../../../registry/new-york/ClickSpark/ClickSpark";
 import ClickSpark2 from "../../../registry/new-york/ClickSpark2/ClickSpark2";
 import ClickSparkle from "../../../registry/new-york/ClickSparkle/ClickSparkle";
@@ -46,6 +48,24 @@ import ClickTesseract from "../../../registry/new-york/ClickTesseract/ClickTesse
 import ClickWarp from "../../../registry/new-york/ClickWarp/ClickWarp";
 import EffectCard from "../EffectCard";
 import ClickPrompt from "../../../registry/new-york/ClickPrompt/ClickPrompt";
+
+const SolidRippleGridPreview = ({ color }: { color?: string }) => (
+  <ClickSolidRipple
+    width={192}
+    height={192}
+    color={color}
+    background="#050505"
+  />
+);
+
+const ResonanceGridPreview = ({ color }: { color?: string }) => (
+  <ClickResonance
+    width={192}
+    height={192}
+    color={color}
+    background="#050505"
+  />
+);
 
 const Grid = (): JSX.Element => {
   return (
@@ -130,6 +150,11 @@ const Grid = (): JSX.Element => {
           <EffectCard title="Quantum" Wrapper={ClickQuantum} to="/Quantum" />
           <EffectCard title="Radiate" Wrapper={ClickRadiate} to="/Radiate" />
           <EffectCard title="Rain" Wrapper={ClickRain} to="/Rain" />
+          <EffectCard
+            title="Resonance"
+            Wrapper={ResonanceGridPreview}
+            to="/Resonance"
+          />
           <EffectCard title="Ripple" Wrapper={ClickRipple} to="/Ripple" />
           <EffectCard
             title="Ripple Matrix"
@@ -140,6 +165,11 @@ const Grid = (): JSX.Element => {
           <EffectCard title="Skull" Wrapper={ClickSkull} to="/Skull" />
           <EffectCard title="Smoke" Wrapper={ClickSmoke} to="/Smoke" />
           <EffectCard title="Sonar" Wrapper={ClickSonar} to="/Sonar" />
+          <EffectCard
+            title="Solid Ripple"
+            Wrapper={SolidRippleGridPreview}
+            to="/SolidRipple"
+          />
           <EffectCard title="Spark" Wrapper={ClickSpark} to="/Spark" />
           <EffectCard title="Spark2" Wrapper={ClickSpark2} to="/Spark2" />
           <EffectCard title="Sparkle" Wrapper={ClickSparkle} to="/Sparkle" />

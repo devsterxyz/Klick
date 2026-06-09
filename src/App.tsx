@@ -26,11 +26,13 @@ import Ping from './components/component-page/Ping'
 import Quantum from './components/component-page/Quantum'
 import Radiate from './components/component-page/Radiate'
 import Rain from './components/component-page/Rain'
+import Resonance from './components/component-page/Resonance'
 import Ripple from './components/component-page/Ripple'
 import RippleMatrix from './components/component-page/RippleMatrix'
 import Shatter from './components/component-page/Shatter'
 import Skull from './components/component-page/Skull'
 import Smoke from './components/component-page/Smoke'
+import SolidRipple from './components/component-page/SolidRipple'
 import Spark from './components/component-page/Spark'
 import Spark2 from './components/component-page/Spark2'
 import Sparkle from './components/component-page/Sparkle'
@@ -99,11 +101,13 @@ const App = () => {
             <Route path="/Quantum" element={<Quantum />} />
             <Route path="/Radiate" element={<Radiate />} />
             <Route path="/Rain" element={<Rain />} />
+            <Route path="/Resonance" element={<Resonance />} />
             <Route path="/Ripple" element={<Ripple />} />
             <Route path="/RippleMatrix" element={<RippleMatrix />} />
             <Route path="/Shatter" element={<Shatter />} />
             <Route path="/Skull" element={<Skull />} />
             <Route path="/Smoke" element={<Smoke />} />
+            <Route path="/SolidRipple" element={<SolidRipple />} />
             <Route path="/Sonar" element={<Sonar />} />
             <Route path="/Spark" element={<Spark />} />
             <Route path="/Spark2" element={<Spark2 />} />
