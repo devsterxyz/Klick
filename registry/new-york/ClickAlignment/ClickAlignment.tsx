@@ -12,6 +12,7 @@ interface AlignDot {
   decay: number;
 }
 
+
 interface ClickAlignmentProps {
   color?: string;
   dotSize?: number;
