@@ -48,24 +48,52 @@ import ClickTesseract from "../../../registry/new-york/ClickTesseract/ClickTesse
 import ClickWarp from "../../../registry/new-york/ClickWarp/ClickWarp";
 import EffectCard from "../EffectCard";
 import ClickPrompt from "../../../registry/new-york/ClickPrompt/ClickPrompt";
+import { useTheme } from "../ThemeContext";
 
 const SolidRippleGridPreview = ({ color }: { color?: string }) => (
-  <ClickSolidRipple
-    width={192}
-    height={192}
-    color={color}
-    background="#050505"
-  />
+  <ThemeAwareGridPreview type="solid-ripple" color={color} />
 );
 
 const ResonanceGridPreview = ({ color }: { color?: string }) => (
-  <ClickResonance
-    width={192}
-    height={192}
-    color={color}
-    background="#050505"
-  />
+  <ThemeAwareGridPreview type="resonance" color={color} />
 );
+
+const ThemeAwareGridPreview = ({
+  type,
+  color,
+}: {
+  type: "resonance" | "solid-ripple";
+  color?: string;
+}) => {
+  const { theme, contrastColor } = useTheme();
+  const isDark = theme === "dark";
+  const effectColor = color ?? contrastColor;
+  const background = isDark ? "#050505" : "#ffffff";
+  const previewClassName =
+    "border border-gray-200 dark:border-[#151515] transition-all duration-300 group-hover/effect-card:border-gray-400 dark:group-hover/effect-card:border-[#333]";
+
+  if (type === "resonance") {
+    return (
+      <ClickResonance
+        className={previewClassName}
+        width={192}
+        height={192}
+        color={effectColor}
+        background={background}
+      />
+    );
+  }
+
+  return (
+    <ClickSolidRipple
+      className={previewClassName}
+      width={192}
+      height={192}
+      color={effectColor}
+      background={background}
+    />
+  );
+};
 
 const Grid = (): JSX.Element => {
   return (

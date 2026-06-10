@@ -1,4 +1,4 @@
-import React, { ComponentType, JSX, ReactNode } from 'react'
+import React, { ComponentType, JSX, ReactNode, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CornerBrackets from './CornerBrackets'
 import StudioButtonDiagonal from './StudioButtonDiagonal'
@@ -22,6 +22,8 @@ type EffectCardProps = {
 
 const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
   const { contrastColor } = useTheme()
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
   const cardId = `effect-${to.replace('/', '').toLowerCase()}`
   const effectColorProps: EffectWrapperProps = {
     color: contrastColor,
@@ -31,6 +33,38 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
     textColor: contrastColor,
     shardColor: contrastColor,
   }
+
+  useEffect(() => {
+    const card = cardRef.current
+
+    if (!card) {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      setIsVisible(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      {
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.16,
+      },
+    )
+
+    observer.observe(card)
+
+    return () => observer.disconnect()
+  }, [])
 
   const content = (
     <div
@@ -56,7 +90,15 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
   )
 
   return (
-    <div id={cardId} className="group/effect-card flex w-56 scroll-mt-24 cursor-default flex-col items-center gap-3">
+    <div
+      ref={cardRef}
+      id={cardId}
+      className={`group/effect-card flex w-56 scroll-mt-24 cursor-default flex-col items-center gap-3 transition-all duration-700 ease-out ${
+        isVisible
+          ? 'translate-y-0 opacity-100 blur-0'
+          : 'translate-y-8 opacity-0 blur-sm'
+      }`}
+    >
       <div className="flex items-center h-4">
         <span
           className="text-[10px] font-sans tracking-[0.15em] font-bold uppercase

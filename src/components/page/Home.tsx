@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import GithubIcon from '../icons/GithubIcon'
 import VariationCard from '../VariationCard'
@@ -68,7 +68,16 @@ const PatternRail = ({ side }: { side: 'left' | 'right' }) => {
 
 const Home = () => {
   const [copied, setCopied] = useState(false)
+  const [heroVisible, setHeroVisible] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setHeroVisible(true)
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
 
   useEffect(() => {
     if (!location.hash) {
@@ -102,7 +111,13 @@ const Home = () => {
       <PatternRail side="left" />
       <PatternRail side="right" />
       <div className="px-14 sm:px-20 xl:px-28">
-        <div className="relative h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white ">
+        <div
+          className={`relative h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black transition-all duration-300 ease-out dark:text-white ${
+            heroVisible
+              ? 'translate-y-0 opacity-100 blur-0'
+              : 'translate-y-3 opacity-0 blur-sm'
+          }`}
+        >
           <div className="relative z-10 flex h-full w-full border-x border-b border-black/20 dark:border-white/10">
             <div className="flex min-w-0 flex-1 flex-col">  
               <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">

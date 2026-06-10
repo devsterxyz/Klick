@@ -168,8 +168,6 @@ export default function ClickSolidRipple({
         height,
         background,
         overflow: "hidden",
-        cursor: "crosshair",
-        border: "1px solid #222",
       }}
     >
       {/* Idle hint label */}
