@@ -50,6 +50,7 @@ import Load from './components/component-page/Load'
 import Sonar from './components/component-page/Sonar'
 import SuperNova from './components/component-page/SuperNova'
 import Prompt from './components/component-page/Prompt'
+import Footer from './components/Footer'
 
 const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
 
@@ -121,6 +122,7 @@ const App = () => {
           </Routes>
         </div>
       </main>
+      <Footer />
     </div>
     </div>
   )

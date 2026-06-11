@@ -13,6 +13,7 @@ interface BlackHoleParticle {
 }
 
 interface ClickBlackHoleProps {
+  className?: string;
   color?: string;
   dotSize?: number;
   count?: number;
@@ -25,6 +26,7 @@ interface ClickBlackHoleProps {
 }
 
 export default function ClickBlackHole({
+  className,
   color = '#fff',
   dotSize = 2,
   count = 40,
@@ -202,7 +204,7 @@ export default function ClickBlackHole({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10 "

@@ -17,6 +17,7 @@ type Skull = {
 };
 
 type ClickSkullProps = {
+  className?: string;
   color?: string;
   count?: number;
   speedMin?: number;
@@ -29,6 +30,7 @@ type ClickSkullProps = {
 };
 
 export default function ClickSkull({
+  className,
   color = '#fff',
   count = 5,
   speedMin = 2,
@@ -202,7 +204,7 @@ export default function ClickSkull({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

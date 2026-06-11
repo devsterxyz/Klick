@@ -19,6 +19,7 @@ interface DiffusionSystem {
 }
 
 interface ClickDiffusionProps {
+  className?: string;
   color?: string;
   dotSize?: number;
   count?: number;
@@ -29,6 +30,7 @@ interface ClickDiffusionProps {
 }
 
 export default function ClickDiffusion({
+  className,
   color = '#fff',
   dotSize = 1.5,
   count = 30,
@@ -161,7 +163,7 @@ export default function ClickDiffusion({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

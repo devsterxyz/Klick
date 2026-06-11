@@ -18,6 +18,7 @@ interface SonarSystem {
 }
 
 interface ClickSonarProps {
+  className?: string;
   color?: string;
   dotCount?: number;
   dotSpread?: number;
@@ -28,6 +29,7 @@ interface ClickSonarProps {
 }
 
 export default function ClickSonar({
+  className,
   color = '#fff',
   dotCount = 20,
   dotSpread = 80,
@@ -159,7 +161,7 @@ export default function ClickSonar({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

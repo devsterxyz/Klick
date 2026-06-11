@@ -12,6 +12,7 @@ type Particle = {
 };
 
 type ClickFlowFieldProps = {
+  className?: string;
   dotColor?: string;
   dotCount?: number;
   initialSpeed?: number;
@@ -23,6 +24,7 @@ type ClickFlowFieldProps = {
 };
 
 export default function ClickFlowField({
+  className,
   dotColor = '#fff',
   dotCount = 40,
   initialSpeed = 4,
@@ -127,7 +129,7 @@ export default function ClickFlowField({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

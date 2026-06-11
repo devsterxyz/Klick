@@ -102,7 +102,7 @@ const Grid = (): JSX.Element => {
       className="relative scroll-mt-16 overflow-hidden bg-transparent text-black dark:text-white"
     >
       <div className="relative z-10 w-full border-x border-b border-black/20 dark:border-white/10">
-        <div className="grid w-full grid-cols-1 justify-items-center gap-x-10 gap-y-12 px-6 py-10 sm:grid-cols-2 md:px-10 lg:grid-cols-3 xl:grid-cols-4 xl:px-14">
+        <div className="grid w-full grid-cols-1 justify-items-center gap-x-10 gap-y-12 px-6 pb-20 pt-10 sm:grid-cols-2 sm:pb-24 md:px-10 lg:grid-cols-3 lg:pb-28 xl:grid-cols-4 xl:px-14">
           <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
           <EffectCard
             title="Alignment"

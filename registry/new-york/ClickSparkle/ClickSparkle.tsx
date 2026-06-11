@@ -14,6 +14,7 @@ type Star = {
 };
 
 type ClickSparkleProps = {
+  className?: string;
   color?: string;
   lineWidth?: number;
   count?: number;
@@ -25,6 +26,7 @@ type ClickSparkleProps = {
 };
 
 export default function ClickSparkle({
+  className,
   color = '#fff',
   lineWidth = 1,
   count = 8,
@@ -152,7 +154,7 @@ export default function ClickSparkle({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

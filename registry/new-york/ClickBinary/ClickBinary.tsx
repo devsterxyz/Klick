@@ -15,6 +15,7 @@ type Particle = {
 type EasingType = 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
 
 type ClickBinaryProps = {
+  className?: string;
   textColor?: string;
   fontSize?: number;
   particleCount?: number;
@@ -26,6 +27,7 @@ type ClickBinaryProps = {
 };
 
 export default function ClickBinary({
+  className,
   textColor = '#fff',
   fontSize = 12,
   particleCount = 10,
@@ -158,7 +160,7 @@ export default function ClickBinary({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

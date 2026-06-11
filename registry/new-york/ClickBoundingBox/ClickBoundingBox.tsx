@@ -15,6 +15,7 @@ interface BoundingBox {
 }
 
 interface ClickBoundingBoxProps {
+  className?: string;
   color?: string;
   lineWidth?: number;
   decay?: number;
@@ -25,6 +26,7 @@ interface ClickBoundingBoxProps {
 }
 
 export default function ClickBoundingBox({
+  className,
   color = '#fff',
   lineWidth = 1,
   decay = 0.015,
@@ -185,7 +187,7 @@ export default function ClickBoundingBox({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

@@ -14,6 +14,7 @@ type Particle = {
 };
 
 type ClickFireTrailProps = {
+  className?: string;
   fillColor?: string;
   particleCount?: number;
   minRiseSpeed?: number;
@@ -28,6 +29,7 @@ type ClickFireTrailProps = {
 };
 
 export default function ClickFireTrail({
+  className,
   fillColor = '#fff',
   particleCount = 15,
   minRiseSpeed = 2,
@@ -150,7 +152,7 @@ export default function ClickFireTrail({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

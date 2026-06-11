@@ -26,6 +26,7 @@ type DotParticle = {
 type Particle = RingParticle | DotParticle;
 
 type ClickPingProps = {
+  className?: string;
   color?: string;
   ringSpeed?: number;
   ringLineWidth?: number;
@@ -37,6 +38,7 @@ type ClickPingProps = {
 };
 
 export default function ClickPing({
+  className,
   color = '#fff',
   ringSpeed = 2.5,
   ringLineWidth = 1.5,
@@ -177,7 +179,7 @@ export default function ClickPing({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-fit h-fit block absolute top-0 left-0 select-none pointer-events-none z-10"

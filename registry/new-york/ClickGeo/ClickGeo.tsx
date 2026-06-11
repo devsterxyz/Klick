@@ -18,6 +18,7 @@ type Shape = {
 };
 
 type ClickGeoProps = {
+  className?: string;
   color?: string;
   lineWidth?: number;
   maxRadius?: number;
@@ -28,6 +29,7 @@ type ClickGeoProps = {
 };
 
 export default function ClickGeo({
+  className,
   color = '#fff',
   lineWidth = 1,
   maxRadius = 50,
@@ -165,7 +167,7 @@ export default function ClickGeo({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

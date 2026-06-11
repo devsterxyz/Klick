@@ -21,6 +21,7 @@ type ParticleGroup = {
 };
 
 type ClickFusionProps = {
+  className?: string;
   strokeColor?: string;
   particleCount?: number;
   minSpread?: number;
@@ -32,6 +33,7 @@ type ClickFusionProps = {
 };
 
 export default function ClickFusion({
+  className,
   strokeColor = '#fff',
   particleCount = 20,
   minSpread = 50,
@@ -173,7 +175,7 @@ export default function ClickFusion({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

@@ -13,6 +13,7 @@ type Particle = {
 };
 
 type ClickAgitateProps = {
+  className?: string;
   strokeColor?: string;
   particleCount?: number;
   duration?: number;
@@ -21,6 +22,7 @@ type ClickAgitateProps = {
 };
 
 export default function ClickAgitate({
+  className,
   strokeColor = "#ffffff",
   particleCount = 25,
   duration = 1200,
@@ -158,7 +160,7 @@ export default function ClickAgitate({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none z-10"

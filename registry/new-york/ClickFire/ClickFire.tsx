@@ -14,6 +14,7 @@ type Particle = {
 };
 
 type ClickFireProps = {
+  className?: string;
   count?: number;
   minSpeed?: number;
   maxSpeed?: number;
@@ -24,6 +25,7 @@ type ClickFireProps = {
 };
 
 export default function ClickFire({
+  className,
   count = 3,
   minSpeed = 1.5,
   maxSpeed = 3.5,
@@ -153,7 +155,7 @@ export default function ClickFire({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"

@@ -16,6 +16,7 @@ type Spark = {
 };
 
 type ClickSparkProps = {
+  className?: string;
   color?: string;
   count?: number;
   speedMin?: number;
@@ -28,6 +29,7 @@ type ClickSparkProps = {
 };
 
 export default function ClickSpark({
+  className,
   color = '#fff',
   count = 20,
   speedMin = 4,
@@ -164,7 +166,7 @@ export default function ClickSpark({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

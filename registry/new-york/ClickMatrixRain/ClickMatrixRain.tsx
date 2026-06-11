@@ -11,6 +11,7 @@ type Particle = {
 };
 
 type ClickMatrixRainProps = {
+  className?: string;
   textColor?: string;
   columnCount?: number;
   fallSpeed?: number;
@@ -22,6 +23,7 @@ type ClickMatrixRainProps = {
 };
 
 export default function ClickMatrixRain({
+  className,
   textColor = '#fff',
   columnCount = 10,
   fallSpeed = 3,
@@ -140,7 +142,7 @@ export default function ClickMatrixRain({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

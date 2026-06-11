@@ -13,6 +13,7 @@ type Particle = {
 };
 
 type ClickRadiateProps = {
+  className?: string;
   strokeColor?: string;
   rayCount?: number;
   minSpeed?: number;
@@ -23,6 +24,7 @@ type ClickRadiateProps = {
 };
 
 export default function ClickRadiate({
+  className,
   strokeColor = '#fff',
   rayCount = 15,
   minSpeed = 8,
@@ -131,7 +133,7 @@ export default function ClickRadiate({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

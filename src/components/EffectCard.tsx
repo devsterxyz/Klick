@@ -56,8 +56,8 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
         }
       },
       {
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.16,
+        rootMargin: '0px 0px -4% 0px',
+        threshold: 0.08,
       },
     )
 
@@ -93,7 +93,7 @@ const EffectCard = ({ title, Wrapper, to }: EffectCardProps): JSX.Element => {
     <div
       ref={cardRef}
       id={cardId}
-      className={`group/effect-card flex w-56 scroll-mt-24 cursor-default flex-col items-center gap-3 transition-all duration-700 ease-out ${
+      className={`group/effect-card flex w-56 scroll-mt-24 cursor-default flex-col items-center gap-3 transition-all duration-500 ease-out ${
         isVisible
           ? 'translate-y-0 opacity-100 blur-0'
           : 'translate-y-8 opacity-0 blur-sm'

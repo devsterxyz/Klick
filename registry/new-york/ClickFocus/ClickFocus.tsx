@@ -14,6 +14,7 @@ type Bracket = {
 };
 
 type ClickFocusProps = {
+  className?: string;
   color?: string;
   lineWidth?: number;
   startDist?: number;
@@ -24,6 +25,7 @@ type ClickFocusProps = {
 };
 
 export default function ClickFocus({
+  className,
   color = '#fff',
   lineWidth = 1,
   startDist = 40,
@@ -159,7 +161,7 @@ export default function ClickFocus({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

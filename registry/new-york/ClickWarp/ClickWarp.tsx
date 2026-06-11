@@ -14,6 +14,7 @@ type WarpParticle = {
 };
 
 type ClickWarpProps = {
+  className?: string;
   textColor?: string;
   streakCount?: number;
   baseSpeed?: number;
@@ -24,6 +25,7 @@ type ClickWarpProps = {
 };
 
 export default function ClickWarp({
+  className,
   textColor = '#fff',
   streakCount = 30,
   baseSpeed = 1,
@@ -139,7 +141,7 @@ export default function ClickWarp({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

@@ -14,6 +14,7 @@ type Heart = {
 };
 
 type ClickHeartProps = {
+  className?: string;
   count?: number;
   speedMin?: number;
   speedMax?: number;
@@ -24,6 +25,7 @@ type ClickHeartProps = {
 };
 
 export default function ClickHeart({
+  className,
   count = 5,
   speedMin = 2,
   speedMax = 4,
@@ -161,7 +163,7 @@ export default function ClickHeart({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"

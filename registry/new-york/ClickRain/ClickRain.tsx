@@ -14,6 +14,7 @@ type Particle = {
 };
 
 type ClickRainProps = {
+  className?: string;
   strokeColor?: string;
   dropCount?: number;
   fallSpeed?: number;
@@ -27,6 +28,7 @@ type ClickRainProps = {
 };
 
 export default function ClickRain({
+  className,
   strokeColor = '#fff',
   dropCount = 15,
   fallSpeed = 5,
@@ -161,7 +163,7 @@ export default function ClickRain({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

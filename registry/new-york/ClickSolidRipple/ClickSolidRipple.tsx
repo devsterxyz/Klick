@@ -15,6 +15,7 @@ interface RippleParticle {
 }
 
 interface SolidRippleProps {
+  className?: string;
   /** Width of the canvas panel in px */
   width?: number;
   /** Height of the canvas panel in px */
@@ -31,7 +32,6 @@ interface SolidRippleProps {
   color?: string;
   /** Background color of the panel */
   background?: string;
-  className?: string;
 }
 
 export default function ClickSolidRipple({

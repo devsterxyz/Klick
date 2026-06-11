@@ -13,6 +13,7 @@ type Particle = {
 };
 
 type ClickSmokeProps = {
+  className?: string;
   fillColor?: string;
   puffCount?: number;
   spreadX?: number;
@@ -28,6 +29,7 @@ type ClickSmokeProps = {
 };
 
 export default function ClickSmoke({
+  className,
   fillColor = '#fff',
   puffCount = 8,
   spreadX = 10,
@@ -136,7 +138,7 @@ export default function ClickSmoke({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

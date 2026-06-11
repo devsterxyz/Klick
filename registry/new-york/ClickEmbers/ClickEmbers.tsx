@@ -12,6 +12,7 @@ type Particle = {
 };
 
 type ClickEmbersProps = {
+  className?: string;
   strokeColor?: string;
   particleCount?: number;
   spreadSpeed?: number;
@@ -25,6 +26,7 @@ type ClickEmbersProps = {
 };
 
 export default function ClickEmbers({
+  className,
   strokeColor = '#fff',
   particleCount = 30,
   spreadSpeed = 5,
@@ -137,7 +139,7 @@ export default function ClickEmbers({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

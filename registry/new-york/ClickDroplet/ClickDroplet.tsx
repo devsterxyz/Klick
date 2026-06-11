@@ -22,6 +22,7 @@ type Particle = {
 };
 
 type ClickDropletProps = {
+  className?: string;
   dotColor?: string;
   dropSpeed?: number;
   splashCount?: number;
@@ -32,6 +33,7 @@ type ClickDropletProps = {
 };
 
 export default function ClickDroplet({
+  className,
   dotColor = '#fff',
   dropSpeed = 5,
   splashCount = 6,
@@ -167,7 +169,7 @@ export default function ClickDroplet({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

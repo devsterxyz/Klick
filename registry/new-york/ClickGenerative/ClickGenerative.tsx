@@ -13,6 +13,7 @@ interface GenText {
 }
 
 interface ClickGenerativeProps {
+  className?: string;
   color?: string;
   decay?: number;
   maxChars?: number;
@@ -21,6 +22,7 @@ interface ClickGenerativeProps {
 }
 
 export default function ClickGenerative({
+  className,
   color = '#fff',
   decay = 0.01,
   maxChars = 12,
@@ -143,7 +145,7 @@ export default function ClickGenerative({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

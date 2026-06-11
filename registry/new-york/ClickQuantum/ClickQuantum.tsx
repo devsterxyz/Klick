@@ -13,6 +13,7 @@ type Particle = {
 };
 
 type ClickQuantumProps = {
+  className?: string;
   strokeColor?: string;
   particleCount?: number;
   spreadRadius?: number;
@@ -23,6 +24,7 @@ type ClickQuantumProps = {
 };
 
 export default function ClickQuantum({
+  className,
   strokeColor = '#fff',
   particleCount = 15,
   spreadRadius = 80,
@@ -132,7 +134,7 @@ export default function ClickQuantum({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

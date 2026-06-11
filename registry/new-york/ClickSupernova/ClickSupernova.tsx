@@ -26,6 +26,7 @@ interface NovaDot {
 type NovaParticle = NovaRing | NovaDot;
 
 interface ClickSupernovaProps {
+  className?: string;
   color?: string;
   dotSize?: number;
   dotCount?: number;
@@ -36,6 +37,7 @@ interface ClickSupernovaProps {
 }
 
 export default function ClickSupernova({
+  className,
   color = '#fff',
   dotSize = 1.5,
   dotCount = 30,
@@ -179,7 +181,7 @@ export default function ClickSupernova({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

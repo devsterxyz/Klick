@@ -12,6 +12,7 @@ type Particle = {
 };
 
 type ClickSpark2Props = {
+  className?: string;
   strokeColor?: string;
   particleCount?: number;
   minSpeed?: number;
@@ -23,6 +24,7 @@ type ClickSpark2Props = {
 };
 
 export default function ClickSpark2({
+  className,
   strokeColor = '#fff',
   particleCount = 20,
   minSpeed = 6,
@@ -131,7 +133,7 @@ export default function ClickSpark2({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"

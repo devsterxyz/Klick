@@ -17,6 +17,7 @@ type Shard = {
 };
 
 type ClickShatterProps = {
+  className?: string;
   shardColor?: string;
   shardCount?: number;
   shardSize?: number;
@@ -28,6 +29,7 @@ type ClickShatterProps = {
 };
 
 export default function ClickShatter({
+  className,
   shardColor = '#fff',
   shardCount = 12,
   shardSize = 6,
@@ -172,7 +174,7 @@ export default function ClickShatter({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

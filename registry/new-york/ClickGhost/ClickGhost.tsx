@@ -25,6 +25,7 @@ type GhostColor =
   | 'random';
 
 type ClickGhostProps = {
+  className?: string;
   count?: number;
   scatter?: number;
   minSpeed?: number;
@@ -37,6 +38,7 @@ type ClickGhostProps = {
 };
 
 export default function ClickGhost({
+  className,
   count = 6,
   scatter = 40,
   minSpeed = 1,
@@ -156,7 +158,7 @@ export default function ClickGhost({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

@@ -13,6 +13,7 @@ interface StringParticle {
 }
 
 interface ResonanceProps {
+  className?: string;
   width?: number;
   height?: number;
   /** Number of strings that fire per click */
@@ -27,7 +28,6 @@ interface ResonanceProps {
   color?: string;
   /** Background */
   background?: string;
-  className?: string;
 }
 
 export default function Resonance({

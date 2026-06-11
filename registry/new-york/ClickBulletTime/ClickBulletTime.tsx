@@ -18,6 +18,7 @@ type Bullet = {
 };
 
 type ClickBulletTimeProps = {
+  className?: string;
   count?: number;
   speedMin?: number;
   speedMax?: number;
@@ -32,6 +33,7 @@ type ClickBulletTimeProps = {
 };
 
 export default function ClickBulletTime({
+  className,
   count = 15,
   speedMin = 8,
   speedMax = 14,
@@ -245,7 +247,7 @@ export default function ClickBulletTime({
 
   return (
     <div
-      className="relative w-fit h-fit"
+      className={`relative ${className ?? 'w-fit h-fit'}`}
       onClick={handleClick}
     >
       <canvas

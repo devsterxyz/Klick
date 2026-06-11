@@ -12,6 +12,7 @@ interface LoadParticle {
 }
 
 interface ClickLoadProps {
+  className?: string;
   color?: string;
   decay?: number;
   speed?: number;
@@ -19,6 +20,7 @@ interface ClickLoadProps {
 }
 
 export default function ClickLoad({
+  className,
   color = '#fff',
   decay = 0.015,
   speed = 2.5,
@@ -130,7 +132,7 @@ export default function ClickLoad({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10 "

@@ -14,6 +14,7 @@ interface AlignDot {
 
 
 interface ClickAlignmentProps {
+  className?: string;
   color?: string;
   dotSize?: number;
   count?: number;
@@ -22,6 +23,7 @@ interface ClickAlignmentProps {
 }
 
 export default function ClickAlignment({
+  className,
   color = '#fff',
   dotSize = 2,
   count = 20,
@@ -163,7 +165,7 @@ export default function ClickAlignment({
   };
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"

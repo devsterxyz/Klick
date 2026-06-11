@@ -16,6 +16,7 @@ type Particle = {
 };
 
 type ClickHoloSphereProps = {
+  className?: string;
   dotColor?: string;
   pointCount?: number;
   maxSize?: number;
@@ -28,6 +29,7 @@ type ClickHoloSphereProps = {
 };
 
 export default function ClickHoloSphere({
+  className,
   dotColor = '#fff',
   pointCount = 40,
   maxSize = 40,
@@ -158,7 +160,7 @@ export default function ClickHoloSphere({
   );
 
   return (
-    <div className="relative w-fit h-fit" onClick={handleClick}>
+    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
