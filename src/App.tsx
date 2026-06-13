@@ -52,6 +52,7 @@ import SuperNova from './components/component-page/SuperNova'
 import Prompt from './components/component-page/Prompt'
 import Footer from './components/Footer'
 import Footer2 from './components/Footer2'
+import ScrollToTop from './components/ScrollToTop'
 
 const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
 
@@ -69,6 +70,7 @@ const App = () => {
       <Navbar />
       <main className="relative">
         <div className={`relative z-10 ${contentInsetClass}`}>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Agitate" element={<Agitate />} />
@@ -123,7 +125,6 @@ const App = () => {
           </Routes>
         </div>
       </main>
-      <Footer />
       <Footer2 />
     </div>
     </div>

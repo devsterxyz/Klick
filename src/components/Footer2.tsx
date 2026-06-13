@@ -5,9 +5,9 @@ import TwitterXIcon from './icons/TwitterXIcon'
 
 const quickLinks = [
   { label: 'Home', to: '/' },
-  { label: 'Sponsor', to: 'https://buymeacoffee.com/devsterdev' },
-  { label: 'Req an icon', to: 'https://github.com/devsterdev' },
-  { label: 'Github', to: 'https://github.com/devsterdev' },
+  { label: 'Sponsor', to: 'https://buymeacoffee.com/devsterxyz' },
+  { label: 'Req an icon', to: 'https://x.com/devsterxyz' },
+  { label: 'Github', to: 'https://github.com/devsterxyz/Klick' },
 ]
 
 const linkClass =
@@ -33,11 +33,11 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => {
 
 const Footer2 = () => {
   return (
-    <footer className="relative bg-transparent px-4 pb-8 pt-0 text-black dark:text-white sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] border border-black/20 dark:border-white/20">
-        <div className="grid gap-10 px-7 py-10 sm:px-9 md:grid-cols-4 md:gap-8 lg:px-12 lg:py-12">
+    <footer className="relative w-full bg-transparent text-black dark:text-white font-pixel">
+      <div className="w-full overflow-hidden border border-neutral-200/60 bg-white/80  dark:border-white/20 dark:bg-black">
+        <div className="grid gap-10 px-8 py-10 sm:px-12 md:grid-cols-4 md:gap-8 lg:px-16 lg:py-12">
           <section className="flex items-center md:justify-center">
-            <Link to="/" className="font-sans text-3xl font-semibold tracking-normal">
+            <Link to="/" className="font-geist-pixel text-[40px] font-semibold tracking-wider text-black dark:text-white">
               Klick
             </Link>
           </section>
@@ -55,7 +55,7 @@ const Footer2 = () => {
             <h2 className="text-base font-semibold">Sponsor</h2>
             <div className="mt-5">
               <a
-                href="https://buymeacoffee.com/devsterdev"
+                href="https://buymeacoffee.com/devsterxyz"
                 target="_blank"
                 rel="noreferrer"
                 className={linkClass}
@@ -69,7 +69,7 @@ const Footer2 = () => {
             <h2 className="text-base font-semibold">Connect</h2>
             <div className="mt-5 flex items-center gap-4">
               <a
-                href="https://github.com/devsterdev"
+                href="https://github.com/devsterxyz"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Dev on GitHub"
@@ -78,7 +78,7 @@ const Footer2 = () => {
                 <GithubIcon size={19} className="cursor-default" />
               </a>
               <a
-                href="https://x.com/devsterdev"
+                href="https://x.com/devsterxyz"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Dev on X"
@@ -90,8 +90,10 @@ const Footer2 = () => {
           </section>
         </div>
 
-        <div className="border-t border-black/20 px-7 py-6 text-sm font-medium text-black/60 dark:border-white/20 dark:text-white/60 sm:px-9 lg:px-12">
-          © 2026 klick. Built by Dev
+        <div className="border-t border-neutral-200/60 px-8 py-6 text-md font-medium text-black/60 dark:border-white/10 dark:text-white/60 sm:px-12 lg:px-16">
+          <a href="https://github.com/devsterxyz" target="_blank" rel="noreferrer" className="cursor-default">
+            © 2026 klick. Built by Dev | Crafted with care.
+          </a> 
         </div>
       </div>
     </footer>

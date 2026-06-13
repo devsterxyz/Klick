@@ -49,6 +49,7 @@ import ClickWarp from "../../../registry/new-york/ClickWarp/ClickWarp";
 import EffectCard from "../EffectCard";
 import ClickPrompt from "../../../registry/new-york/ClickPrompt/ClickPrompt";
 import { useTheme } from "../ThemeContext";
+import Footer from "../Footer";
 
 const SolidRippleGridPreview = ({ color }: { color?: string }) => (
   <ThemeAwareGridPreview type="solid-ripple" color={color} />
@@ -217,6 +218,7 @@ const Grid = (): JSX.Element => {
           <EffectCard title="Warp" Wrapper={ClickWarp} to="/Warp" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
