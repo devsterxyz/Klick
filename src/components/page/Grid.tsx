@@ -67,18 +67,30 @@ const ThemeAwareGridPreview = ({
   color?: string;
 }) => {
   const { theme, contrastColor } = useTheme();
+  const [isMobilePreview, setIsMobilePreview] = React.useState(false);
   const isDark = theme === "dark";
   const effectColor = color ?? contrastColor;
   const background = isDark ? "#050505" : "#ffffff";
+  const previewSize = isMobilePreview ? 148 : 192;
   const previewClassName =
     "border border-gray-200 dark:border-[#151515] transition-all duration-300 group-hover/effect-card:border-gray-400 dark:group-hover/effect-card:border-[#333]";
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
+    const handleChange = () => setIsMobilePreview(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   if (type === "resonance") {
     return (
       <ClickResonance
         className={previewClassName}
-        width={192}
-        height={192}
+        width={previewSize}
+        height={previewSize}
         color={effectColor}
         background={background}
       />
@@ -88,8 +100,8 @@ const ThemeAwareGridPreview = ({
   return (
     <ClickSolidRipple
       className={previewClassName}
-      width={192}
-      height={192}
+      width={previewSize}
+      height={previewSize}
       color={effectColor}
       background={background}
     />
@@ -102,8 +114,8 @@ const Grid = (): JSX.Element => {
       id="effects-grid"
       className="relative scroll-mt-16 overflow-hidden bg-transparent text-black dark:text-white"
     >
-      <div className="relative z-10 w-full border-x border-b border-black/20 dark:border-white/10">
-        <div className="grid w-full grid-cols-1 justify-items-center gap-x-10 gap-y-12 px-6 pb-20 pt-10 sm:grid-cols-2 sm:pb-24 md:px-10 lg:grid-cols-3 lg:pb-28 xl:grid-cols-4 xl:px-14">
+      <div className="relative z-10 w-full border-b border-black/20 dark:border-white/10 lg:border-x">
+        <div className="grid w-full grid-cols-2 justify-items-center gap-x-1 gap-y-8 px-0 pb-16 pt-8 min-[390px]:gap-x-3 sm:gap-x-10 sm:gap-y-12 sm:px-6 sm:pb-24 md:px-10 lg:grid-cols-3 lg:pb-28 xl:grid-cols-4 xl:px-14">
           <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
           <EffectCard
             title="Alignment"

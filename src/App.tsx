@@ -54,7 +54,7 @@ import Footer from './components/Footer'
 import Footer2 from './components/Footer2'
 import ScrollToTop from './components/ScrollToTop'
 
-const contentInsetClass = 'px-14 sm:px-20 xl:px-28'
+const contentInsetClass = 'px-2 sm:px-4 md:px-6 lg:px-14 xl:px-28'
 
 const App = () => {
   return (

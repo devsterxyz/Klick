@@ -19,7 +19,7 @@ const PatternRail = ({ side, segmentCount }: PatternRailProps) => {
 
   return (
     <div
-      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} flex w-14 flex-col overflow-hidden text-white/8 sm:w-20 xl:w-28`}
+      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} hidden w-8 flex-col overflow-hidden text-white/8 min-[769px]:flex lg:w-14 xl:w-28`}
       style={{ '--rail-segments': segmentCount } as React.CSSProperties}
     >
       {railSegments.map((_, index) => (
@@ -36,10 +36,10 @@ const PageRails = ({ children, segmentCount = 29 }: PageRailsProps) => {
   const normalizedSegmentCount = Math.max(1, Math.floor(segmentCount))
 
   return (
-    <div className="relative -mx-14 sm:-mx-20 xl:-mx-28">
+    <div className="relative min-[769px]:-mx-8 lg:-mx-14 xl:-mx-28">
       <PatternRail side="left" segmentCount={normalizedSegmentCount} />
       <PatternRail side="right" segmentCount={normalizedSegmentCount} />
-      <div className="px-14 sm:px-20 xl:px-28">{children}</div>
+      <div className="min-[769px]:px-8 lg:px-14 xl:px-28">{children}</div>
     </div>
   )
 }

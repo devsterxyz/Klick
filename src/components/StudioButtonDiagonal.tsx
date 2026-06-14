@@ -73,7 +73,7 @@ const StudioButtonDiagonal: React.FC<ButtonProps> = ({
       <motion.button
         variants={{ tap: { scale: 0.95 } }}
         transition={{ type: "spring", damping: 15, stiffness: 400 }}
-        className="relative flex min-w-[144px] items-center justify-center overflow-hidden bg-transparent px-1 py-2"
+        className="relative flex min-w-[7rem] items-center justify-center overflow-hidden bg-transparent px-1 py-1.5 sm:min-w-[144px] sm:py-2"
       >
         {/* Pattern */}
         <div
@@ -104,7 +104,7 @@ const StudioButtonDiagonal: React.FC<ButtonProps> = ({
           transition={{ type: "spring", damping: 28, stiffness: 150, mass: 0.6 }}
         />
 
-        <span className={`relative z-20 transition-colors duration-500 ${hoverTextColor} ${idleTextColor} font-sans text-[10px] tracking-[0.3em] font-bold uppercase`}>
+        <span className={`relative z-20 transition-colors duration-500 ${hoverTextColor} ${idleTextColor} font-sans text-[8px] tracking-[0.18em] font-bold uppercase sm:text-[10px] sm:tracking-[0.3em]`}>
           {text}
         </span>
       </motion.button>

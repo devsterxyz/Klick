@@ -51,22 +51,22 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border border-b-black/20 dark:bg-black dark:border-b-white/20 h-20">
-        <div className="mx-12 h-full border-x border-x-black/20 dark:border-x-white/20 sm:mx-[78px] xl:mx-[110px]">
-          <div className="flex h-full items-center justify-between px-6 md:px-10">
+      <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-b-black/20 bg-white/90 backdrop-blur-md dark:border-b-white/20 dark:bg-black sm:h-20">
+        <div className="mx-2 h-full border-x-black/20 dark:border-x-white/20 sm:mx-4 md:mx-6 lg:mx-[78px] lg:border-x xl:mx-[110px]">
+          <div className="flex h-full items-center justify-between gap-3 px-4 sm:px-6 md:px-10">
             <Link
               to="/"
-              className="font-geist-pixel text-[30px] font-semibold tracking-wider text-black dark:text-white"
+              className="shrink-0 font-geist-pixel text-[25px] font-semibold tracking-wider text-black dark:text-white sm:text-[30px]"
             >
               Klick
             </Link>
 
-            <div className="flex items-center gap-3 text-black dark:text-white">
+            <div className="flex min-w-0 items-center gap-2 text-black dark:text-white sm:gap-3">
               <button
                 type="button"
                 onClick={toggleTheme}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white text-black shadow-sm transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:bg-neutral-950 dark:text-white dark:hover:bg-white/5"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white text-black shadow-sm transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:bg-neutral-950 dark:text-white dark:hover:bg-white/5 sm:h-10 sm:w-10"
               >
                 <BrightnessDownIcon />
               </button>
@@ -75,7 +75,7 @@ const Navbar = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Dev on X"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white text-black shadow-sm transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:bg-neutral-950 dark:text-white dark:hover:bg-white/5"
+                className="hidden h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white text-black shadow-sm transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:bg-neutral-950 dark:text-white dark:hover:bg-white/5 min-[380px]:flex sm:h-10 sm:w-10"
               >
                 <TwitterXIcon />
               </a>
@@ -84,11 +84,11 @@ const Navbar = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="View Klick repo on GitHub"
-                className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-medium text-black shadow-sm transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:bg-neutral-950 dark:text-white dark:hover:bg-white/5"
+                className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-black/10 bg-white px-2 text-xs font-medium text-black shadow-sm transition hover:border-black/20 hover:bg-black/5 dark:border-white/10 dark:bg-neutral-950 dark:text-white dark:hover:bg-white/5 sm:h-10 sm:gap-2 sm:px-3 sm:text-sm"
               >
                 <GithubIcon size={18} />
                 <StarIcon size={14} />
-                <span>{stars !== null ? stars.toLocaleString() : 'Star'}</span>
+                <span className="max-w-[3.5rem] truncate sm:max-w-none">{stars !== null ? stars.toLocaleString() : 'Star'}</span>
               </a>
 
               
@@ -97,7 +97,7 @@ const Navbar = () => {
         </div>
       </header>
 
-      <div className="h-20" aria-hidden="true" />
+      <div className="h-16 sm:h-20" aria-hidden="true" />
     </>
   )
 }

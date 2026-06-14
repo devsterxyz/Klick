@@ -6,7 +6,7 @@ import TwitterXIcon from './icons/TwitterXIcon'
 const quickLinks = [
   { label: 'Home', to: '/' },
   { label: 'Sponsor', to: 'https://buymeacoffee.com/devsterxyz' },
-  { label: 'Req an icon', to: 'https://x.com/devsterxyz' },
+  { label: 'Req animation', to: 'https://x.com/devsterxyz' },
   { label: 'Github', to: 'https://github.com/devsterxyz/Klick' },
 ]
 
@@ -34,7 +34,7 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => {
 const Footer2 = () => {
   return (
     <footer className="relative w-full bg-transparent text-black dark:text-white font-pixel">
-      <div className="w-full overflow-hidden border border-neutral-200/60 bg-white/80  dark:border-white/20 dark:bg-black">
+      <div className="w-full overflow-hidden border-y border-neutral-200/60 bg-white/80 dark:border-white/20 dark:bg-black lg:border-x">
         <div className="grid gap-10 px-8 py-10 sm:px-12 md:grid-cols-4 md:gap-8 lg:px-16 lg:py-12">
           <section className="flex items-center md:justify-center">
             <Link to="/" className="font-geist-pixel text-[40px] font-semibold tracking-wider text-black dark:text-white">

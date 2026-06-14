@@ -34,7 +34,7 @@ const ComponentPageLayout = ({
   return (
     <PageRails segmentCount={segmentCount}>
       <div className="min-h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black dark:text-white">
-        <div className="min-h-[calc(100vh-80px)] w-full border-x border-b border-black/20 px-4 py-6 dark:border-white/10 sm:px-6 md:px-10 md:py-8">
+        <div className="min-h-[calc(100vh-80px)] w-full border-b border-black/20 px-4 py-6 dark:border-white/10 sm:px-6 md:px-10 md:py-8 lg:border-x">
           <BackToGridLink />
 
           <div className="mt-8 grid w-full gap-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(25rem,0.95fr)]">

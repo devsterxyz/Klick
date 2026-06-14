@@ -28,20 +28,25 @@ const GhostButton = ({
   href,
   children,
   invert = false,
+  className = '',
 }: {
   href: string
   children: React.ReactNode
   invert?: boolean
+  className?: string
 }) => {
+  const isExternal = href.startsWith('http')
+
   return (
     <a
       href={href}
-      target='_blank'
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noreferrer' : undefined}
       className={`group relative inline-flex h-9 items-center justify-center gap-2 overflow-hidden border border-dashed px-4 text-[13px] font-medium transition ${
         invert
           ? 'border-black bg-black text-white hover:bg-neutral-900 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200'
           : 'border-black/20 text-black hover:border-black/40 hover:bg-black/[0.03] dark:border-white/20 dark:text-white dark:hover:border-white/40 dark:hover:bg-white/[0.03]'
-      }`}
+      } ${className}`}
     >
       <CornerBrackets muted={!invert} />
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
@@ -54,7 +59,7 @@ const PatternRail = ({ side }: { side: 'left' | 'right' }) => {
 
   return (
     <div
-      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} flex w-14 flex-col text-white/8 sm:w-20 xl:w-28`}
+      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} hidden w-8 flex-col text-white/8 min-[769px]:flex lg:w-14 xl:w-28`}
     >
       {railSegments.map((_, index) => (
         <div
@@ -107,43 +112,43 @@ const Home = () => {
   }
 
   return (
-    <div className="relative -mx-14 sm:-mx-20 xl:-mx-28">
+    <div className="relative min-[769px]:-mx-8 lg:-mx-14 xl:-mx-28">
       <PatternRail side="left" />
       <PatternRail side="right" />
-      <div className="px-14 sm:px-20 xl:px-28">
+      <div className="min-[769px]:px-8 lg:px-14 xl:px-28">
         <div
-          className={`relative h-[calc(100vh-80px)] overflow-hidden bg-transparent text-black transition-all duration-300 ease-out dark:text-white ${
+          className={`relative overflow-hidden bg-transparent text-black transition-all duration-300 ease-out dark:text-white sm:min-h-[calc(100svh-80px)] lg:h-[calc(100vh-80px)] ${
             heroVisible
               ? 'translate-y-0 opacity-100 blur-0'
               : 'translate-y-3 opacity-0 blur-sm'
           }`}
         >
-          <div className="relative z-10 flex h-full w-full border-x border-b border-black/20 dark:border-white/10">
+          <div className="relative z-10 flex w-full border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:h-full lg:min-h-0 lg:border-x">
             <div className="flex min-w-0 flex-1 flex-col">  
               <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
-                <section className="flex min-h-0 flex-col border-b border-black/20 dark:border-white/10 lg:border-b-0 lg:border-r">
-                  <div className="flex flex-1 flex-col px-6 py-7 md:px-9 md:py-8 lg:px-10 mt-16 lg:mt-[4.5rem]">
+                <section className="flex flex-col border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:min-h-0 lg:border-b-0 lg:border-r">
+                  <div className="flex flex-1 flex-col justify-center px-4 py-10 sm:mt-14 sm:justify-start sm:px-6 sm:py-7 md:px-9 md:py-8 lg:mt-[4.5rem] lg:px-10">
 
                     <VariationCard title="01. The Original">
-                      <div className="inline-flex items-center gap-2.5 border border-dashed border-black/20 dark:border-white/20 px-3.5 py-1.5 font-sans text-[11px] font-medium group">
+                      <div className="inline-flex items-center gap-2.5 border border-dashed border-black/20 dark:border-white/20 px-3 py-1.5 font-sans text-[10px] font-medium group sm:px-3.5 sm:text-[11px]">
                         <span className="h-2 w-2 bg-black dark:bg-white group-hover:bg-green-500 dark:group-hover:bg-green-500" />
                         v1 &middot; Early Preview
                       </div>
                     </VariationCard>
 
-                    <div className="mt-6 max-w-[36rem]">
-                      <h1 className="font-geist-pixel text-[2.6rem] leading-[0.95] tracking-wide sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.35rem]">
+                    <div className="mt-5 max-w-[36rem] sm:mt-6">
+                      <h1 className="font-geist-pixel text-[2.2rem] leading-[1] tracking-wide min-[390px]:text-[2.45rem] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.35rem]">
                         Click effects for sharper interfaces
                       </h1>
-                      <p className="mt-5 max-w-[32rem] text-[15px] leading-7 text-black/55 dark:text-white/55 sm:text-base">
+                      <p className="mt-4 max-w-[32rem] text-sm leading-6 text-black/55 dark:text-white/55 sm:mt-5 sm:text-base sm:leading-7">
                         Add responsive click feedback to buttons, cards, and controls with small animation wrappers built for React.
                       </p>
                     </div>
 
-                    <div className="mt-6 flex h-12 max-w-[34rem] items-center justify-between rounded-md border border-black/10 bg-neutral-100 px-4 dark:border-white/10 dark:bg-[#0b0b0b]">
+                    <div className="mt-5 flex h-11 max-w-[34rem] items-center justify-between rounded-md border border-black/10 bg-neutral-100 px-3 dark:border-white/10 dark:bg-[#0b0b0b] sm:mt-6 sm:h-12 sm:px-4">
     
                       {/* Command */}
-                      <div className="flex items-center gap-2.5 overflow-hidden font-mono text-sm text-black/80 dark:text-white/80">
+                      <div className="flex items-center gap-2 overflow-hidden font-mono text-xs text-black/80 dark:text-white/80 sm:gap-2.5 sm:text-sm">
                         <span className="text-black/40 dark:text-white/40">$</span>
                         <code className="truncate">{installCommand}</code>
                       </div>
@@ -159,21 +164,27 @@ const Home = () => {
 
                     </div>
 
-                    <div className="mt-5 flex flex-wrap gap-3">
+                    <div className="mt-5 flex flex-wrap gap-2.5 sm:gap-3">
                       <GhostButton href="https://github.com/devsterdev">
                         <GithubIcon size={15} className="cursor-default" />
                         Github
                       </GhostButton>
-                      <GhostButton href="#preview-panels" invert>
+                      <GhostButton href="#effects-grid" invert className="sm:hidden">
                         Get Started
                         <ArrowRight color="currentColor" size={15} />
                       </GhostButton>
+                      <span className="hidden sm:inline-flex">
+                        <GhostButton href="#preview-panels" invert>
+                          Get Started
+                          <ArrowRight color="currentColor" size={15} />
+                        </GhostButton>
+                      </span>
                     </div>
                   </div>
                 </section>
 
-                <section id="preview-panels" className="min-h-0 overflow-hidden px-5 py-5 md:px-8 md:py-6 relative w-full">
-                  <div className="flex h-full w-full">
+                <section id="preview-panels" className="relative hidden min-h-0 w-full overflow-hidden px-5 py-5 sm:block md:px-8 md:py-6">
+                  <div className="flex h-[28rem] w-full md:h-[34rem] lg:h-full">
                     <div className="relative min-h-0 overflow-hidden border border-dashed border-black/30 dark:border-white/20 bg-transparent p-5 flex flex-1">
                       <CornerBrackets muted />
                       <CursorAnimation className="h-full w-full" />
