@@ -1,6 +1,172 @@
+// "use client"
+
+// import { useRef, useEffect, useCallback } from 'react';
+// import type { ReactNode } from 'react';
+
+// type Particle = {
+//   cx: number;
+//   y: number;
+//   vy: number;
+//   phase: number;
+//   amp: number;
+//   size: number;
+//   startTime: number;
+// };
+
+// type ClickFireTrailProps = {
+//   className?: string;
+//   fillColor?: string;
+//   particleCount?: number;
+//   minRiseSpeed?: number;
+//   maxRiseSpeed?: number;
+//   minAmplitude?: number;
+//   maxAmplitude?: number;
+//   minSize?: number;
+//   maxSize?: number;
+//   shrinkRate?: number;
+//   duration?: number;
+//   children?: ReactNode;
+// };
+
+// export default function ClickFireTrail({
+//   className,
+//   fillColor = '#fff',
+//   particleCount = 15,
+//   minRiseSpeed = 2,
+//   maxRiseSpeed = 4,
+//   minAmplitude = 2,
+//   maxAmplitude = 6,
+//   minSize = 2,
+//   maxSize = 4,
+//   shrinkRate = 0.03,
+//   duration = 1500,
+//   children,
+// }: ClickFireTrailProps) {
+//   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+//   const particlesRef = useRef<Particle[]>([]);
+//   const animIdRef = useRef<number | null>(null);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     if (!canvas) return;
+//     const parent = canvas.parentElement;
+//     if (!parent) return;
+
+//     const resize = () => {
+//       const { width, height } = parent.getBoundingClientRect();
+//       if (canvas.width !== width || canvas.height !== height) {
+//         canvas.width = width;
+//         canvas.height = height;
+//       }
+//     };
+
+//     const ro = new ResizeObserver(resize);
+//     ro.observe(parent);
+//     resize();
+
+//     return () => ro.disconnect();
+//   }, []);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     if (!canvas) return;
+//     const ctx = canvas.getContext('2d');
+//     if (!ctx) return;
+
+//     const draw = (timestamp: number) => {
+//       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//       particlesRef.current = particlesRef.current.filter((p) => {
+//         const elapsed = timestamp - p.startTime;
+//         if (elapsed >= duration) return false;
+
+//         const progress = elapsed / duration;
+//         const alpha = Math.max(0, 1 - progress);
+
+//         p.y += p.vy;
+
+//         const xOffset = Math.sin(p.phase + p.y * 0.05) * p.amp;
+
+//         p.size = Math.max(0, p.size - shrinkRate);
+
+//         ctx.beginPath();
+//         ctx.arc(p.cx + xOffset, p.y, p.size, 0, Math.PI * 2);
+//         ctx.fillStyle = fillColor;
+//         ctx.globalAlpha = alpha;
+//         ctx.fill();
+//         ctx.globalAlpha = 1;
+
+//         return true;
+//       });
+
+//       animIdRef.current = requestAnimationFrame(draw);
+//     };
+
+//     animIdRef.current = requestAnimationFrame(draw);
+
+//     return () => {
+//       if (animIdRef.current !== null) {
+//         cancelAnimationFrame(animIdRef.current);
+//       }
+//     };
+//   }, [fillColor, duration, shrinkRate]);
+
+//   const handleClick = useCallback(
+//     (e: React.MouseEvent<HTMLDivElement>) => {
+//       const canvas = canvasRef.current;
+//       if (!canvas) return;
+//       const rect = canvas.getBoundingClientRect();
+//       const cx = e.clientX - rect.left;
+//       const cy = e.clientY - rect.top;
+//       const now = performance.now();
+
+//       const newParticles: Particle[] = Array.from(
+//         { length: particleCount },
+//         () => ({
+//           cx,
+//           y: cy,
+//           vy: -(
+//             minRiseSpeed +
+//             Math.random() * (maxRiseSpeed - minRiseSpeed)
+//           ),
+//           phase: Math.random() * Math.PI * 2,
+//           amp:
+//             minAmplitude +
+//             Math.random() * (maxAmplitude - minAmplitude),
+//           size: minSize + Math.random() * (maxSize - minSize),
+//           startTime: now,
+//         })
+//       );
+
+//       particlesRef.current.push(...newParticles);
+//     },
+//     [
+//       particleCount,
+//       minRiseSpeed,
+//       maxRiseSpeed,
+//       minAmplitude,
+//       maxAmplitude,
+//       minSize,
+//       maxSize,
+//     ]
+//   );
+
+//   return (
+//     <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
+//       <canvas
+//         ref={canvasRef}
+//         className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
+//       />
+//       {children}
+//     </div>
+//   );
+// };
+
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Particle = {
@@ -14,7 +180,6 @@ type Particle = {
 };
 
 type ClickFireTrailProps = {
-  className?: string;
   fillColor?: string;
   particleCount?: number;
   minRiseSpeed?: number;
@@ -29,7 +194,6 @@ type ClickFireTrailProps = {
 };
 
 export default function ClickFireTrail({
-  className,
   fillColor = '#fff',
   particleCount = 15,
   minRiseSpeed = 2,
@@ -46,25 +210,18 @@ export default function ClickFireTrail({
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // Sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -86,7 +243,6 @@ export default function ClickFireTrail({
         p.y += p.vy;
 
         const xOffset = Math.sin(p.phase + p.y * 0.05) * p.amp;
-
         p.size = Math.max(0, p.size - shrinkRate);
 
         ctx.beginPath();
@@ -111,28 +267,19 @@ export default function ClickFireTrail({
     };
   }, [fillColor, duration, shrinkRate]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
       const newParticles: Particle[] = Array.from(
         { length: particleCount },
         () => ({
-          cx,
-          y: cy,
-          vy: -(
-            minRiseSpeed +
-            Math.random() * (maxRiseSpeed - minRiseSpeed)
-          ),
+          cx: e.clientX,
+          y: e.clientY,
+          vy: -(minRiseSpeed + Math.random() * (maxRiseSpeed - minRiseSpeed)),
           phase: Math.random() * Math.PI * 2,
-          amp:
-            minAmplitude +
-            Math.random() * (maxAmplitude - minAmplitude),
+          amp: minAmplitude + Math.random() * (maxAmplitude - minAmplitude),
           size: minSize + Math.random() * (maxSize - minSize),
           startTime: now,
         })
@@ -140,24 +287,31 @@ export default function ClickFireTrail({
 
       particlesRef.current.push(...newParticles);
     },
-    [
-      particleCount,
-      minRiseSpeed,
-      maxRiseSpeed,
-      minAmplitude,
-      maxAmplitude,
-      minSize,
-      maxSize,
-    ]
+    [particleCount, minRiseSpeed, maxRiseSpeed, minAmplitude, maxAmplitude, minSize, maxSize]
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}
