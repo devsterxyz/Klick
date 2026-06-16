@@ -117,17 +117,17 @@ const Home = () => {
       <PatternRail side="right" />
       <div className="min-[769px]:px-8 lg:px-14 xl:px-28">
         <div
-          className={`relative overflow-hidden bg-transparent text-black transition-all duration-300 ease-out dark:text-white sm:min-h-[calc(100svh-80px)] lg:h-[calc(100vh-80px)] ${
+          className={`relative overflow-hidden bg-transparent text-black transition-all duration-300 ease-out dark:text-white min-h-[calc(100svh-72px)] sm:min-h-[calc(100svh-80px)] lg:h-[calc(100vh-80px)] ${
             heroVisible
               ? 'translate-y-0 opacity-100 blur-0'
               : 'translate-y-3 opacity-0 blur-sm'
           }`}
         >
-          <div className="relative z-10 flex w-full border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:h-full lg:min-h-0 lg:border-x">
+          <div className="relative z-10 flex min-h-[calc(100svh-72px)] w-full border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:h-full lg:min-h-0 lg:border-x">
             <div className="flex min-w-0 flex-1 flex-col">  
               <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
-                <section className="flex flex-col border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:min-h-0 lg:border-b-0 lg:border-r">
-                  <div className="flex flex-1 flex-col justify-center px-4 py-10 sm:mt-14 sm:justify-start sm:px-6 sm:py-7 md:px-9 md:py-8 lg:mt-[4.5rem] lg:px-10">
+                <section className="flex min-h-[calc(100svh-72px)] flex-col border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:min-h-0 lg:border-b-0 lg:border-r">
+                  <div className="flex flex-1 flex-col justify-center px-5 py-7 min-[390px]:py-8 sm:mt-14 sm:justify-start sm:px-6 sm:py-7 md:px-9 md:py-8 lg:mt-[4.5rem] lg:px-10">
 
                     <VariationCard title="01. The Original">
                       <div className="inline-flex items-center gap-2.5 border border-dashed border-black/20 dark:border-white/20 px-3 py-1.5 font-sans text-[10px] font-medium group sm:px-3.5 sm:text-[11px]">
@@ -136,19 +136,19 @@ const Home = () => {
                       </div>
                     </VariationCard>
 
-                    <div className="mt-5 max-w-[36rem] sm:mt-6">
-                      <h1 className="font-geist-pixel text-[2.2rem] leading-[1] tracking-wide min-[390px]:text-[2.45rem] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.35rem]">
+                    <div className="mt-4 w-full max-w-[36rem] min-[390px]:mt-5 sm:mt-6">
+                      <h1 className="max-w-full font-geist-pixel text-[clamp(1.72rem,8.8vw,2.35rem)] leading-[1.04] tracking-normal sm:text-[3.5rem] sm:tracking-wide lg:text-[4rem] xl:text-[4.35rem]">
                         Click effects for sharper interfaces
                       </h1>
-                      <p className="mt-4 max-w-[32rem] text-sm leading-6 text-black/55 dark:text-white/55 sm:mt-5 sm:text-base sm:leading-7">
+                      <p className="mt-3 max-w-[32rem] text-[13px] leading-5 text-black/55 dark:text-white/55 min-[375px]:text-sm min-[390px]:leading-6 sm:mt-5 sm:text-base sm:leading-7">
                         Add responsive click feedback to buttons, cards, and controls with small animation wrappers built for React.
                       </p>
                     </div>
 
-                    <div className="mt-5 flex h-11 max-w-[34rem] items-center justify-between rounded-md border border-black/10 bg-neutral-100 px-3 dark:border-white/10 dark:bg-[#0b0b0b] sm:mt-6 sm:h-12 sm:px-4">
+                    <div className="mt-4 flex min-h-11 w-full max-w-[34rem] items-center justify-between rounded-md border border-black/10 bg-neutral-100 px-2 dark:border-white/10 dark:bg-[#0b0b0b] min-[390px]:mt-5 min-[390px]:px-3 sm:mt-6 sm:min-h-12 sm:px-4">
     
                       {/* Command */}
-                      <div className="flex items-center gap-2 overflow-hidden font-mono text-xs text-black/80 dark:text-white/80 sm:gap-2.5 sm:text-sm">
+                      <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden font-mono text-[10px] text-black/80 dark:text-white/80 min-[375px]:gap-1.5 min-[375px]:text-[11px] min-[390px]:gap-2 min-[390px]:text-xs sm:gap-2.5 sm:text-sm">
                         <span className="text-black/40 dark:text-white/40">$</span>
                         <code className="truncate">{installCommand}</code>
                       </div>
@@ -157,15 +157,15 @@ const Home = () => {
                       <button
                         type="button"
                         onClick={handleCopy}
-                        className="ml-3 shrink-0 text-xs font-medium text-black/60 transition hover:text-black dark:text-white/60 dark:hover:text-white"
+                        className="ml-2 shrink-0 text-[11px] font-medium text-black/60 transition hover:text-black dark:text-white/60 dark:hover:text-white min-[375px]:text-xs sm:ml-0"
                       >
                         {copied ? "Copied" : "Copy"}
                       </button>
 
                     </div>
 
-                    <div className="mt-5 flex flex-wrap gap-2.5 sm:gap-3">
-                      <GhostButton href="https://github.com/devsterdev">
+                    <div className="mt-4 flex flex-wrap gap-2 min-[390px]:mt-5 min-[390px]:gap-2.5 sm:gap-3">
+                      <GhostButton href="https://github.com/devsterxyz/Klick">
                         <GithubIcon size={15} className="cursor-default" />
                         Github
                       </GhostButton>
@@ -174,7 +174,7 @@ const Home = () => {
                         <ArrowRight color="currentColor" size={15} />
                       </GhostButton>
                       <span className="hidden sm:inline-flex">
-                        <GhostButton href="#preview-panels" invert>
+                        <GhostButton href="#effects-grid" invert>
                           Get Started
                           <ArrowRight color="currentColor" size={15} />
                         </GhostButton>
