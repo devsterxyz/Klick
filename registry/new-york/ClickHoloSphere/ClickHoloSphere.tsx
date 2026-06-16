@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Point3D = [number, number, number];
@@ -16,7 +18,6 @@ type Particle = {
 };
 
 type ClickHoloSphereProps = {
-  className?: string;
   dotColor?: string;
   pointCount?: number;
   maxSize?: number;
@@ -29,7 +30,6 @@ type ClickHoloSphereProps = {
 };
 
 export default function ClickHoloSphere({
-  className,
   dotColor = '#fff',
   pointCount = 40,
   maxSize = 40,
@@ -44,25 +44,18 @@ export default function ClickHoloSphere({
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -87,24 +80,14 @@ export default function ClickHoloSphere({
         p.rotY += rotSpeedY;
 
         for (const [sx, sy, sz] of p.pts) {
-          const py =
-            sy * Math.cos(p.rotX) - sz * Math.sin(p.rotX);
-          const pz =
-            sy * Math.sin(p.rotX) + sz * Math.cos(p.rotX);
-
-          const px =
-            sx * Math.cos(p.rotY) - pz * Math.sin(p.rotY);
-
+          const py = sy * Math.cos(p.rotX) - sz * Math.sin(p.rotX);
+          const pz = sy * Math.sin(p.rotX) + sz * Math.cos(p.rotX);
+          const px = sx * Math.cos(p.rotY) - pz * Math.sin(p.rotY);
           const depth = (pz + 1) / 2;
 
           ctx.fillStyle = dotColor;
           ctx.globalAlpha = alpha * depth;
-          ctx.fillRect(
-            p.x + px * p.size,
-            p.y + py * p.size,
-            dotSize,
-            dotSize
-          );
+          ctx.fillRect(p.x + px * p.size, p.y + py * p.size, dotSize, dotSize);
         }
 
         ctx.globalAlpha = 1;
@@ -117,38 +100,28 @@ export default function ClickHoloSphere({
     animIdRef.current = requestAnimationFrame(draw);
 
     return () => {
-      if (animIdRef.current !== null) {
-        cancelAnimationFrame(animIdRef.current);
-      }
+      if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
   }, [dotColor, duration, maxSize, growSpeed, rotSpeedX, rotSpeedY, dotSize]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
-      const pts: Point3D[] = Array.from(
-        { length: pointCount },
-        () => {
-          const theta = Math.random() * Math.PI * 2;
-          const phi = Math.acos(2 * Math.random() - 1);
-
-          return [
-            Math.cos(theta) * Math.sin(phi),
-            Math.cos(phi),
-            Math.sin(theta) * Math.sin(phi),
-          ];
-        }
-      );
+      const pts: Point3D[] = Array.from({ length: pointCount }, () => {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        return [
+          Math.cos(theta) * Math.sin(phi),
+          Math.cos(phi),
+          Math.sin(theta) * Math.sin(phi),
+        ];
+      });
 
       particlesRef.current.push({
-        x: cx,
-        y: cy,
+        x: e.clientX,
+        y: e.clientY,
         pts,
         size: 0,
         rotX: 0,
@@ -160,12 +133,27 @@ export default function ClickHoloSphere({
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type NodeParticle = {
@@ -16,7 +18,6 @@ type ParticleGroup = {
 };
 
 type ClickSynapseProps = {
-  className?: string;
   strokeColor?: string;
   nodeCount?: number;
   burstSpeed?: number;
@@ -28,7 +29,6 @@ type ClickSynapseProps = {
 };
 
 export default function ClickSynapse({
-  className,
   strokeColor = '#fff',
   nodeCount = 10,
   burstSpeed = 8,
@@ -42,25 +42,18 @@ export default function ClickSynapse({
   const particlesRef = useRef<ParticleGroup[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // Sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -79,7 +72,6 @@ export default function ClickSynapse({
         const progress = elapsed / duration;
         const alpha = Math.max(0, 1 - progress);
 
-        // Update node positions
         for (const n of group.nodes) {
           n.vx *= friction;
           n.vy *= friction;
@@ -134,41 +126,48 @@ export default function ClickSynapse({
     };
   }, [strokeColor, duration, friction, connectionDist, nodeRadius]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
       const nodes: NodeParticle[] = Array.from(
         { length: nodeCount },
         () => ({
-          x: cx,
-          y: cy,
+          x: e.clientX,
+          y: e.clientY,
           vx: (Math.random() - 0.5) * burstSpeed,
           vy: (Math.random() - 0.5) * burstSpeed,
         })
       );
 
-      particlesRef.current.push({
-        nodes,
-        startTime: now,
-      });
+      particlesRef.current.push({ nodes, startTime: now });
     },
     [nodeCount, burstSpeed]
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

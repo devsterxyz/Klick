@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Heart = {
@@ -14,7 +16,6 @@ type Heart = {
 };
 
 type ClickHeartProps = {
-  className?: string;
   count?: number;
   speedMin?: number;
   speedMax?: number;
@@ -24,8 +25,10 @@ type ClickHeartProps = {
   children?: ReactNode;
 };
 
+const MAX_PARTICLES = 120;
+const CLICK_DELAY = 60;
+
 export default function ClickHeart({
-  className,
   count = 5,
   speedMin = 2,
   speedMax = 4,
@@ -40,35 +43,28 @@ export default function ClickHeart({
   const animationIdRef = useRef<number | null>(null);
   const lastClickRef = useRef<number>(0);
 
-  const MAX_PARTICLES = 120;
-  const CLICK_DELAY = 60;
-
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
-    const parent = canvas?.parentElement;
-    if (!canvas || !parent) return;
+    if (!canvas) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      canvas.width = width;
-      canvas.height = height;
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
-  const drawHeart = (ctx: CanvasRenderingContext2D, size: number) => {
-    const s = size / 10;
-    ctx.beginPath();
-    ctx.moveTo(0, -s * 2);
-    ctx.bezierCurveTo(s * 4, -s * 6, s * 8, 0, 0, s * 4);
-    ctx.bezierCurveTo(-s * 8, 0, -s * 4, -s * 6, 0, -s * 2);
-    ctx.closePath();
-  };
+  // cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (animationIdRef.current !== null) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+    };
+  }, []);
 
   const startLoop = () => {
     if (isRunningRef.current) return;
@@ -103,12 +99,10 @@ export default function ClickHeart({
         ctx.save();
         ctx.globalAlpha = p.life;
         ctx.translate(p.x, p.y);
-
         ctx.font = `${p.size}px Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('❤️', 0, 0);
-
         ctx.restore();
 
         hearts[writeIndex++] = p;
@@ -123,25 +117,11 @@ export default function ClickHeart({
     animationIdRef.current = requestAnimationFrame(draw);
   };
 
-  useEffect(() => {
-    return () => {
-      if (animationIdRef.current !== null) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-    };
-  }, []);
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = (e: React.MouseEvent) => {
     const now = performance.now();
     if (now - lastClickRef.current < CLICK_DELAY) return;
     lastClickRef.current = now;
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
 
     if (heartsRef.current.length > MAX_PARTICLES) {
       heartsRef.current.splice(0, count);
@@ -149,8 +129,8 @@ export default function ClickHeart({
 
     for (let i = 0; i < count; i++) {
       heartsRef.current.push({
-        x: x + (Math.random() - 0.5) * 30,
-        y,
+        x: e.clientX + (Math.random() - 0.5) * 30,
+        y: e.clientY,
         vy: speedMin + Math.random() * (speedMax - speedMin),
         size: sizeMin + Math.random() * (sizeMax - sizeMin),
         phase: Math.random() * Math.PI * 2,
@@ -163,12 +143,27 @@ export default function ClickHeart({
   };
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

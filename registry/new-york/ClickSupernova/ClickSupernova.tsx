@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 interface NovaRing {
@@ -26,7 +28,6 @@ interface NovaDot {
 type NovaParticle = NovaRing | NovaDot;
 
 interface ClickSupernovaProps {
-  className?: string;
   color?: string;
   dotSize?: number;
   dotCount?: number;
@@ -37,7 +38,6 @@ interface ClickSupernovaProps {
 }
 
 export default function ClickSupernova({
-  className,
   color = '#fff',
   dotSize = 1.5,
   dotCount = 30,
@@ -51,35 +51,18 @@ export default function ClickSupernova({
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
 
+  // Sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-    resizeCanvas();
-
-    return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
-    };
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   const startLoop = () => {
@@ -142,16 +125,12 @@ export default function ClickSupernova({
     };
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = (e: React.MouseEvent) => {
+    const x = e.clientX;
+    const y = e.clientY;
     const PI2 = Math.PI * 2;
 
-    // Expanding shockwave ring
     particlesRef.current.push({
       type: 'ring',
       x,
@@ -162,7 +141,6 @@ export default function ClickSupernova({
       decay: ringDecay,
     });
 
-    // Scattered ejecta dots
     for (let i = 0; i < dotCount; i++) {
       const angle = Math.random() * PI2;
       const speed = 2 + Math.random() * 6;
@@ -181,12 +159,27 @@ export default function ClickSupernova({
   };
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

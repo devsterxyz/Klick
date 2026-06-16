@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Skull = {
@@ -17,7 +19,6 @@ type Skull = {
 };
 
 type ClickSkullProps = {
-  className?: string;
   color?: string;
   count?: number;
   speedMin?: number;
@@ -30,7 +31,6 @@ type ClickSkullProps = {
 };
 
 export default function ClickSkull({
-  className,
   color = '#fff',
   count = 5,
   speedMin = 2,
@@ -46,34 +46,26 @@ export default function ClickSkull({
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
+  }, []);
 
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-    resizeCanvas();
-
+  // cleanup on unmount
+  useEffect(() => {
     return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
+      if (animationIdRef.current !== null) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
     };
   }, []);
 
@@ -171,24 +163,11 @@ export default function ClickSkull({
     animationIdRef.current = requestAnimationFrame(draw);
   };
 
-  useEffect(() => {
-    return () => {
-      if (animationIdRef.current !== null) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-    };
-  }, []);
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = (e: React.MouseEvent) => {
     const newSkulls: Skull[] = Array.from({ length: count }, () => ({
-      x: x + (Math.random() - 0.5) * 20,
-      y,
+      x: e.clientX + (Math.random() - 0.5) * 20,
+      y: e.clientY,
       vx: (Math.random() - 0.5) * 6,
       vy: -(speedMin + Math.random() * (speedMax - speedMin)),
       gravity,
@@ -204,12 +183,27 @@ export default function ClickSkull({
   };
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

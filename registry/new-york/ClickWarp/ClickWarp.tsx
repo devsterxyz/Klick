@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type WarpParticle = {
@@ -14,7 +16,6 @@ type WarpParticle = {
 };
 
 type ClickWarpProps = {
-  className?: string;
   textColor?: string;
   streakCount?: number;
   baseSpeed?: number;
@@ -25,7 +26,6 @@ type ClickWarpProps = {
 };
 
 export default function ClickWarp({
-  className,
   textColor = '#fff',
   streakCount = 30,
   baseSpeed = 1,
@@ -38,25 +38,18 @@ export default function ClickWarp({
   const particlesRef = useRef<WarpParticle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // Sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -75,7 +68,6 @@ export default function ClickWarp({
         const progress = elapsed / duration;
         const alpha = Math.max(0, 1 - progress);
 
-        // Accelerate
         p.speed *= p.accel;
 
         const oldX = p.x + Math.cos(p.angle) * p.dist;
@@ -112,21 +104,16 @@ export default function ClickWarp({
     };
   }, [textColor, duration, maxLineWidth]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
       const newParticles: WarpParticle[] = Array.from(
         { length: streakCount },
         () => ({
-          x: cx,
-          y: cy,
+          x: e.clientX,
+          y: e.clientY,
           angle: Math.random() * Math.PI * 2,
           dist: 5,
           speed: baseSpeed + Math.random() * baseSpeed,
@@ -141,12 +128,27 @@ export default function ClickWarp({
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

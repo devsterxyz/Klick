@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type RingParticle = {
@@ -26,7 +28,6 @@ type DotParticle = {
 type Particle = RingParticle | DotParticle;
 
 type ClickPingProps = {
-  className?: string;
   color?: string;
   ringSpeed?: number;
   ringLineWidth?: number;
@@ -38,7 +39,6 @@ type ClickPingProps = {
 };
 
 export default function ClickPing({
-  className,
   color = '#fff',
   ringSpeed = 2.5,
   ringLineWidth = 1.5,
@@ -53,34 +53,26 @@ export default function ClickPing({
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
+  }, []);
 
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-    resizeCanvas();
-
+  // cleanup on unmount
+  useEffect(() => {
     return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
+      if (animationIdRef.current !== null) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
     };
   }, []);
 
@@ -105,10 +97,7 @@ export default function ClickPing({
       particlesRef.current = particlesRef.current.filter((p) => {
         p.life -= p.decay;
 
-        if (
-          p.life <= 0 ||
-          (p.type === 'ping_ring' && p.r >= maxRadius)
-        ) {
+        if (p.life <= 0 || (p.type === 'ping_ring' && p.r >= maxRadius)) {
           return false;
         }
 
@@ -118,7 +107,6 @@ export default function ClickPing({
 
         if (p.type === 'ping_ring') {
           p.r += p.vr;
-
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
           ctx.lineWidth = p.lineWidth;
@@ -139,26 +127,12 @@ export default function ClickPing({
     animationIdRef.current = requestAnimationFrame(draw);
   };
 
-  useEffect(() => {
-    return () => {
-      if (animationIdRef.current !== null) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-    };
-  }, []);
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = (e: React.MouseEvent) => {
     particlesRef.current.push({
       type: 'ping_ring',
-      x,
-      y,
+      x: e.clientX,
+      y: e.clientY,
       r: 0,
       vr: ringSpeed,
       lineWidth: ringLineWidth,
@@ -168,8 +142,8 @@ export default function ClickPing({
 
     particlesRef.current.push({
       type: 'simple_dot',
-      x,
-      y,
+      x: e.clientX,
+      y: e.clientY,
       size: dotSize,
       life: 1.0,
       decay: dotDecay,
@@ -179,12 +153,27 @@ export default function ClickPing({
   };
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="w-fit h-fit block absolute top-0 left-0 select-none pointer-events-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

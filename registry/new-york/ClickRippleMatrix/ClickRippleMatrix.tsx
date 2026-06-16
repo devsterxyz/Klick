@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Particle = {
@@ -11,7 +13,6 @@ type Particle = {
 };
 
 type ClickRippleMatrixProps = {
-  className?: string;
   dotColor?: string;
   gridRadius?: number;
   gridSpacing?: number;
@@ -22,7 +23,6 @@ type ClickRippleMatrixProps = {
 };
 
 export default function ClickRippleMatrix({
-  className,
   dotColor = '#fff',
   gridRadius = 3,
   gridSpacing = 15,
@@ -35,25 +35,18 @@ export default function ClickRippleMatrix({
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -77,24 +70,12 @@ export default function ClickRippleMatrix({
         for (let ix = -gridRadius; ix <= gridRadius; ix++) {
           for (let iy = -gridRadius; iy <= gridRadius; iy++) {
             const dist = Math.sqrt(ix * ix + iy * iy);
-
-            const size = Math.max(
-              0,
-              Math.sin(dist * 1 - p.phase) *
-                maxDotRadius *
-                alpha
-            );
+            const size = Math.max(0, Math.sin(dist * 1 - p.phase) * maxDotRadius * alpha);
 
             if (size <= 0) continue;
 
             ctx.beginPath();
-            ctx.arc(
-              p.x + ix * gridSpacing,
-              p.y + iy * gridSpacing,
-              size,
-              0,
-              Math.PI * 2
-            );
+            ctx.arc(p.x + ix * gridSpacing, p.y + iy * gridSpacing, size, 0, Math.PI * 2);
             ctx.fillStyle = dotColor;
             ctx.globalAlpha = alpha;
             ctx.fill();
@@ -111,38 +92,42 @@ export default function ClickRippleMatrix({
     animIdRef.current = requestAnimationFrame(draw);
 
     return () => {
-      if (animIdRef.current !== null) {
-        cancelAnimationFrame(animIdRef.current);
-      }
+      if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
   }, [dotColor, duration, gridRadius, gridSpacing, waveSpeed, maxDotRadius]);
 
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
-      const now = performance.now();
-
-      particlesRef.current.push({
-        x: cx,
-        y: cy,
-        phase: 0,
-        startTime: now,
-      });
-    },
-    []
-  );
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    particlesRef.current.push({
+      x: e.clientX,
+      y: e.clientY,
+      phase: 0,
+      startTime: performance.now(),
+    });
+  }, []);
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

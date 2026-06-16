@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Particle = {
@@ -11,7 +13,6 @@ type Particle = {
 };
 
 type ClickMatrixRainProps = {
-  className?: string;
   textColor?: string;
   columnCount?: number;
   fallSpeed?: number;
@@ -22,8 +23,9 @@ type ClickMatrixRainProps = {
   children?: ReactNode;
 };
 
+const KATA = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
+
 export default function ClickMatrixRain({
-  className,
   textColor = '#fff',
   columnCount = 10,
   fallSpeed = 3,
@@ -37,28 +39,18 @@ export default function ClickMatrixRain({
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
-  const KATA =
-    'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
-
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -77,27 +69,17 @@ export default function ClickMatrixRain({
         if (elapsed >= duration) return false;
 
         const progress = elapsed / duration;
-
         const traveled = p.vy * (elapsed / 16.67);
         const headY = p.y + traveled;
 
         for (let j = 0; j < trailLength; j++) {
           const charY = headY - j * (fontSize + 2);
-          const trailAlpha = Math.max(
-            0,
-            (1 - j / trailLength) * (1 - progress)
-          );
+          const trailAlpha = Math.max(0, (1 - j / trailLength) * (1 - progress));
 
-          if (j === 0) {
-            ctx.fillStyle = textColor;
-            ctx.globalAlpha = trailAlpha;
-          } else {
-            ctx.fillStyle = textColor;
-            ctx.globalAlpha = trailAlpha * 0.8;
-          }
+          ctx.fillStyle = textColor;
+          ctx.globalAlpha = j === 0 ? trailAlpha : trailAlpha * 0.8;
 
-          const char =
-            KATA[Math.floor(Math.random() * KATA.length)];
+          const char = KATA[Math.floor(Math.random() * KATA.length)];
           ctx.fillText(char, p.x, charY);
         }
 
@@ -111,26 +93,20 @@ export default function ClickMatrixRain({
     animIdRef.current = requestAnimationFrame(draw);
 
     return () => {
-      if (animIdRef.current !== null) {
-        cancelAnimationFrame(animIdRef.current);
-      }
+      if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
-  }, [textColor, fontSize, trailLength, duration, KATA]);
+  }, [textColor, fontSize, trailLength, duration]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
       const newParticles: Particle[] = Array.from(
         { length: columnCount },
         (_, i) => ({
-          x: cx + (Math.random() - 0.5) * spreadRadius,
-          y: cy - Math.random() * 50,
+          x: e.clientX + (Math.random() - 0.5) * spreadRadius,
+          y: e.clientY - Math.random() * 50,
           vy: fallSpeed + Math.random() * (fallSpeed * 0.7),
           startTime: now + i * 30,
         })
@@ -142,12 +118,27 @@ export default function ClickMatrixRain({
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

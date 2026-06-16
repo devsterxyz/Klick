@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Spark = {
@@ -16,7 +18,6 @@ type Spark = {
 };
 
 type ClickSparkProps = {
-  className?: string;
   color?: string;
   count?: number;
   speedMin?: number;
@@ -29,7 +30,6 @@ type ClickSparkProps = {
 };
 
 export default function ClickSpark({
-  className,
   color = '#fff',
   count = 20,
   speedMin = 4,
@@ -45,34 +45,26 @@ export default function ClickSpark({
   const isRunningRef = useRef<boolean>(false);
   const animationIdRef = useRef<number | null>(null);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
+  }, []);
 
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-    resizeCanvas();
-
+  // cleanup on unmount
+  useEffect(() => {
     return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
+      if (animationIdRef.current !== null) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
     };
   }, []);
 
@@ -105,7 +97,7 @@ export default function ClickSpark({
         const dy = p.y - p.originY;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (p.life <= 0 || dist >= maxRadius) return false;
+        if (dist >= maxRadius) return false;
 
         const tailX = p.x - p.vx * p.len * 0.1;
         const tailY = p.y - p.vy * p.len * 0.1;
@@ -128,20 +120,8 @@ export default function ClickSpark({
     animationIdRef.current = requestAnimationFrame(draw);
   };
 
-  useEffect(() => {
-    return () => {
-      if (animationIdRef.current !== null) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-    };
-  }, []);
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = (e: React.MouseEvent) => {
     const PI2 = Math.PI * 2;
 
     const newSparks: Spark[] = Array.from({ length: count }, () => {
@@ -149,10 +129,10 @@ export default function ClickSpark({
       const speed = speedMin + Math.random() * (speedMax - speedMin);
       const len = lenMin + Math.random() * (lenMax - lenMin);
       return {
-        x,
-        y,
-        originX: x,
-        originY: y,
+        x: e.clientX,
+        y: e.clientY,
+        originX: e.clientX,
+        originY: e.clientY,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         len,
@@ -166,12 +146,27 @@ export default function ClickSpark({
   };
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

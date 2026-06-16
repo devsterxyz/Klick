@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type TesseractParticle = {
@@ -13,7 +15,6 @@ type TesseractParticle = {
 };
 
 type ClickTesseractProps = {
-  className?: string;
   strokeColor?: string;
   maxSize?: number;
   growSpeed?: number;
@@ -24,7 +25,6 @@ type ClickTesseractProps = {
 };
 
 export default function ClickTesseract({
-  className,
   strokeColor = '#fff',
   maxSize = 40,
   growSpeed = 2.5,
@@ -37,25 +37,18 @@ export default function ClickTesseract({
   const particlesRef = useRef<TesseractParticle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // Sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -128,19 +121,14 @@ export default function ClickTesseract({
     };
   }, [strokeColor, duration, maxSize, growSpeed, rotSpeedX, rotSpeedY]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
       particlesRef.current.push({
-        x: cx,
-        y: cy,
+        x: e.clientX,
+        y: e.clientY,
         size: 0,
         rotX: Math.random() * Math.PI * 2,
         rotY: Math.random() * Math.PI * 2,
@@ -151,12 +139,27 @@ export default function ClickTesseract({
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

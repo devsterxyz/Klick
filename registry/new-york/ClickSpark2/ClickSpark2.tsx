@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type Particle = {
@@ -12,7 +14,6 @@ type Particle = {
 };
 
 type ClickSpark2Props = {
-  className?: string;
   strokeColor?: string;
   particleCount?: number;
   minSpeed?: number;
@@ -24,7 +25,6 @@ type ClickSpark2Props = {
 };
 
 export default function ClickSpark2({
-  className,
   strokeColor = '#fff',
   particleCount = 20,
   minSpeed = 6,
@@ -38,25 +38,18 @@ export default function ClickSpark2({
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number | null>(null);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    const resize = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    resize();
-
-    return () => ro.disconnect();
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   useEffect(() => {
@@ -76,7 +69,6 @@ export default function ClickSpark2({
         const alpha = Math.max(0, 1 - progress);
 
         p.speed *= friction;
-
         p.x += Math.cos(p.angle) * p.speed;
         p.y += Math.sin(p.angle) * p.speed;
 
@@ -101,31 +93,22 @@ export default function ClickSpark2({
     animIdRef.current = requestAnimationFrame(draw);
 
     return () => {
-      if (animIdRef.current !== null) {
-        cancelAnimationFrame(animIdRef.current);
-      }
+      if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
   }, [strokeColor, duration, friction, lineWidth]);
 
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
+    (e: React.MouseEvent) => {
       const now = performance.now();
 
-      const newParticles: Particle[] = Array.from(
-        { length: particleCount },
-        () => ({
-          x: cx,
-          y: cy,
-          angle: Math.random() * Math.PI * 2,
-          speed: minSpeed + Math.random() * (maxSpeed - minSpeed),
-          startTime: now,
-        })
-      );
+      const newParticles: Particle[] = Array.from({ length: particleCount }, () => ({
+        x: e.clientX,
+        y: e.clientY,
+        angle: Math.random() * Math.PI * 2,
+        speed: minSpeed + Math.random() * (maxSpeed - minSpeed),
+        startTime: now,
+      }));
 
       particlesRef.current.push(...newParticles);
     },
@@ -133,12 +116,27 @@ export default function ClickSpark2({
   );
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none select-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}

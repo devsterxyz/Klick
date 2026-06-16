@@ -1,6 +1,8 @@
+
 "use client"
 
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 type EasingType = 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
@@ -17,7 +19,6 @@ type Shard = {
 };
 
 type ClickShatterProps = {
-  className?: string;
   shardColor?: string;
   shardCount?: number;
   shardSize?: number;
@@ -29,7 +30,6 @@ type ClickShatterProps = {
 };
 
 export default function ClickShatter({
-  className,
   shardColor = '#fff',
   shardCount = 12,
   shardSize = 6,
@@ -42,48 +42,27 @@ export default function ClickShatter({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const shardsRef = useRef<Shard[]>([]);
 
+  // sync canvas to full viewport
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+    const syncSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-    resizeCanvas();
-
-    return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
-    };
+    syncSize();
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   }, []);
 
   const easeFunc = useCallback(
     (t: number): number => {
       switch (easing) {
-        case 'linear':
-          return t;
-        case 'ease-in':
-          return t * t;
-        case 'ease-in-out':
-          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        default:
-          return t * (2 - t);
+        case 'linear':      return t;
+        case 'ease-in':     return t * t;
+        case 'ease-in-out': return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        default:            return t * (2 - t);
       }
     },
     [easing]
@@ -107,21 +86,14 @@ export default function ClickShatter({
         const progress = elapsed / duration;
         const eased = easeFunc(progress);
 
-        const x =
-          shard.originX +
-          Math.cos(shard.angle) * eased * shard.distance;
-
+        const x = shard.originX + Math.cos(shard.angle) * eased * shard.distance;
         const y =
           shard.originY +
           Math.sin(shard.angle) * eased * shard.distance +
           gravity * eased * eased * spreadRadius;
 
-        const rotation =
-          shard.initialRotation +
-          shard.rotationSpeed * progress * Math.PI * 4;
-
-        const alpha =
-          progress < 0.6 ? 1 : 1 - (progress - 0.6) / 0.4;
+        const rotation = shard.initialRotation + shard.rotationSpeed * progress * Math.PI * 4;
+        const alpha = progress < 0.6 ? 1 : 1 - (progress - 0.6) / 0.4;
 
         ctx.save();
         ctx.globalAlpha = Math.max(0, alpha);
@@ -148,38 +120,46 @@ export default function ClickShatter({
     return () => cancelAnimationFrame(animationId);
   }, [shardColor, shardSize, spreadRadius, duration, gravity, easeFunc]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  // clientX/Y maps directly to fixed canvas — no rect offset needed
+  const handleClick = (e: React.MouseEvent) => {
     const now = performance.now();
 
-    const newShards: Shard[] = Array.from(
-      { length: shardCount },
-      () => ({
-        originX: x,
-        originY: y,
-        angle: Math.random() * Math.PI * 2,
-        distance: spreadRadius * (0.4 + Math.random() * 0.6),
-        size: shardSize * (0.5 + Math.random() * 0.8),
-        initialRotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 2,
-        startTime: now,
-      })
-    );
+    const newShards: Shard[] = Array.from({ length: shardCount }, () => ({
+      originX: e.clientX,
+      originY: e.clientY,
+      angle: Math.random() * Math.PI * 2,
+      distance: spreadRadius * (0.4 + Math.random() * 0.6),
+      size: shardSize * (0.5 + Math.random() * 0.8),
+      initialRotation: Math.random() * Math.PI * 2,
+      rotationSpeed: (Math.random() - 0.5) * 2,
+      startTime: now,
+    }));
 
     shardsRef.current.push(...newShards);
   };
 
   return (
-    <div className={`relative ${className ?? 'w-fit h-fit'}`} onClick={handleClick}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full block absolute top-0 left-0 select-none pointer-events-none z-10"
-      />
-      {children}
-    </div>
+    <>
+      <div style={{ display: 'contents' }} onClick={handleClick}>
+        {children}
+      </div>
+
+      {typeof window !== 'undefined' &&
+        createPortal(
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999,
+            }}
+          />,
+          document.body
+        )}
+    </>
   );
-};
+}
