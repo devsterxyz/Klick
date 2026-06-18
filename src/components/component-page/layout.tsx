@@ -96,6 +96,14 @@ const ComponentPageLayout = ({
                     Add the component through the CLI or copy the source into
                     your project.
                   </p>
+                  <a
+                    href="https://ui.shadcn.com/docs/installation"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-1 block text-sm text-black/55 underline decoration-black/30 underline-offset-4 transition-colors hover:text-black dark:text-white/50 dark:decoration-white/30 dark:hover:text-white"
+                  >
+                    Having trouble with the CLI? Set up shadcn first.
+                  </a>
                 </div>
                 <InstallationOptions CLICode={cliCode} ManualCode={manualCode} />
               </div>

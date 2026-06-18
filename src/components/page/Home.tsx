@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import CursorAnimation from '../CursorAnimation'
 
 const railSegments = Array.from({ length: 29 })
-const installCommand = 'npx shadcn@latest add button card tabs'
+const installCommand = 'npx shadcn@latest add devsterxyz/Klick/click-supernova'
 const railSegmentClass =
   'bg-[repeating-linear-gradient(315deg,rgba(0,0,0,0.1)_0,rgba(0,0,0,0.1)_1px,transparent_0,transparent_50%)] dark:bg-[repeating-linear-gradient(315deg,rgba(255,255,255,0.08)_0,rgba(255,255,255,0.08)_1px,transparent_0,transparent_50%)] bg-[length:7px_7px]'
 

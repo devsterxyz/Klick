@@ -26,7 +26,7 @@ const Float = () => {
     <ComponentPageLayout
       title="Float"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-float.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-float"
       manualCode={clickFloatCode}
       controlTitle="Tune the float"
       controlDescription="Shape the color, particle count, horizontal spread, and sway."

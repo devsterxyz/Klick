@@ -25,7 +25,7 @@ const Resonance = () => {
     <ComponentPageLayout
       title="Resonance"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-resonance.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-resonance"
       manualCode={clickResonanceCode}
       controlTitle="Tune the resonance"
       controlDescription="Shape the string count, amplitude, oscillation speed, and dampening."

@@ -23,7 +23,7 @@ const SolidRipple = () => {
     <ComponentPageLayout
       title="Solid Ripple"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-solid-ripple.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-solid-ripple"
       manualCode={clickSolidRippleCode}
       controlTitle="Tune the solid ripple"
       controlDescription="Shape the color, ripple size, and expansion speed."

@@ -26,7 +26,7 @@ const Shatter = () => {
     <ComponentPageLayout
       title="Shatter"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-shatter.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-shatter"
       manualCode={clickShatterCode}
       controlTitle="Tune the shatter"
       controlDescription="Shape the shard color, count, size, and spread."

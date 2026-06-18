@@ -26,7 +26,7 @@ const Skull = () => {
     <ComponentPageLayout
       title="Skull"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-skull.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-skull"
       manualCode={clickSkullCode}
       controlTitle="Tune the skulls"
       controlDescription="Shape the color, count, gravity, and max size."

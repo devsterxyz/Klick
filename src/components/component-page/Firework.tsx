@@ -26,7 +26,7 @@ const Firework = () => {
     <ComponentPageLayout
       title="Firework"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-firework.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-firework"
       manualCode={clickFireworkCode}
       controlTitle="Tune the firework"
       controlDescription="Shape the burst color, count, gravity, and drag."

@@ -26,7 +26,7 @@ const Quantum = () => {
     <ComponentPageLayout
       title="Quantum"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-quantum.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-quantum"
       manualCode={clickQuantumCode}
       controlTitle="Tune the quantum"
       controlDescription="Shape the color, particle count, spread, and teleport timing."

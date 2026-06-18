@@ -22,7 +22,7 @@ const Ghost = () => {
     <ComponentPageLayout
       title="Ghost"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-ghost.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-ghost"
       manualCode={clickGhostCode}
       controlTitle="Tune the ghost"
       controlDescription="Shape the count, scatter, and size."

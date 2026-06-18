@@ -26,7 +26,7 @@ const Diffusion = () => {
     <ComponentPageLayout
       title="Diffusion"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-diffusion.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-diffusion"
       manualCode={ClickDiffusionCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

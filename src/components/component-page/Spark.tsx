@@ -26,7 +26,7 @@ const Spark = () => {
     <ComponentPageLayout
       title="Spark"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-spark.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-spark"
       manualCode={clickSparkCode}
       controlTitle="Tune the sparks"
       controlDescription="Shape the color, count, speed, and radius."

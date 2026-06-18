@@ -26,7 +26,7 @@ const Synapse = () => {
     <ComponentPageLayout
       title="Synapse"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-synapse.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-synapse"
       manualCode={clickSynapseCode}
       controlTitle="Tune the synapse"
       controlDescription="Shape the color, node count, burst speed, and connection distance."

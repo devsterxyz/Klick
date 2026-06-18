@@ -26,7 +26,7 @@ const DoubleSonar = () => {
     <ComponentPageLayout
       title="Double Sonar"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-double-sonar.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-double-sonar"
       manualCode={ClickDoubleSonarCode}
       controlTitle="Tune the burst"
       controlDescription="Shape how noisy, fast, and visible each click feels."

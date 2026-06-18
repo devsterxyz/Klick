@@ -22,7 +22,7 @@ const Prompt = () => {
     <ComponentPageLayout
       title="Prompt"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-prompt.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-prompt"
       manualCode={clickPromptCode}
       controlTitle="Tune the prompt"
       controlDescription="Shape the prompt color and fade."

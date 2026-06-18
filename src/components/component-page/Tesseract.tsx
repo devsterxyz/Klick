@@ -26,7 +26,7 @@ const Tesseract = () => {
     <ComponentPageLayout
       title="Tesseract"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-tesseract.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-tesseract"
       manualCode={clickTesseractCode}
       controlTitle="Tune the tesseract"
       controlDescription="Shape the stroke color, size, growth, and rotation."

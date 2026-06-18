@@ -26,7 +26,7 @@ const Splash = () => {
     <ComponentPageLayout
       title="Splash"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-splash.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-splash"
       manualCode={clickSplashCode}
       controlTitle="Tune the splash"
       controlDescription="Shape the dot color, count, spread speed, and gravity."

@@ -26,7 +26,7 @@ const Focus = () => {
     <ComponentPageLayout
       title="Focus"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-focus.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-focus"
       manualCode={clickFocusCode}
       controlTitle="Tune the focus"
       controlDescription="Shape the bracket color, size, line width, and starting distance."

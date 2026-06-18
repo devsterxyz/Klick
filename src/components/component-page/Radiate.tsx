@@ -26,7 +26,7 @@ const Radiate = () => {
     <ComponentPageLayout
       title="Radiate"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-radiate.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-radiate"
       manualCode={clickRadiateCode}
       controlTitle="Tune the radiance"
       controlDescription="Shape the ray color, count, line width, and max speed."

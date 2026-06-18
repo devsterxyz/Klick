@@ -26,7 +26,7 @@ export default function Alignment() {
     <ComponentPageLayout
       title="Alignment"
       code={code}
-      cliCode="npx shadcn@latest add https://klick-here.vercel.app/r/click-alignment.json"
+      cliCode="npx shadcn@latest add devsterxyz/Klick/click-alignment"
       manualCode={clickAlignmentCode}
       controlTitle="Tune the grid"
       controlDescription="Shape the dot size, density, and alignment spread."
