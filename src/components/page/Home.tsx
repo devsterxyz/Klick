@@ -7,7 +7,17 @@ import { useLocation } from 'react-router-dom'
 import CursorAnimation from '../CursorAnimation'
 
 const railSegments = Array.from({ length: 29 })
-const installCommand = 'npx shadcn@latest add devsterxyz/Klick/click-supernova'
+const installCommandPrefix = 'npx shadcn@latest add devsterxyz/Klick/'
+const installCommandVariants = [
+  'click-supernova',
+  'click-firework',
+  'click-float',
+  'click-flame',
+  'click-synapse',
+  'click-splash',
+  'click-sparkle',
+  'click-radiate',
+]
 const railSegmentClass =
   'bg-[repeating-linear-gradient(315deg,rgba(0,0,0,0.1)_0,rgba(0,0,0,0.1)_1px,transparent_0,transparent_50%)] dark:bg-[repeating-linear-gradient(315deg,rgba(255,255,255,0.08)_0,rgba(255,255,255,0.08)_1px,transparent_0,transparent_50%)] bg-[length:7px_7px]'
 
@@ -74,7 +84,13 @@ const PatternRail = ({ side }: { side: 'left' | 'right' }) => {
 const Home = () => {
   const [copied, setCopied] = useState(false)
   const [heroVisible, setHeroVisible] = useState(false)
+  const [installCommandIndex, setInstallCommandIndex] = useState(0)
+  const [typedInstallVariant, setTypedInstallVariant] = useState(installCommandVariants[0])
+  const [isDeletingInstallVariant, setIsDeletingInstallVariant] = useState(false)
   const location = useLocation()
+  const currentInstallVariant = installCommandVariants[installCommandIndex]
+  const installCommand = `${installCommandPrefix}${typedInstallVariant}`
+  const copyInstallCommand = `${installCommandPrefix}${currentInstallVariant}`
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -101,9 +117,43 @@ const Home = () => {
     return () => window.cancelAnimationFrame(frame)
   }, [location.hash])
 
+  useEffect(() => {
+    const holdDelay = 5000
+    const deleteDelay = 45
+    const typeDelay = 70
+
+    if (!isDeletingInstallVariant && typedInstallVariant === currentInstallVariant) {
+      const timeout = window.setTimeout(() => {
+        setIsDeletingInstallVariant(true)
+      }, holdDelay)
+
+      return () => window.clearTimeout(timeout)
+    }
+
+    if (isDeletingInstallVariant && typedInstallVariant.length > 0) {
+      const timeout = window.setTimeout(() => {
+        setTypedInstallVariant((variant) => variant.slice(0, -1))
+      }, deleteDelay)
+
+      return () => window.clearTimeout(timeout)
+    }
+
+    if (isDeletingInstallVariant) {
+      setInstallCommandIndex((currentIndex) => (currentIndex + 1) % installCommandVariants.length)
+      setIsDeletingInstallVariant(false)
+      return
+    }
+
+    const timeout = window.setTimeout(() => {
+      setTypedInstallVariant(currentInstallVariant.slice(0, typedInstallVariant.length + 1))
+    }, typeDelay)
+
+    return () => window.clearTimeout(timeout)
+  }, [currentInstallVariant, isDeletingInstallVariant, typedInstallVariant])
+
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(installCommand)
+      await navigator.clipboard.writeText(copyInstallCommand)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1600)
     } catch (error) {
@@ -150,7 +200,10 @@ const Home = () => {
                       {/* Command */}
                       <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden font-mono text-[10px] text-black/80 dark:text-white/80 min-[375px]:gap-1.5 min-[375px]:text-[11px] min-[390px]:gap-2 min-[390px]:text-xs sm:gap-2.5 sm:text-sm">
                         <span className="text-black/40 dark:text-white/40">$</span>
-                        <code className="truncate">{installCommand}</code>
+                        <code className="truncate">
+                          {installCommand}
+                          <span className="ml-0.5 inline-block h-4 w-px translate-y-0.5 animate-pulse bg-black/70 dark:bg-white/70" />
+                        </code>
                       </div>
 
                       {/* Copy button */}
