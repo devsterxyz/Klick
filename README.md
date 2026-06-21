@@ -1,8 +1,8 @@
 # Klick
 
-A cursor click animation library for React and Next.js — sprinkle delightful click effects on any element with a single CLI command.
+A cursor click animation library for React and Next.js, sprinkle delightful click effects on any element with a single CLI command.
 
-![Klick home page](./public/images/lightMode.png)
+![Klick home page](./public/screenshot.png)
 
 <!-- Note: drop your home page screenshot into a public/ or .github/ folder in the repo and point the path above at it -->
 
@@ -21,11 +21,11 @@ A cursor click animation library for React and Next.js — sprinkle delightful c
 
 ## What is Klick?
 
-Klick is a cursor click animation library for React and Next.js components or pages. Wrap any element — a button, a card, a whole page — and every click triggers a canvas-based animation like rain droplets, hearts, radiating lines, smoke puffs, and more. Components install with a single CLI command (powered by shadcn/ui), so the code lands directly in your project, fully typed and ready to customize.
+Klick is a cursor click animation library for React and Next.js components or pages. Wrap any element, a button, a card, a whole page, and every click triggers a canvas-based animation like rain droplets, hearts, radiating lines, smoke puffs, and more. Components install with a single CLI command (powered by shadcn/ui), so the code lands directly in your project, fully typed and ready to customize.
 
 ## Component Examples
 
-**ClickDroplet** — a rippling splash effect on click.
+**ClickDroplet**  a rippling splash effect on click.
 
 ```tsx
 <ClickDroplet
@@ -38,7 +38,7 @@ Klick is a cursor click animation library for React and Next.js components or pa
 </ClickDroplet>
 ```
 
-**ClickHeart** — little hearts that pop out on click.
+**ClickHeart**  little hearts that pop out on click.
 
 ```tsx
 <ClickHeart
@@ -50,7 +50,7 @@ Klick is a cursor click animation library for React and Next.js components or pa
 </ClickHeart>
 ```
 
-**ClickRain** — falling streaks that ripple where they land.
+**ClickRain**  falling streaks that ripple where they land.
 
 ```tsx
 <ClickRain
@@ -92,11 +92,11 @@ Every click component follows the same core pattern:
 
 1. **A fixed full-screen canvas is portaled to `document.body`.** Using `createPortal`, a `<canvas>` is rendered outside the normal DOM tree and pinned to the viewport with `position: fixed`, `pointerEvents: 'none'`, and a high `z-index`. This lets the animation draw on top of your entire page without blocking clicks or affecting layout. The canvas resizes itself on every window resize to always match the viewport.
 
-2. **A click handler spawns particles at the cursor position.** The wrapping `<div style={{ display: 'contents' }}>` listens for `onClick` and reads `e.clientX` / `e.clientY` directly — since the canvas is `fixed`, no offset math is needed. Depending on the component, this creates a batch of "particles" (droplets, hearts, rays, smoke puffs) with randomized starting properties like position spread, velocity, and size, each tagged with a `startTime`.
+2. **A click handler spawns particles at the cursor position.** The wrapping `<div style={{ display: 'contents' }}>` listens for `onClick` and reads `e.clientX` / `e.clientY` directly since the canvas is `fixed`, no offset math is needed. Depending on the component, this creates a batch of "particles" (droplets, hearts, rays, smoke puffs) with randomized starting properties like position spread, velocity, and size, each tagged with a `startTime`.
 
-3. **A `requestAnimationFrame` loop draws and ages every particle.** On each frame, the canvas is cleared and every active particle is redrawn based on how much time has elapsed since its `startTime`. Particles update their position/size each frame (falling, rising, expanding, etc.) and fade out using `globalAlpha` as they approach their `duration`. Once a particle's elapsed time exceeds `duration`, it's filtered out of the array — keeping the particle list lean and the animation loop running only as long as needed.
+3. **A `requestAnimationFrame` loop draws and ages every particle.** On each frame, the canvas is cleared and every active particle is redrawn based on how much time has elapsed since its `startTime`. Particles update their position/size each frame (falling, rising, expanding, etc.) and fade out using `globalAlpha` as they approach their `duration`. Once a particle's elapsed time exceeds `duration`, it's filtered out of the array keeping the particle list lean and the animation loop running only as long as needed.
 
-This shared architecture means every Klick component is self-contained, has no external animation dependencies, and cleans up its own `requestAnimationFrame` and resize listeners on unmount.
+This shared architecture means every Klick component is self contained, has no external animation dependencies, and cleans up its own `requestAnimationFrame` and resize listeners on unmount.
 
 ## Issues You Might Face
 
