@@ -86,6 +86,14 @@ Klick is a cursor click animation library for React and Next.js components or pa
 | `click-splash` | `click-supernova` | `click-synapse` |
 | `click-tesseract` | `click-warp` | `click-prompt` |
 
+Install any component individually:
+
+```bash
+npx shadcn@latest add devsterxyz/Klick/click-alignment
+// etc
+npx shadcn@latest add devsterxyz/Klick/click-binary
+```
+
 ## How it Works
 
 Every click component follows the same core pattern:
