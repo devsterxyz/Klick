@@ -2,7 +2,7 @@
 
 A cursor click animation library for React and Next.js, sprinkle delightful click effects on any element with a single CLI command.
 
-![Klick home page](./public/screenshot.png)
+![Klick home page](./public/images/lightMode.png)
 
 <!-- Note: drop your home page screenshot into a public/ or .github/ folder in the repo and point the path above at it -->
 
