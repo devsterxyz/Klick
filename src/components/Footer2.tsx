@@ -132,7 +132,7 @@ const Footer2 = () => {
         </div>
 
         <div className="border-t border-neutral-200/60 px-8 py-6 text-md font-medium text-black/60 dark:border-white/10 dark:text-white/60 sm:px-12 lg:px-16">
-          <a href="https://github.com/devsterxyz" target="_blank" rel="noreferrer" className="cursor-default">
+          <a href="https://github.com/devsterxyz" target="_blank" rel="noreferrer" className="ml-14 cursor-default">
             © 2026 klick. Built by Dev | Crafted with care.
           </a> 
         </div>
