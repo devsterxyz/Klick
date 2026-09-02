@@ -181,7 +181,7 @@ const Home = ({ effectSearchQuery }: HomeProps) => {
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
                 <section className="flex min-h-[calc(100svh-72px)] flex-col border-b border-black/20 dark:border-white/10 sm:min-h-[calc(100svh-80px)] lg:min-h-0 lg:border-b-0 lg:border-r">
-                  <div className="flex flex-1 flex-col justify-center px-5 py-7 min-[390px]:py-8 sm:mt-14 sm:justify-start sm:px-6 sm:py-7 md:px-9 md:py-8 lg:mt-[4.5rem] lg:px-10">
+                <div className="flex flex-1 min-[320px]:max-w-78 min-[375px]:max-w-90 min-[425px]:max-w-102 sm:max-w-none flex-col justify-center px-5 py-7 min-[390px]:py-8 sm:mt-14 sm:justify-start sm:px-6 sm:py-7 md:px-9 md:py-8 lg:mt-[4.5rem] lg:px-10">
 
                     <VariationCard title="01. The Original">
                       <div className="inline-flex items-center gap-2.5 border border-dashed border-black/20 dark:border-white/20 px-3 py-1.5 font-sans text-[10px] font-medium group sm:px-3.5 sm:text-[11px]">
@@ -195,15 +195,15 @@ const Home = ({ effectSearchQuery }: HomeProps) => {
                         Click effects for sharper interfaces
                       </h1>
                       <p className="mt-3 max-w-[32rem] text-[13px] leading-5 text-black/55 dark:text-white/55 min-[375px]:text-sm min-[390px]:leading-6 sm:mt-5 sm:text-base sm:leading-7">
-                        Add responsive click feedback to buttons, cards, and controls with small animation wrappers built for React.
+                        Add responsive click feedback to buttons, cards, and controls with small animation <br className='max-[425px]:block hidden' /> wrappers built for React.
                       </p>
                     </div>
 
                     <div className="mt-4 flex min-h-11 w-full max-w-[34rem] items-center justify-between rounded-md border border-black/10 bg-neutral-100 px-2 dark:border-white/10 dark:bg-[#0b0b0b] min-[390px]:mt-5 min-[390px]:px-3 sm:mt-6 sm:min-h-12 sm:px-4">
-                      <div className="min-w-0 flex-1 overflow-x-auto font-mono text-[10px] text-black/80 dark:text-white/80 min-[375px]:text-[11px] min-[390px]:text-xs sm:text-sm">
-                        <span className="flex w-max items-center gap-1 whitespace-nowrap min-[375px]:gap-1.5 min-[390px]:gap-2 sm:gap-2.5">
-                          <span className="text-black/40 dark:text-white/40">$</span>
-                          <code className="whitespace-nowrap">
+                      <div className="min-w-0 flex-1 overflow-hidden font-mono text-[10px] text-black/80 dark:text-white/80 min-[375px]:text-[11px] min-[390px]:text-xs sm:text-sm">
+                        <span className="flex w-full min-w-0 items-center gap-1 overflow-hidden min-[375px]:gap-1.5 min-[390px]:gap-2 sm:gap-2.5">
+                          <span className="shrink-0 text-black/40 dark:text-white/40">$</span>
+                          <code className="min-w-0 max-sm:mb-[0.3rem] overflow-hidden whitespace-nowrap">
                             {installCommand}
                             <span className="ml-0.5 inline-block h-4 w-px translate-y-0.5 animate-pulse bg-black/70 dark:bg-white/70" />
                           </code>
