@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Home from "./components/page/Home";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
@@ -55,7 +55,6 @@ import Bubble from "./components/component-page/Bubble";
 import Inflate from "./components/component-page/Inflate";
 import SineWave from "./components/component-page/SineWave";
 import Spectrum from "./components/component-page/Spectrum";
-import Footer from "./components/Footer";
 import Footer2 from "./components/Footer2";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -132,7 +131,6 @@ const App = () => {
               <Route path="/Sparkle" element={<Sparkle />} />
               <Route path="/Spectrum" element={<Spectrum />} />
               <Route path="/Supernova" element={<SuperNova />} />
-              <Route path="/SuperNova" element={<SuperNova />} />
               <Route path="/Splash" element={<Splash />} />
               <Route path="/Synapse" element={<Synapse />} />
               <Route path="/Tesseract" element={<Tesseract />} />
