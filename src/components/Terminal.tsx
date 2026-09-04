@@ -28,14 +28,14 @@ const renderHighlightedCode = (code: string) =>
 const Terminal = ({ code, fileName }: { code: string; fileName?: string }): React.ReactNode => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = async() => {
     const textArea = document.createElement("textarea");
     textArea.value = code;
     document.body.appendChild(textArea);
     textArea.select();
 
     try {
-      document.execCommand("copy");
+      await navigator.clipboard.writeText(code);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {

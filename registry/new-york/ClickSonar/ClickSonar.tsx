@@ -1,9 +1,8 @@
+"use client";
 
-"use client"
-
-import { useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import type { ReactNode } from 'react';
+import { useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
+import type { ReactNode } from "react";
 
 interface SonarDot {
   x: number;
@@ -26,6 +25,7 @@ interface ClickSonarProps {
   speed?: number;
   decay?: number;
   dotSize?: number;
+  className?: string;
   children?: ReactNode;
 }
 
@@ -36,6 +36,7 @@ export default function ClickSonar({
   speed = 2.5,
   decay = 0.015,
   dotSize = 2,
+  className,
   children,
 }: ClickSonarProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -53,8 +54,8 @@ export default function ClickSonar({
       canvas.height = window.innerHeight;
     };
     syncSize();
-    window.addEventListener('resize', syncSize);
-    return () => window.removeEventListener('resize', syncSize);
+    window.addEventListener("resize", syncSize);
+    return () => window.removeEventListener("resize", syncSize);
   }, []);
 
   // cleanup on unmount
@@ -72,7 +73,7 @@ export default function ClickSonar({
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const draw = () => {
@@ -84,9 +85,9 @@ export default function ClickSonar({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const resolvedColor = color ?? (
-        document.documentElement.classList.contains('dark') ? '#fff' : '#000'
-      );
+      const resolvedColor =
+        color ??
+        (document.documentElement.classList.contains("dark") ? "#fff" : "#000");
 
       systemsRef.current = systemsRef.current.filter((sys: SonarSystem) => {
         sys.life -= sys.decay;
@@ -142,25 +143,25 @@ export default function ClickSonar({
 
   return (
     <>
-      <div style={{ display: 'contents' }} onClick={handleClick}>
+      <div className={className} onClick={handleClick}>
         {children}
       </div>
 
-      {typeof window !== 'undefined' &&
+      {typeof window !== "undefined" &&
         createPortal(
           <canvas
             ref={canvasRef}
             style={{
-              position: 'fixed',
+              position: "fixed",
               top: 0,
               left: 0,
-              width: '100vw',
-              height: '100vh',
-              pointerEvents: 'none',
+              width: "100vw",
+              height: "100vh",
+              pointerEvents: "none",
               zIndex: 9999,
             }}
           />,
-          document.body
+          document.body,
         )}
     </>
   );

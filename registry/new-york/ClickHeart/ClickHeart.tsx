@@ -1,9 +1,8 @@
+"use client";
 
-"use client"
-
-import { useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import type { ReactNode } from 'react';
+import { useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
+import type { ReactNode } from "react";
 
 type Heart = {
   x: number;
@@ -22,6 +21,7 @@ type ClickHeartProps = {
   sizeMin?: number;
   sizeMax?: number;
   decay?: number;
+  className?: string;
   children?: ReactNode;
 };
 
@@ -35,6 +35,7 @@ export default function ClickHeart({
   sizeMin = 18,
   sizeMax = 28,
   decay = 0.02,
+  className,
   children,
 }: ClickHeartProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -53,8 +54,8 @@ export default function ClickHeart({
       canvas.height = window.innerHeight;
     };
     syncSize();
-    window.addEventListener('resize', syncSize);
-    return () => window.removeEventListener('resize', syncSize);
+    window.addEventListener("resize", syncSize);
+    return () => window.removeEventListener("resize", syncSize);
   }, []);
 
   // cleanup on unmount
@@ -72,7 +73,7 @@ export default function ClickHeart({
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const draw = () => {
@@ -100,9 +101,9 @@ export default function ClickHeart({
         ctx.globalAlpha = p.life;
         ctx.translate(p.x, p.y);
         ctx.font = `${p.size}px Arial`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('❤️', 0, 0);
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("❤️", 0, 0);
         ctx.restore();
 
         hearts[writeIndex++] = p;
@@ -144,25 +145,25 @@ export default function ClickHeart({
 
   return (
     <>
-      <div style={{ display: 'contents' }} onClick={handleClick}>
+      <div className={className} onClick={handleClick}>
         {children}
       </div>
 
-      {typeof window !== 'undefined' &&
+      {typeof window !== "undefined" &&
         createPortal(
           <canvas
             ref={canvasRef}
             style={{
-              position: 'fixed',
+              position: "fixed",
               top: 0,
               left: 0,
-              width: '100vw',
-              height: '100vh',
-              pointerEvents: 'none',
+              width: "100vw",
+              height: "100vh",
+              pointerEvents: "none",
               zIndex: 9999,
             }}
           />,
-          document.body
+          document.body,
         )}
     </>
   );
